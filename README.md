@@ -1,14 +1,14 @@
 # Clue-Less
 ###### Team Professor Plum's Revenge
-_JHU EN.605.401.81_
-_Spring 2014_
+_JHU EN.605.401.81, Spring 2014_
 
 ## Requirements and Installation
 
 **Development Tools**
-1. Development Environment [Vagrant](http://www.vagrantup.com/)
-2. VM Provider [VirtualBox](https://www.virtualbox.org/)
-3. Version Control [Git](http://gitscm.com/)
+
+1. Development Environment - [Vagrant](http://www.vagrantup.com/)
+2. VM Provider - [VirtualBox](https://www.virtualbox.org/)
+3. Version Control - [Git](http://gitscm.com/)
 
 ## Usage
 Stand up development environment
@@ -18,7 +18,7 @@ Stand up development environment
 ```
 
 ## Authors
-Jack Willard
-Andrew Fife
-Matthew Maisel
-Bryan Carpenter
++ Jack Willard
++ Andrew Fife
++ Matthew Maisel
++ Bryan Carpenter
