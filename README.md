@@ -1,4 +1,24 @@
-prof-plum-revenge
-=================
+# Clue-Less
+###### Team Professor Plum's Revenge
+_JHU EN.605.401.81_
+_Spring 2014_
 
-Clue-Less game for Team Professor Plum's Revenge in JHU EN.605.401.81.SP14
+## Requirements and Installation
+
+**Development Tools**
+1. Development Environment [Vagrant](http://www.vagrantup.com/)
+2. VM Provider [VirtualBox](https://www.virtualbox.org/)
+3. Version Control [Git](http://gitscm.com/)
+
+## Usage
+Stand up development environment
+```
+    vagrant up
+    vagrant ssh
+```
+
+## Authors
+Jack Willard
+Andrew Fife
+Matthew Maisel
+Bryan Carpenter
