@@ -15,7 +15,13 @@ Stand up development environment
 ```
     vagrant up
     vagrant ssh
+    cd /vagrant
+    sudo bash bin/install.sh
+    play
+    run
 ```
+
+Back on your host OS, the Play web server running on the Vagrant VM should be forwarded to localhost:8080 in your browser.
 
 ## Play Commands
 
