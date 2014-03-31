@@ -17,6 +17,10 @@ Stand up development environment
     vagrant ssh
 ```
 
+## Play Commands
+
+This file will be packaged with your application, when using `play dist`.
+
 ## Authors
 + Jack Willard
 + Andrew Fife
