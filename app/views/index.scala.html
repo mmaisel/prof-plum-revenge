@@ -1,7 +1,24 @@
 @(message: String)
 
-@main("Welcome to Play") {
-
-    @play20.welcome(message, style = "Java")
-
+@main("Game Lobby") {
+    <h1>@message</h1>
+    <div class="row">
+        <div class="row">
+        <div class="col-md-8">
+            <div class="row">Gameboard</div>
+            <div class="row">
+                <div class="col-md-6">Card Hand</div>
+                <div class="col-md-4">Action Menu</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-4">Chat and Game Info</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">Current Player Turn</div>
+            </div>
+        </div>
+        </div>
+    </div>
 }

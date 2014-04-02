@@ -17,7 +17,7 @@ Stand up development environment
     vagrant ssh
     cd /vagrant
     sudo bash bin/install.sh
-    play
+    sudo play
     run
 ```
 

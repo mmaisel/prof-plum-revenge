@@ -2,8 +2,14 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
-GET     /                           controllers.Application.index()
+# Game Lobby Page
+GET     /                           controllers.Game.index()
+
+# Game Board
+GET     /game/:uuid                 controllers.Game.gameboard(uuid: Long)
+
+# Game API
+POST    /api                        controllers.GameAPI.index()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
