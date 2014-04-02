@@ -3,10 +3,10 @@
 # ~~~~
 
 # Game Lobby Page
-GET     /                           controllers.Game.index()
+GET     /                           controllers.Clueless.index()
 
 # Game Board
-GET     /game/:uuid                 controllers.Game.gameboard(uuid: Long)
+GET     /game/:uuid                 controllers.Clueless.gameboard(uuid: Long)
 
 # Game API
 POST    /api                        controllers.GameAPI.index()

@@ -5,7 +5,7 @@ import play.mvc.*;
 
 import views.html.*;
 
-public class Game extends Controller {
+public class Clueless extends Controller {
 
     public static Result index() {
         return ok(index.render("Game Lobby"));
