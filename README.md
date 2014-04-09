@@ -18,7 +18,7 @@ Stand up development environment
     cd /vagrant
     sudo bash bin/install.sh
     sudo play
-    run
+    ~ run
 ```
 
 Back on your host OS, the Play web server running on the Vagrant VM should be forwarded to localhost:8080 in your browser.
