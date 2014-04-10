@@ -4,6 +4,10 @@ _JHU EN.605.401.81, Spring 2014_
 
 ## Requirements and Installation
 
+**Dependencies**
+
+1. SSH - [OpenSSH](http://sourceforge.net/projects/sshwindows/files/OpenSSH%20for%20Windows%20-%20Release/3.8p1-1%2020040709%20Build/setupssh381-20040709.zip/download)
+
 **Development Tools**
 
 1. Development Environment - [Vagrant](http://www.vagrantup.com/)
