@@ -5,23 +5,30 @@
 */
 
 // temp delcarations,
-var gameboard, current_player, game_uuid, player;
+var current_player, game_uuid, player;
 
+game_uuid = 1;
+
+var gameboardInterval = window.setInterval('updateGameBoard()', 1); // update gameboard every 1 seconds
 
 // Client Subsystem
 // This set of fncs are specific to gameboard and user interaction and UI
 
-function updateGameBoard() {}
+var updateGameBoard = function() {
+    $.getJSON("/api/game/" + game_uuid, function(gameboard) {
+        $('#gameboard').text(gameboard);
+    });
+};
 
-function getGameTick() {}
+function getGameTick() {};
 
-function displayCard() {}
+function displayCard() {};
 
-function makeSuggestion() {}
+function makeSuggestion() {};
 
-function sendCard() {}
+function sendCard() {};
 
-function playTurn() {}
+function playTurn() {};
 
 
 //  Client Message and Transport Subsystem (CMTS)
@@ -43,6 +50,6 @@ function playTurn() {}
 //      ...
 
 
-function sendMessage(message) {}
+function sendMessage(message) {};
 
-function recieveMessage(message) {}
+function recieveMessage(message) {};

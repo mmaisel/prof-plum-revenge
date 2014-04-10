@@ -9,7 +9,7 @@ GET     /                           controllers.Clueless.index()
 GET     /game/:uuid                 controllers.Clueless.gameboard(uuid: Long)
 
 # Game API
-POST    /api/game/:uuid                             controllers.GameAPI.index(uuid: Long)
+GET     /api/game/:uuid                             controllers.GameAPI.index(uuid: Long)
 POST    /api/game/:uuid/playturn                    controllers.GameAPI.playturn(uuid: Long)
 
 # Map static resources from the /public folder to the /assets URL path
