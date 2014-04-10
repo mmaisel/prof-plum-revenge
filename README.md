@@ -17,6 +17,8 @@ _JHU EN.605.401.81, Spring 2014_
 ## Usage
 Stand up development environment.
 
+VM ssh passphrase associated with private key is null. Just hit Enter when prompted.
+
 VM ssh password is "vagrant" (without the quotes).
 
 ```
