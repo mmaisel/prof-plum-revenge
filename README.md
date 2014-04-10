@@ -25,7 +25,7 @@ VM ssh password is "vagrant" (without the quotes).
     vagrant up
     vagrant ssh
     cd /vagrant
-    sudo bash bin/install.sh
+    sudo bash bin/install.sh  ##first time only
     sudo play
     ~ run
 ```
