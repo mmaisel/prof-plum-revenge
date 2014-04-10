@@ -15,7 +15,10 @@ _JHU EN.605.401.81, Spring 2014_
 3. Version Control - [Git](http://gitscm.com/)
 
 ## Usage
-Stand up development environment
+Stand up development environment.
+
+VM ssh password is "vagrant" (without the quotes).
+
 ```
     vagrant up
     vagrant ssh
@@ -23,6 +26,15 @@ Stand up development environment
     sudo bash bin/install.sh
     sudo play
     ~ run
+```
+
+On a windows machine, you will have to fix the install.sh file line terminaters.  The easiest way to do this is in vim.
+
+```
+   vim /vagrant/bin/install.sh
+   :set ff=unix
+   :w
+   :q
 ```
 
 Back on your host OS, the Play web server running on the Vagrant VM should be forwarded to localhost:8080 in your browser.
