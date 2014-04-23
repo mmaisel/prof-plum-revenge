@@ -38,6 +38,7 @@ var current_player, game_uuid, player;
 game_uuid = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Update gameboard every second
 var gameboardInterval = window.setInterval('updateGameBoard()', 1);
 
@@ -118,6 +119,9 @@ var GameInfo = {
 
 };
 
+=======
+var gameboardInterval = window.setInterval('updateGameBoard()', 1000); // update gameboard every 1 seconds
+>>>>>>> 6941391a3d4d06f429d5307bb4f26e5c01c8a902
 =======
 var gameboardInterval = window.setInterval('updateGameBoard()', 1000); // update gameboard every 1 seconds
 >>>>>>> 6941391a3d4d06f429d5307bb4f26e5c01c8a902
