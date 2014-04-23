@@ -1,0 +1,25 @@
+/* Button sizes for the action menu */
+.plum_fixed_width_action {
+	width: 102px;
+}
+
+.plum_fixed_width_move {
+	width: 34px;
+	height: 24px;
+}
+
+/* Custom table for the action menu layout */
+table.plum_action_menu td {
+	padding: 4px;
+}
+
+/* Custom table for action menu action buttons */
+table.plum_action_table td {
+	padding: 4px;
+}
+
+/* Custom table for action menu move buttons */
+table.plum_move_table td {
+	padding: 1px;
+}
+
