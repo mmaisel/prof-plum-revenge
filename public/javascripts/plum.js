@@ -9,7 +9,7 @@ var current_player, game_uuid, player;
 
 game_uuid = 1;
 
-var gameboardInterval = window.setInterval('updateGameBoard()', 1); // update gameboard every 1 seconds
+var gameboardInterval = window.setInterval('updateGameBoard()', 1000); // update gameboard every 1 seconds
 
 // Client Subsystem
 // This set of fncs are specific to gameboard and user interaction and UI
