@@ -1,5 +1,6 @@
 package controllers;
 
+import java.lang.Math.*;
 import play.*;
 import play.mvc.*;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -11,7 +12,7 @@ public class GameAPI extends Controller {
     public static Result index(Long uuid) {
         // lookup game state for a particular game, put into gameboard json struct, send back
         ObjectNode gameboard = Json.newObject();
-        gameboard.put("status", "SUCCESS");
+        gameboard.put("status", Math.random());
         return ok(gameboard);
     }
 

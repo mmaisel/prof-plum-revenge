@@ -16,7 +16,8 @@ var gameboardInterval = window.setInterval('updateGameBoard()', 1000); // update
 
 var updateGameBoard = function() {
     $.getJSON("/api/game/" + game_uuid, function(gameboard) {
-        $('#gameboard').text(gameboard);
+        console.log(gameboard)
+        $('#gameboard').text(gameboard.status);
     });
 };
 
