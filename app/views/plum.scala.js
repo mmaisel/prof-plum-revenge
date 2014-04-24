@@ -1,3 +1,4 @@
+@(club_uuid: String, player_name: String, player_uuid: String)
 /**
  * PlumJS
  * This contains the JS components of the Client Subsystem (CS) and Client 
@@ -31,12 +32,9 @@ var DIRECTION = {
 	Right : {value: 3, name: "Right", code: "R"}
 };
 
-
-// TODO: Need to generate these values somewhere
-var current_player, game_uuid, player;
-
-game_uuid = 1;
-
+var club_uuid = "@club_uuid";
+var player_name = "@player_name";
+var player_uuid = "@player_uuid"
 
 // Update gameboard every second
 var gameboardInterval = window.setInterval('updateGameBoard()', 1000);
@@ -191,7 +189,7 @@ var Message = {
  */
 
 var updateGameBoard = function() {
-    $.getJSON("/api/game/" + game_uuid, function(gameboard) {
+    $.getJSON("/api/club/" + club_uuid, function(gameboard) {
         console.log(gameboard)
         $('#gameboard').text(gameboard.status);
     });

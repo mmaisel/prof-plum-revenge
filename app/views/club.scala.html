@@ -1,0 +1,115 @@
+@(title: String, player_name: String, player_uuid: String, club_uuid: String)
+
+@main(title) {
+    <h1 class="page-header">@title</h1>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Gameboard</h3>
+                        </div>
+                        <div id="gameboard" class="panel-body">
+                            ** GAMEBOARD LAYOUT HERE **
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Card Hand</h3>
+                        </div>
+                        <div class="panel-body">
+                            ** CARDS HERE **
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Action Menu</h3>
+                        </div>
+                        <div class="panel-body">
+
+                            <!-- Action Menu Items -->
+                            <table class="plum_action_menu"><tr>
+                                <td>
+                                    <table class="plum_action_menu" align="left">
+                                        <tr>
+                                            <td><button class="plum_fixed_width_action" id="suggestion_button">Suggestion</button></td>
+                                        </tr>
+                                        <tr id="plum_action_table">
+                                            <td><button class="plum_fixed_width_action" id="accuse_button">Accuse</button></td>
+                                        </tr>
+                                        <tr id="plum_action_table">
+                                            <td><button class="plum_fixed_width_action" id="secret_room_button">Secret Room</button></td>
+                                        </tr>
+                                    </table>
+                                </td>
+
+                                <td>
+                                    <table class="plum_move_table">
+                                        <tr>
+                                            <td></td>
+                                            <td><button id="up_button" class="glyphicon glyphicon-arrow-up plum_fixed_width_move"></button></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td><button id="left_button"  class="glyphicon glyphicon-arrow-left plum_fixed_width_move"></button></td>
+                                            <td><button id="down_button"  class="glyphicon glyphicon-arrow-down plum_fixed_width_move"></button></td>
+                                            <td><button id="right_button" class="glyphicon glyphicon-arrow-right plum_fixed_width_move"></button></td>
+                                        </tr>
+                                    </table>
+                                <td>
+                            </tr></table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Chat and Game History</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <!-- TODO: Need to implement the tab to switch between
+                        the game information and chat room -->
+                        
+                        <!-- Chat Room -->
+                        <textarea id="chat_box" readonly="readonly"
+                                  style="width: 250px; height: 200px;
+                                         margin: 2px; resize: none"></textarea>
+                        </textarea>
+                        <form id="message_form">
+                            <input type=text id="message_input"
+                                   style="width: 180px; height: 24px; margin: 2px" />
+                            <input type="submit" id="send_button" value="Send"
+                                   style="width: 60px; margin: 2px" disabled />
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Current Player Turn</h3>
+                    </div>
+                    <div class="panel-body">
+                        ** PLAYER GRID WITH CURRENT PLAYER **
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" charset="utf-8" src="@routes.Clueless.plumJs(club_uuid, player_name, player_uuid)"></script>
+
+}

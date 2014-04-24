@@ -4,13 +4,16 @@
 
 # Game Lobby Page
 GET     /                           controllers.Clueless.index()
+POST     /                           controllers.Clueless.join()
 
 # Game Board
-GET     /game/:uuid                 controllers.Clueless.gameboard(uuid: Long)
+GET     /club/:club_uuid             controllers.Clueless.club(club_uuid: Integer, player_name, player_uuid: Integer)
+GET     /assets/javascripts/plum.js  controllers.Clueless.plumJs(player_name, player_uuid, club_uuid)
+
 
 # Game API
-GET     /api/game/:uuid                             controllers.GameAPI.index(uuid: Long)
-POST    /api/game/:uuid/playturn                    controllers.GameAPI.playturn(uuid: Long)
+GET     /api/club/:club_uuid                             controllers.ClubAPI.index(club_uuid: Integer)
+POST    /api/club/:club_uuid/play                        controllers.ClubAPI.playturn(club_uuid: Integer)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
