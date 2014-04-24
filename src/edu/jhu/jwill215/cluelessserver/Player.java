@@ -26,7 +26,7 @@ public class Player {
 		this.msgr = new ConsoleMessenger();
 	}
 	
-	public enum Query {WANTMOVE, MOVE, WANTSUGGEST, SUGGEST, WANTACCUSE, ACCUSE, CARDS};
+	public enum Query {MOVE, SUGGEST, ACCUSE, CARDS, ACTION};
 
 	Object query(Query type, Object...objects) {
 		switch (objects.length) {

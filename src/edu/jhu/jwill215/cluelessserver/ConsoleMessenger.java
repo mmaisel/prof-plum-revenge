@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 import edu.jhu.jwill215.cluelessserver.Game.Announcement;
+import edu.jhu.jwill215.cluelessserver.Game.Action;
 import edu.jhu.jwill215.cluelessserver.Player.Query;
 
 public class ConsoleMessenger implements IMessenger {
@@ -16,9 +17,17 @@ public class ConsoleMessenger implements IMessenger {
 	@Override
 	public Object query(Query type, Object...objects) {
 		switch(type) {
-		case WANTMOVE: {
-			out.format("%s: Would you like to attempt to move? [y/n]", (String)objects[0]);
-			return this.getYesNo();
+		case ACTION: {
+			String options = "Select an action: ";
+			int objectLocation = 0;
+			@SuppressWarnings("unchecked")
+			ArrayList<Action> actions = (ArrayList<Action>)objects[1];
+			for (Action a : actions) {
+				options = options + "[" + objectLocation++ + "] " + a.toString() + ", ";
+			}
+			out.format("%s: %s :", (String)objects[0], options);
+			int answer = this.getNumber(actions.size());
+			return actions.get(answer);
 		}
 		case MOVE: {
 			String options = "Select a move: ";
@@ -31,10 +40,6 @@ public class ConsoleMessenger implements IMessenger {
 			out.format("%s: %s :", (String)objects[0], options);
 			int answer = this.getNumber(moves.size());
 			return moves.get(answer);
-		}
-		case WANTSUGGEST: {
-			out.format("%s: Would you like to make a suggestion? [y/n]", (String)objects[0]);
-			return this.getYesNo();
 		}
 		case SUGGEST: {
 			Triglyph suggestion = new Triglyph();
@@ -56,10 +61,6 @@ public class ConsoleMessenger implements IMessenger {
 			suggestion.suspect  = Suspect.values()[this.getNumber(Suspect.values().length-1)];
 
 			return suggestion;
-		}
-		case WANTACCUSE: {
-			out.format("%s: Would you like to make an accusation? [y/n]", (String)objects[0]);
-			return this.getYesNo();
 		}
 		case ACCUSE: {
 			Triglyph suggestion = new Triglyph();

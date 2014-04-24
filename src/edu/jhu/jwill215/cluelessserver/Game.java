@@ -100,6 +100,9 @@ public class Game {
 		return players.get(currentPlayer);
 	}
 	
+	
+	public enum Action {STARTTURN, MOVE, SUGGEST, ACCUSE, ENDTURN}
+	
 	private boolean playTurn(Player currentPlayer) {
 		
 		//skip player who previously accused incorrectly
@@ -118,33 +121,61 @@ public class Game {
 		}
 		
 		// attempt a move, if valid play, make a suggestion
-		//determine if player will make a move this turn
-		List<ISpace> validMoves = currentPlayer.character.location.getValidMoves();
-		if (currentPlayer.character.location.getClass().equals(Hall.BALLKITCHEN.getDeclaringClass()) ||
-				(currentPlayer.character.location.getClass().equals(Room.BALLROOM.getDeclaringClass()) &&
-						(validMoves.size() > 0) &&
-						((boolean)currentPlayer.query(Query.WANTMOVE)))) {
-			this.moveSuspect(currentPlayer.character, (ISpace)currentPlayer.query(Query.MOVE, validMoves));
-			currentPlayer.canSuggest = true;
-		}
-		
-		//if valid play, make a suggestion
-		if (currentPlayer.character.location.getClass().equals(Room.BALLROOM.getDeclaringClass()) &&
-				currentPlayer.canSuggest) {
-			currentPlayer.canSuggest = false;
-			if ((boolean)currentPlayer.query(Query.WANTSUGGEST)) {
+		Action nextAction = Action.STARTTURN;
+		while (nextAction != Action.ENDTURN) {
+			switch (nextAction) {
+			case STARTTURN: {
+				//determine if player will make a move this turn
+				List<ISpace> validMoves = currentPlayer.character.location.getValidMoves();
+				if (currentPlayer.character.location.getClass().equals(Hall.BALLKITCHEN.getDeclaringClass())) {
+					List<Action> validActions = new ArrayList<Action>();
+					validActions.add(Action.MOVE);
+					nextAction = (Action)currentPlayer.query(Query.ACTION, validActions);
+				} else {
+					List<Action> validActions = new ArrayList<Action>();
+					if ((currentPlayer.character.location.getClass().equals(Room.BALLROOM.getDeclaringClass()) &&
+							(validMoves.size() > 0))) validActions.add(Action.MOVE);
+					if ((currentPlayer.character.location.getClass().equals(Room.BALLROOM.getDeclaringClass()) &&
+							(currentPlayer.canSuggest))) validActions.add(Action.SUGGEST);
+					validActions.add(Action.ACCUSE);
+					validActions.add(Action.ENDTURN);
+					nextAction = (Action)currentPlayer.query(Query.ACTION, validActions);
+				}
+				break;
+			}
+			case MOVE: {
+				List<ISpace> validMoves = currentPlayer.character.location.getValidMoves();
+				this.moveSuspect(currentPlayer.character, (ISpace)currentPlayer.query(Query.MOVE, validMoves));
+				currentPlayer.canSuggest = true;
+				List<Action> validActions = new ArrayList<Action>();
+				validActions.add(Action.SUGGEST);
+				validActions.add(Action.ACCUSE);
+				validActions.add(Action.ENDTURN);
+				nextAction = (Action)currentPlayer.query(Query.ACTION, validActions);
+				break;
+			}
+			case SUGGEST: {
 				Triglyph suggestion = (Triglyph)currentPlayer.query(Query.SUGGEST);
 				suggestion.room = (Room)currentPlayer.character.location;
-				this.makeSuggestion(currentPlayer, suggestion);
+				this.makeSuggestion(currentPlayer, suggestion);	
+				currentPlayer.canSuggest = false;
+
+				List<Action> validActions = new ArrayList<Action>();
+				validActions.add(Action.ACCUSE);
+				validActions.add(Action.ENDTURN);
+				nextAction = (Action)currentPlayer.query(Query.ACTION, validActions);
+				break;
+			}
+			case ACCUSE: {
+				Triglyph accusation = (Triglyph)currentPlayer.query(Query.ACCUSE);
+				if(this.makeAccusation(currentPlayer, accusation)) return false;
+				nextAction = Action.ENDTURN;
+				break;
+			}	
+			default:
+				break;
 			}
 		}
-		
-		//if wanted, make an accusation
-		if ((boolean)currentPlayer.query(Query.WANTACCUSE)) {
-			Triglyph accusation = (Triglyph)currentPlayer.query(Query.ACCUSE);
-			if(this.makeAccusation(currentPlayer, accusation)) {return false;}
-		}
-		
 		return true;
 	}
 
