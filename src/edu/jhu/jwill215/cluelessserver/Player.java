@@ -30,6 +30,8 @@ public class Player {
 
 	Object query(Query type, Object...objects) {
 		switch (objects.length) {
+		case 2:
+			return this.msgr.query(type, this.name, objects [0], objects[1]);
 		case 1:
 			return this.msgr.query(type, this.name, objects[0]);
 		default:

@@ -27,7 +27,13 @@ public class ConsoleMessenger implements IMessenger {
 			}
 			out.format("%s: %s :", (String)objects[0], options);
 			int answer = this.getNumber(actions.size());
-			return actions.get(answer);
+			Action action = actions.get(answer);
+			ArrayList<Object> complexReturn = new ArrayList<Object>();
+			complexReturn.add(action);
+			if (action == Action.MOVE) {
+				complexReturn.add(this.query(Query.MOVE, objects[0], objects[2]));
+			}
+			return complexReturn;
 		}
 		case MOVE: {
 			String options = "Select a move: ";

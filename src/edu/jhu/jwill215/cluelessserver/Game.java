@@ -122,36 +122,42 @@ public class Game {
 		
 		// attempt a move, if valid play, make a suggestion
 		Action nextAction = Action.STARTTURN;
+		ISpace nextSpace = currentPlayer.character.location;
 		while (nextAction != Action.ENDTURN) {
 			switch (nextAction) {
 			case STARTTURN: {
 				//determine if player will make a move this turn
 				List<ISpace> validMoves = currentPlayer.character.location.getValidMoves();
+				List<Action> validActions = new ArrayList<Action>();
 				if (currentPlayer.character.location.getClass().equals(Hall.BALLKITCHEN.getDeclaringClass())) {
-					List<Action> validActions = new ArrayList<Action>();
 					validActions.add(Action.MOVE);
-					nextAction = (Action)currentPlayer.query(Query.ACTION, validActions);
 				} else {
-					List<Action> validActions = new ArrayList<Action>();
 					if ((currentPlayer.character.location.getClass().equals(Room.BALLROOM.getDeclaringClass()) &&
 							(validMoves.size() > 0))) validActions.add(Action.MOVE);
 					if ((currentPlayer.character.location.getClass().equals(Room.BALLROOM.getDeclaringClass()) &&
 							(currentPlayer.canSuggest))) validActions.add(Action.SUGGEST);
 					validActions.add(Action.ACCUSE);
 					validActions.add(Action.ENDTURN);
-					nextAction = (Action)currentPlayer.query(Query.ACTION, validActions);
 				}
+				@SuppressWarnings("unchecked")
+				ArrayList<Object> response = (ArrayList<Object>)currentPlayer.query(Query.ACTION, validActions, validMoves);
+				nextAction = (Action)response.get(0);
+				if(response.size() > 1 ) nextSpace = (ISpace)response.get(1);
 				break;
 			}
 			case MOVE: {
-				List<ISpace> validMoves = currentPlayer.character.location.getValidMoves();
-				this.moveSuspect(currentPlayer.character, (ISpace)currentPlayer.query(Query.MOVE, validMoves));
+				//List<ISpace> validMoves = currentPlayer.character.location.getValidMoves();
+				//this.moveSuspect(currentPlayer.character, (ISpace)currentPlayer.query(Query.MOVE, validMoves));
+				this.moveSuspect(currentPlayer.character, nextSpace);
 				currentPlayer.canSuggest = true;
 				List<Action> validActions = new ArrayList<Action>();
-				validActions.add(Action.SUGGEST);
+				if ((currentPlayer.character.location.getClass().equals(Room.BALLROOM.getDeclaringClass()) &&
+						(currentPlayer.canSuggest))) validActions.add(Action.SUGGEST);
 				validActions.add(Action.ACCUSE);
 				validActions.add(Action.ENDTURN);
-				nextAction = (Action)currentPlayer.query(Query.ACTION, validActions);
+				@SuppressWarnings("unchecked")
+				ArrayList<Object> response = (ArrayList<Object>)currentPlayer.query(Query.ACTION, validActions);
+				nextAction = (Action)response.get(0);
 				break;
 			}
 			case SUGGEST: {
@@ -163,7 +169,9 @@ public class Game {
 				List<Action> validActions = new ArrayList<Action>();
 				validActions.add(Action.ACCUSE);
 				validActions.add(Action.ENDTURN);
-				nextAction = (Action)currentPlayer.query(Query.ACTION, validActions);
+				@SuppressWarnings("unchecked")
+				ArrayList<Object> response = (ArrayList<Object>)currentPlayer.query(Query.ACTION, validActions);
+				nextAction = (Action)response.get(0);
 				break;
 			}
 			case ACCUSE: {
