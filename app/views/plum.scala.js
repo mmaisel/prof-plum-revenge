@@ -95,10 +95,10 @@ $(document).ready(function() {
 	$("#message_input").change(ChatRoom.Validate);
 
 	// Send Message
-	$("#message_form").submit(function() {
+	$("#message_form").submit(function(event) {
+		event.preventDefault(); // Needed to prevent random refreshes
 		ChatRoom.OnSubmit($("#message_input").val());
 	});
-
 
 	/**
 	 * Game Info
@@ -190,8 +190,8 @@ var Message = {
 
 var updateGameBoard = function() {
     $.getJSON("/api/club/" + club_uuid, function(gameboard) {
-        console.log(gameboard)
-        $('#gameboard').text(gameboard.status);
+        //console.log(gameboard)
+        //$('#gameboard').text(gameboard.status);
     });
 };
 
