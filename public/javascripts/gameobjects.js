@@ -6,11 +6,12 @@ weapon.prototype.toString = function() {
 	return this.name;
 };
 var ROPE 		= new weapon("rope");
-var LEAD_PIPE 	= new weapon("lead pipe");
+var LEADPIPE 	= new weapon("lead pipe");
 var KNIFE 		= new weapon("knife");
 var WRENCH 		= new weapon("wrench");
 var CANDLESTICK = new weapon("candlestick");
 var REVOLVER 	= new weapon("revolver");
+var NOCARD 		= new weapon("no card");
 
 function room(name) {
 	this.name = name;
@@ -26,6 +27,7 @@ var DINING 			= new room("Dining Room");
 var CONSERVATORY 	= new room("Conservatory");
 var BALLROOM 		= new room("Ballroom");
 var KITCHEN 		= new room("Kitchen");
+var LIBRARY			= new room("Library");
 
 function hall(name) {
 	this.name = name;
@@ -59,46 +61,89 @@ var GREEN	= new suspect("Mr. Green");
 var PEACOCK = new suspect("Ms. Peacock");
 var PLUM	= new suspect("Prof. Plum");
 
-function triglyph(room, suspect, weapon) {
+function trigylphus(room, suspect, weapon) {
 	this.room = room;
 	this.suspect = suspect;
 	this.weapon = weapon;
 };
+trigylphus.prototype.toString = function() {
+	var myString = "";
+	for (var i in this) {
+		if (i=="toString") continue;
+		if (this[i] != null) myString = myString + this[i].toString() + ", ";
+	}
+	return myString;
+};
+var myTri = new trigylphus(null, null, null);
 
 function announcement() {
-	type;
-	playerName;
-	playerCharacter;
-	triglyph;
-	card;
-	room;
-	cards;
+	type = null;
+	playerName = null;
+	playerCharacter = null;
+	trigylphx = null;
+	card = null;
+	room = null;
+	cards = null;
 }
-function announcementType() {};
-var SKIP = new announcementType();
-var MOVE = new announcementType();
-var SUGGEST = new announcementType();
-var FALSE = new announcementType();
-var ACCUSE = new announcementType();
-var WINNER = new announcementType();
-var LOSER = new announcementType();
-var NEWPLAYER = new announcementType();
+announcement.prototype.toString = function() {
+	var myString = "";
+	for (var i in this) {
+		if (i=="toString") continue;
+		if (this[i] != null) myString = myString + this[i].toString() + ", ";
+	}
+	return myString;
+};
+
+function announcementType(name) {
+	this.name = name;
+};
+announcementType.prototype.toString = function() {
+	return this.name;
+};
+var SKIP = new announcementType("SKIP");
+var MOVE = new announcementType("MOVE");
+var SUGGEST = new announcementType("SUGGEST");
+var FALSE = new announcementType("FALSE");
+var ACCUSE = new announcementType("ACCUSE");
+var WINNER = new announcementType("WINNER");
+var LOSER = new announcementType("LOSER");
+var NEWPLAYER = new announcementType("NEWPLAYER");
+var SHOWHAND = new announcementType("SHOWHAND");
 
 function query() {
-	type;
-	playerName;
-	spaces;
-	cards;
-	actions;
+	type = null;
+	playerName = null;
+	spaces = null;
+	cards = null;
+	actions = null;
 }
-function queryType () {};
-var SUGGEST = new queryType();
-var ACCUSE = new queryType();
-var CARDS = new queryType();
-var ACTION = new queryType();
+query.prototype.toString = function() {
+	var myString = "";
+	for (var i in this) {
+		if (i=="toString") continue;
+		if (this[i] != null) myString = myString + this[i].toString() + ", ";
+	}
+	return myString;
+};
 
-function actionType () {};
-var MOVE = new actionType();
-var SUGGEST = new actionType();
-var ACCUSE = new actionType();
-var ENDTURN = new actionType();
+function queryType (name) {
+	this.name = name;
+};
+queryType.prototype.toString = function() {
+	return this.name;
+}
+var Q_SUGGEST = new queryType("SUGGEST");
+var Q_ACCUSE = new queryType("ACCUSE");
+var Q_CARDS = new queryType("CARDS");
+var Q_ACTION = new queryType("ACTION");
+
+function actionType (name) {
+	this.name = name;
+};
+actionType.prototype.toString = function() {
+	return this.name;
+}
+var A_MOVE = new actionType("MOVE");
+var A_SUGGEST = new actionType("SUGGEST");
+var A_ACCUSE = new actionType("ACCUSE");
+var A_ENDTURN = new actionType("ENDTURN");
