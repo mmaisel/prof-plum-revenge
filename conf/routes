@@ -2,18 +2,18 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Game Lobby Page
-GET     /                           controllers.Clueless.index()
-POST     /                           controllers.Clueless.join()
+# game Main Lobby
+GET     /                           controllers.Club.index()
+POST     /                           controllers.Club.join()
 
-# Game Board
-GET     /club/:club_uuid             controllers.Clueless.club(club_uuid: Integer, player_name, player_uuid: Integer)
-GET     /assets/javascripts/plum.js  controllers.Clueless.plumJs(player_name, player_uuid, club_uuid)
+# game Room that display a Gameboard
+GET     /club/:game_uuid             controllers.Club.game(game_uuid: Integer, player_name, player_uuid: Integer)
+GET     /assets/javascripts/plum.js  controllers.Club.plumJs(player_name, player_uuid, game_uuid)
 
 
 # Game API
-GET     /api/club/:club_uuid                             controllers.ClubAPI.index(club_uuid: Integer)
-POST    /api/club/:club_uuid/play                        controllers.ClubAPI.playturn(club_uuid: Integer)
+GET     /api/game/:game_uuid                             controllers.Clueless.index(game_uuid: Integer)
+POST    /api/game/:game_uuid/send                        controllers.Clueless.sendMessage(game_uuid: Integer)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
