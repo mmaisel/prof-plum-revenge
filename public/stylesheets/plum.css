@@ -23,3 +23,11 @@ table.plum_move_table td {
 	padding: 1px;
 }
 
+/* Padding between rows */
+.top-buffer { 
+	margin-top: 1px; 
+}
+
+.hallway { 
+	background-color:#FFAD40;
+}

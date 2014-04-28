@@ -22,7 +22,7 @@ var COMMAND = {
 	Accuse      : { value: 1, name: "Accuse"      },
 	Move        : { value: 2, name: "Move"        },
 	Chat        : { value: 3, name: "Chat"        },
-	SecretRoom : { value: 4, name: "Secret Room" },
+	SecretRoom  : { value: 4, name: "Secret Room" },
 };
 
 var DIRECTION = {
