@@ -1,4 +1,4 @@
-@(club_uuid: String, player_name: String, player_uuid: String)
+@(game_uuid: String, player_name: String, player_uuid: String)
 /**
  * PlumJS
  * This contains the JS components of the Client Subsystem (CS) and Client 
@@ -32,7 +32,7 @@ var DIRECTION = {
 	Right : {value: 3, name: "Right", code: "R"}
 };
 
-var club_uuid = "@club_uuid";
+var game_uuid = "@game_uuid";
 var player_name = "@player_name";
 var player_uuid = "@player_uuid"
 
@@ -189,7 +189,7 @@ var Message = {
  */
 
 var updateGameBoard = function() {
-    $.getJSON("/api/club/" + club_uuid, function(gameboard) {
+    $.getJSON("/api/game/" + game_uuid, function(gameboard) {
         //console.log(gameboard)
         //$('#gameboard').text(gameboard.status);
     });
