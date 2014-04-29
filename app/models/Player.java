@@ -11,21 +11,26 @@ import java.util.*;
  *
  */
 public class Player {
-	String name = "Jack Smith";
+	String name;
+    int uuid;
 	Suspect character;
 	ArrayList<ICard> cards = new ArrayList<ICard>();
 	boolean frozen = false;
 	boolean canSuggest = false;
 	int wins = 0;
-
 	IMessenger msgr;
+
 	Player (IMessenger myMsgr) {
 		this.msgr = myMsgr;
 	}
+    Player (String name, int uuid) {
+        this.name = name;
+        this.uuid = uuid;
+    }
 	Player() {
 		this.msgr = new ConsoleMessenger();
 	}
-	
+
 	public enum Query {MOVE, SUGGEST, ACCUSE, CARDS, ACTION};
 
 	Object query(Query type, Object...objects) {

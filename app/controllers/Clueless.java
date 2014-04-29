@@ -10,14 +10,14 @@ import play.libs.Json;
 
 public class Clueless extends Controller {
 
-    public static Result index(int club_uuid) {
+    public static Result getMessage(String club_uuid) {
         // lookup game state for a particular game, put into gameboard json struct, send back
         ObjectNode gameboard = Json.newObject();
         gameboard.put("status", Math.random());
         return ok(gameboard);
     }
 
-    public static Result sendMessage(int club_uuid) {
+    public static Result sendMessage(String club_uuid) {
         JsonNode json = request().body().asJson();
         if (json == null) {
             return badRequest("No json data, bro.");

@@ -15,7 +15,8 @@ public class UnitTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Club myClub = new Club();
+        int i = 1;
+		Club myClub = new Club(i);
 		myClub.run();
 	}
 	
