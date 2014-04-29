@@ -11,14 +11,14 @@ import java.util.ArrayList;
 /**
  * @author Jack Williard
  */
-public class Club {
+public class WebClub {
 
 
     public int uuid;
     ArrayList<Player> players = new ArrayList<Player>();
     Game myGame;
 
-    public Club(int uuid) {
+    public WebClub(int uuid) {
         this.uuid = uuid;
     }
 

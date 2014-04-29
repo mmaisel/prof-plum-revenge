@@ -39,13 +39,13 @@ public class Club extends Controller {
         DynamicForm clubForm = Form.form().bindFromRequest();
         String player_name = clubForm.get("player_name");
         String club_uuid = clubForm.get("club_uuid");
-        // placeholder
+        // placeholder, get array index of player list to use when joining a club
         int player_uuid = 1;
 
         // see if club is already on the cache
-        models.Club club = (models.Club)Cache.get(club_uuid);
+        models.WebClub club = (models.WebClub)Cache.get(club_uuid);
         if(club==null) {
-            club = new models.Club(Integer.parseInt(club_uuid));
+            club = new models.WebClub(Integer.parseInt(club_uuid));
             Cache.set(club_uuid, club);
         }
 

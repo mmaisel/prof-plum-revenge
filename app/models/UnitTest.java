@@ -16,7 +16,7 @@ public class UnitTest {
 	 */
 	public static void main(String[] args) {
         int i = 1;
-		ConsoleClub myClub = new Club(i);
+		ConsoleClub myClub = new ConsoleClub(i);
 		myClub.run();
 	}
 	
