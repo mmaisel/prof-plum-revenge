@@ -20,6 +20,11 @@ public class Game {
     Game(ArrayList<Player> initialPlayers) {
     	this.players = initialPlayers;
 		
+		//make sure settings don't carry over from previous game.
+		for(Player p : this.players) {
+			p.reset();
+		}
+
     	Connection.applyConnections();
     	
 		Suspect.PLUM.location = Room.STUDY;

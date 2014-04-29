@@ -30,7 +30,14 @@ public class Player {
 	Player() {
 		this.msgr = new ConsoleMessenger();
 	}
-
+	
+	public void reset() {
+		cards.clear();
+		frozen = false;
+		canSuggest = false;
+		character = null;
+	}
+	
 	public enum Query {MOVE, SUGGEST, ACCUSE, CARDS, ACTION};
 
 	Object query(Query type, Object...objects) {
