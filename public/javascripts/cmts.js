@@ -24,32 +24,49 @@
 var Message = {
 
 	create: function(message_type, command, payload) {
-		var msg = new Object();
-		msg.message_type = message_type.name;
-		msg.command      = command.name;
+		this.msg = {}
+
+		this.msg.message_type = message_type.name;
+		this.msg.command      = command.name;
 
 		// Payload needs to be a dictionary
-		msg.payload      = payload;
+		this.msg.payload      = payload;
 	
-		return msg;
+		return this.msg;
 	},
+
+
 
 }; // Message
 
 var CMTS = {
-	
-	sendMessage : function(message) {
-		alert("[SEND] Message:" + "\n" +
-			"type: " + message.message_type + "\n" +
-			"command: " + message.command + "\n" +
-			//"\tpayload: " + message.payload.name + "\n" +
-			"\n");
 
+	// H4x0rzzzz!!!
+	postJSON: function(url, data, callback) {
+	    return jQuery.ajax({
+	        'type': 'POST',
+	        'url': url,
+	        'contentType': 'application/json',
+	        'data': JSON.stringify(data),
+	        'dataType': 'json',
+	        'success': callback
+	    });
+	},
+
+	sendMessage : function(message) {
+		console.log("[SEND]: " + JSON.stringify(message));
+		CMTS.postJSON("/api/game/" + club_uuid, message, function(response) {
+			console.log("[RESPONSE]: " + JSON.stringify(response));
+		});
 		// TODO: Do your $postJSON() call here to post the message to server
 	},
 
 	getMessage : function() {
+		$.getJSON("/api/game/" + club_uuid, function(message) {
+			console.log("[GET]: " + JSON.stringify(message));
+			// TODO: Do your $getJSON() call here to get latest message from 
+			// server then extract the type and command and call into playTurn()
 
-		// TODO: Do your $getJSON() call here to get latest message from server
+		});
 	},
 }

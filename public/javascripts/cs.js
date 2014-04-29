@@ -109,10 +109,10 @@ var GameInfo = {
 };
 
 // Update gameboard every second
-var gameboardInterval = window.setInterval('updateGameBoard()', 1000);
+//var gameboardInterval = window.setInterval('updateGameBoard()', 1000);
 
 var updateGameBoard = function() {
-    $.getJSON("/api/game/" + game_uuid, function(gameboard) {
+    $.getJSON("/api/game/" + club_uuid, function(gameboard) {
         //console.log(gameboard)
         //$('#gameboard').text(gameboard.status);
     });
