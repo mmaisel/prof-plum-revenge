@@ -7,13 +7,13 @@ GET     /                           controllers.Club.index()
 POST     /                           controllers.Club.join()
 
 # game Room that display a Gameboard
-GET     /club/:game_uuid             controllers.Club.game(game_uuid: Integer, player_name, player_uuid: Integer)
+GET     /club/:club_uuid             controllers.Club.clubroom(club_uuid, player_name, player_uuid)
 GET     /assets/javascripts/plum.js  controllers.Club.plumJs(player_name, player_uuid, game_uuid)
 
 
-# Game API
-GET     /api/game/:game_uuid                             controllers.Clueless.index(game_uuid: Integer)
-POST    /api/game/:game_uuid/send                        controllers.Clueless.sendMessage(game_uuid: Integer)
+# Club API
+GET     /api/club/:club_uuid                             controllers.Clueless.getMessage(club_uuid)
+POST    /api/club/:club_uuid                            controllers.Clueless.sendMessage(club_uuid)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

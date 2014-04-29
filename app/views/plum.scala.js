@@ -1,12 +1,11 @@
-@(game_uuid: String, player_name: String, player_uuid: String)
+@(club_uuid: String, player_name: String, player_uuid: String)
 /**
  * PlumJS
  * This code is responsible for handling all JQuery requests and forwarding
  * on the necessary data to the subsystems responsible for handling that data.
  */
 
-
-var game_uuid = "@game_uuid";
+var club_uuid = "@club_uuid";
 var player_name = "@player_name";
 var player_uuid = "@player_uuid"
 
@@ -67,11 +66,4 @@ $(document).ready(function() {
 	});
 
 });
-
-
-
-
-
-
-
 
