@@ -1,7 +1,7 @@
 
 function announcementCallback(msg) {
 	var newNode = document.createElement("p");
-	newNode.appendChild(document.createTextNode(msg.toString()));
+	newNode.appendChild(document.createTextNode("ANNOUNCE: " + msg.toString()));
 	document.getElementById("body").appendChild(newNode);
 	return;
 }; 
@@ -11,9 +11,9 @@ function setQueryIndexToZero() {nextQuery = 0;};
 
 function queryCallback(msg) {
 	var newNode = document.createElement("p");
-	newNode.appendChild(document.createTextNode(msg.toString()));
+	newNode.appendChild(document.createTextNode("QUERY: " + msg.toString()));
 	document.getElementById("body").appendChild(newNode);
-	setTimeout(respondToQuery, 1000);
+	setTimeout(respondToQuery,1000);
 	return;
 
 };

@@ -17,25 +17,28 @@ function registerAnnouncementCallback(aCallback) {
 function registerQueryCallback(qCallback) {
 	messenger.queryCallback = qCallback;
 	currentQ = 0;
-	processQuery();
+	setTimeout(processQuery, 1000*(a.length+1));
 	return 1;
 };
 
 function postQueryResponse(response) {
 	if (currentQ < q.length) {
-		processQuery();
+		setTimeout(processQuery,1000);
 	}
 	return;
 };
 
 function processAnnouncements() {
-	while (currentA < a.length) {
+	//while (currentA < a.length) {
 		messenger.annoucementCallback(a[currentA]);
 		currentA = currentA + 1;
-	}
+		if (currentA < a.length) setTimeout(processAnnouncements, 1000);
+	//}
+	return;
 };
 
 function processQuery() {
 	messenger.queryCallback(q[currentQ]);
 	currentQ = currentQ + 1;
+	return;
 };
