@@ -4,7 +4,7 @@
  * interface functionality.
  */
 
-
+ 
 /**
  * Action Menu
  * These functions represent the buttons inside the action menu box in the UI.
@@ -69,8 +69,26 @@ var ActionMenu = {
 
 // TODO: Implement this
 var GameBoard = {
-
+	addToHand : function (card) {
+		//var newNode = document.createElement("div");
+		//newNode.class = "col-md-1";
+		//newNode.innerHTML = card.toString();
+		//TODO: make cards images as follows:
+		var newNode = document.createElement("img");
+		newNode.src =  "/assets/images/card.jpg";
+		newNode.alt = card.toString();
+		newNode.title = card.toString();
+		//newNode.src = "/assets/images/" + card.toString() + ".jpg";
+		document.getElementById("hand").appendChild(newNode);
+	},
+	showCards : function (cards) {
+		for (var card in cards) {
+			this.addToHand(card);
+		}
+	}
 };
+
+GameBoard.showCards( [1, 2, 3] );
 
 var ChatRoom = {
 
