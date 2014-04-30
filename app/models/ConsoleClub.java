@@ -107,10 +107,7 @@ public class ConsoleClub {
                 players.add(newPlayer);
                 break;
             case 2:  //delete player
-                if (players.size() > 0) {
-                    Player oldPlayer = (Player) this.query(Query.SELECTPLAYER, players);
-                    players.remove(oldPlayer);
-                }
+
                 break;
             case 3:  //List stats for all players
                 if (players.size() > 0) {
