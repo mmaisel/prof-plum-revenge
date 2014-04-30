@@ -85,10 +85,30 @@ var GameBoard = {
 		for (var card in cards) {
 			this.addToHand(card);
 		}
-	}
+	},
+	tokens : { 
+		0: "scarlet_token",
+		1: "mustard_token",
+		2: "white_token",
+		3: "green_token",
+		4: "peacock_token",
+		5: "plum_token",
+	},
+	movePlayer : function (player, space) {
+		var token = document.getElementById(this.tokens[player.value]);
+		var formerParent = token.parentNode;
+		var room = document.getElementById(space.name);
+		var row = room.children[Math.floor(player.value/2)];
+		var col = row.children[player.value%2];
+		var storedInnerHtml = col.innerHTML;
+		col.innerHTML = "";
+		col.appendChild(token);	
+		formerParent.innerHTML = storedInnerHtml;
+		//token.parentNode.removeChild(token);
+	},
 };
-
 GameBoard.showCards( [1, 2, 3] );
+GameBoard.movePlayer(SUSPECT.MUSTARD, ROOM.LIBRARY);
 
 var ChatRoom = {
 
