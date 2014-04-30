@@ -45,6 +45,12 @@
         </div>
     </div>
     <div class="container">
+        @if(flash.get("danger")) {
+            <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>You done goofed!</strong> @flash.get("danger")
+            </div>
+        }
         @content
     </div>
     <script src="@routes.Assets.at("javascripts/bootstrap.js")"></script>

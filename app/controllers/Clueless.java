@@ -22,11 +22,8 @@ public class Clueless extends Controller {
         if (json == null) {
             return badRequest("No json data, bro.");
         }
-        ObjectNode result = Json.newObject();
-        // doAction() on message, get new gamestate, send via gameboard json struct
-        result.put("message", "SUCCESS");
-        result.put("gameboard", "SUCCESS");
-        return ok(result);
+        ObjectNode reply = Json.newObject();
+        return ok(reply);
     }
 
     private void doAction() {

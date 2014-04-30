@@ -11,8 +11,7 @@ import java.util.*;
  *
  */
 public class Player {
-	String name;
-    int uuid;
+	public String name;
 	Suspect character;
 	ArrayList<ICard> cards = new ArrayList<ICard>();
 	boolean frozen = false;
@@ -20,17 +19,19 @@ public class Player {
 	int wins = 0;
 	IMessenger msgr;
 
-	Player (IMessenger myMsgr) {
-		this.msgr = myMsgr;
-	}
-    Player (String name, int uuid) {
+    Player (String name) {
         this.name = name;
-        this.uuid = uuid;
+        this.msgr = new WebMessenger();
     }
+
 	Player() {
 		this.msgr = new ConsoleMessenger();
 	}
-	
+
+    Player (IMessenger myMsgr) {
+        this.msgr = myMsgr;
+    }
+
 	public void reset() {
 		cards.clear();
 		frozen = false;

@@ -15,11 +15,31 @@ public class WebClub {
 
 
     public int uuid;
-    ArrayList<Player> players = new ArrayList<Player>();
+    public ArrayList<Player> players = new ArrayList<Player>();
     Game myGame;
 
     public WebClub(int uuid) {
         this.uuid = uuid;
+    }
+
+    /**
+     *  New player joins a club room, return -1 if club is full!
+     * @param player_name
+     * @return player_id, player id used to identifer player in a club
+     */
+    public int joinClub(String player_name) {
+        if (this.isClubFull()) {
+            return -1;
+        } else {
+            Player newPlayer = new Player(player_name);
+            players.add(newPlayer);
+            int player_id = players.indexOf(newPlayer);
+            return player_id;
+        }
+    }
+
+    private boolean isClubFull() {
+        return (this.players.size() > 4);
     }
 
     public void run() {
