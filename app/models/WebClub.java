@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 import com.typesafe.plugin.RedisPlugin;
 import redis.clients.jedis.*;
-import play.cache.Cache;
 
 /**
  * @author Jack Williard
@@ -30,32 +29,25 @@ public class WebClub {
      * @return player_id, player id used to identifer player in a club
      */
     @SuppressWarnings("unchecked")
-    public static int joinClub(String player_name, String club_uuid) {
+    public static long joinClub(String player_name, String club_uuid) {
 
-        int player_id;
+        long player_id;
+        JedisPool p = Play.application().plugin(RedisPlugin.class).jedisPool();
+        Jedis j = p.getResource();
 
-        ArrayList<String> clubSlots= (ArrayList<String>) Cache.get("club:" + club_uuid + ":players");
-
-        if (clubSlots == null) {
-            return -1;
+        // see how many players are in slots currently
+        long num_of_players = j.llen("club:" + club_uuid + ":players");
+        // max number of players already in room
+        if (num_of_players > 6) {
+            player_id = -1;
         } else {
-
-            String club_debug_log = "Current Players in Club Room - " + club_uuid + "\n";
-            for (String slot: clubSlots) {
-               club_debug_log += "\t" + clubSlots.indexOf(slot) + "  " + slot + "\n";
-            }
-            Logger.debug(club_debug_log);
-
-            if (!isClubFull(clubSlots)) {
-                clubSlots.add(player_name);
-                Cache.set("club:" + club_uuid + ":players", clubSlots);
-                return clubSlots.indexOf(player_name);
-            } else {
-                return -1;
-            }
-
-
+            player_id = num_of_players;
+            // add player to slot in club
+            j.rpush("club:" + club_uuid + ":players", player_name);
         }
+        p.returnResource(j);
+        // return player id to be used in CMTS
+        return player_id;
     }
 
     /**
@@ -71,17 +63,5 @@ public class WebClub {
         }
         */
         return;
-    }
-
-    /**
-     *  More than max players in a club?
-     * @return
-     */
-    private static boolean isClubFull(ArrayList<String> clubSlots) {
-        if (clubSlots.size() > 5) {
-            return true;
-        } else {
-            return false;
-        }
     }
 }

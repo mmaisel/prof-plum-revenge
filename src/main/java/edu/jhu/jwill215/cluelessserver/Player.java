@@ -17,11 +17,17 @@ public class Player {
 	boolean frozen = false;
 	boolean canSuggest = false;
 	int wins = 0;
-
 	IMessenger msgr;
+
+    Player (String player_name, IMessenger myMsgr) {
+        this.name = player_name;
+        this.msgr = myMsgr;
+    }
+
 	Player (IMessenger myMsgr) {
 		this.msgr = myMsgr;
 	}
+
 	Player() {
 		this.msgr = new ConsoleMessenger();
 	}

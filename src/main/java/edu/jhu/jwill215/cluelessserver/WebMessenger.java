@@ -3,6 +3,7 @@ package edu.jhu.jwill215.cluelessserver;
 import edu.jhu.jwill215.cluelessserver.Game.Announcement;
 import edu.jhu.jwill215.cluelessserver.Game.Action;
 import edu.jhu.jwill215.cluelessserver.Player.Query;
+import redis.clients.jedis.*;
 
 public class WebMessenger implements IMessenger {
 

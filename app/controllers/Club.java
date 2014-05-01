@@ -38,7 +38,7 @@ public class Club extends Controller {
         String club_uuid = clubForm.get("club_uuid");
         // placeholder, get array index of player list to use when joining a club
 
-        int player_uuid = models.WebClub.joinClub(player_name, club_uuid);
+        long player_uuid = models.WebClub.joinClub(player_name, club_uuid);
 
         if (player_uuid == -1 ) {
             flash("danger", String.format("Club Room %s is full, and can not join!", club_uuid));
