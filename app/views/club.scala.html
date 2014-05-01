@@ -1,5 +1,163 @@
 @(title: String, player_name: String, player_uuid: String, club_uuid: String)
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
+        <h4 class="modal-title" id="myModalLabel">Make a Suggestion</h4>
+      </div>
+      <div class="modal-body">
+		  <div class="row">
+			  <div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel panel-heading">
+						<h3 class="panel-title">Suspect</h3>
+					</div>
+					<div class="panel-body">
+						<form role="form">
+						<div class="radio">
+							<label>
+								<input type="radio" name="optionsSuspect" value="Col. Mustard">Col. Mustard </input>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" name="optionsSuspect" value="Ms. Scarlet">Ms. Scarlet </input>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" name="optionsSuspect" value="Prof. Plum">Prof. Plum</input>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" name="optionsSuspect" value="Mr. White">Mr. White</input>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" name="optionsSuspect" value="Ms. Peacock">Ms. Peacock</input>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" name="optionsSuspect" value="Mr. Green">Mr. Green </input>
+							</label>
+						</div>
+						</form>
+					</div>
+				</div>
+			  </div>
+			  <div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel panel-heading">
+						<h3 class="panel-title">Weapon</h3>
+					</div>
+					<div class="panel-body">
+						<form role="form">
+						<div class="radio">
+							<label>
+								<input type="radio" name="optionsWeapon" value="rope">Rope </input>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" name="optionsWeapon" value="lead pipe">Lead Pipe </input>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" name="optionsWeapon" value="knife">Knife</input>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" name="optionsWeapon" value="wrench">Wrench</input>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" name="optionsWeapon" value="candlestick">Candlestick</input>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" name="optionsWeapon" value="revolver">Revolver </input>
+							</label>
+						</div>
+						</form>
+					</div>
+				</div>
+			  </div>
+		      <div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel panel-heading">
+						<h3 class="panel-title">Room</h3>
+					</div>
+					<div class="panel-body">
+						<form role="form">
+						<div class="radio">
+							<label>
+								<input type="radio" name="optionsRoom" value="Study" disabled>Study </input>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" name="optionsRoom" value="Hall" disabled>Hall </input>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" name="optionsRoom" value="Lounge" disabled>Lounge</input>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" name="optionsRoom" value="Billiard Room" disabled>Billiard Room</input>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" name="optionsRoom" value="Dining Room" disabled>Dining Room</input>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" name="optionsRoom" value="Conservatory" disabled>Conservatory </input>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" name="optionsRoom" value="Ballroom" disabled>Ballroom </input>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" name="optionsRoom" value="Kitchen" disabled>Kitchen </input>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" name="optionsRoom" value="Library" disabled>Library </input>
+							</label>
+						</div>
+						</form>
+					</div>
+				</div>
+			  </div>
+		  </div>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+        <button type="button" class="btn btn-primary btn-default" data-dismiss="modal">Suggest!</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 @main(title) {
     <h1 class="page-header">@title</h1>
     <div class="row">
@@ -362,7 +520,7 @@
                                 <td>
                                     <table class="plum_action_menu" align="left">
                                         <tr>
-                                            <td><button class="plum_fixed_width_action" id="suggestion_button">Suggestion</button></td>
+                                            <td><button class="plum_fixed_width_action" data-toggle="modal" data-target="#myModal" id="suggestion_button">Suggestion</button></td>
                                         </tr>
                                         <tr id="plum_action_table">
                                             <td><button class="plum_fixed_width_action" id="accuse_button">Accuse</button></td>
