@@ -1,111 +1,194 @@
-/**
- * Game Objects
- * This file contains a list of enum values used to represent all items in the
- * game. These are used to construct messages to send to the game server and 
- * create objects like cards/players
- */
-
-var MESSAGE_TYPE = {
-	ACTION : {
-		value: 0, 
-		name: "ACTION",
+var Gameobjects = {
+	weapon: function(name) {
+		this.name = name; 
 	},
 
-	PRIVATE_ANNOUNCEMENT : { 
-		value: 1, 
-		name: "PRIVATEANNOUNCEMENT", 
+
+	room: function(name) {
+		this.name = name;
 	},
 	
-	ANNOUNCEMENT : { 
-		value: 2,
-		name: "ANNOUNCEMENT",
+
+	hall: function(name) {
+		this.name = name;
+	},
+
+
+	suspect: function(name) {
+		this.name = name;
+	},
+
+
+	triglyphus: function(room, suspect, weapon) {
+		this.room = room;
+		this.suspect = suspect;
+		this.weapon = weapon;
+	},
+
+
+	announcement: function() {
+		type = null;
+		playerName = null;
+		playerCharacter = null;
+		trigylphx = null;
+		card = null;
+		room = null;
+		cards = null;
+	},
+
+
+	announcementType: function(name) {
+		this.name = name;
+	},
+
+	
+	query: function() {
+		type = null;
+		playerName = null;
+		spaces = null;
+		cards = null;
+		actions = null;
+	},
+
+
+	queryType: function(name) {
+		this.name = name;
+	},
+
+
+	actionType: function(name) {
+		this.name = name;
+	},
+
+
+	direction: function(name) {
+		this.name = name;
 	},
 };
 
-var QUERY = {
-	SUGGEST     : { value: 0, name: "Suggest" },
-	ACCUSE      : { value: 1, name: "Accuse"  },
-	CARDS       : { value: 2, name: "Cards"   },
-	ACTION      : { value: 3, name: "Action"  },
+
+Gameobjects.weapon.prototype.toString = function() {
+	return this.name;
+};
+Gameobjects.room.prototype.toString = function() {
+	return this.name;
+};
+Gameobjects.hall.prototype.toString = function() {
+	return this.name;
+};
+Gameobjects.suspect.prototype.toString = function() {
+	return this.name;
+};
+Gameobjects.triglyphus.prototype.toString = function() {
+	var myString = "";
+	for (var i in this) {
+		if (i=="toString") continue;
+		if (this[i] != null) myString = myString + this[i].toString() + ", ";
+	}
+	return myString;
+};
+Gameobjects.announcement.prototype.toString = function() {
+	var myString = "";
+	for (var i in this) {
+		if (i=="toString") continue;
+		if (this[i] != null) myString = myString + this[i].toString() + ", ";
+	}
+	return myString;
+};
+Gameobjects.announcementType.prototype.toString = function() {
+	return this.name;
+};
+Gameobjects.query.prototype.toString = function() {
+	var myString = "";
+	for (var i in this) {
+		if (i=="toString") continue;
+		if (this[i] != null) myString = myString + this[i].toString() + ", ";
+	}
+	return myString;
+};
+Gameobjects.queryType.prototype.toString = function() {
+	return this.name;
+};
+Gameobjects.actionType.prototype.toString = function() {
+	return this.name;
+};
+Gameobjects.direction.prototype.toString = function() {
+	return this.name;
 };
 
 
-var ANNOUNCEMENT_TYPE = {
-	NEWPLAYER : { value: 0, name: "New Player" },
-	ACCUSE    : { value: 1, name: "Accuse"     },
-	FALSE     : { value: 2, name: "False"      },
-	LOSER     : { value: 3, name: "Loser"      },
-	MOVE      : { value: 4, name: "Move"       },
-	SKIP      : { value: 5, name: "Skip"       },
-	SUGGEST   : { value: 6, name: "Suggest"    },
-	WINNER    : { value: 7, name: "Winner"     },
-	SHOWHAND  : { value: 8, name: "Show hand"  },
-	YOURTURN  : { value: 9, name: "Your turn"  },
-};
-
-var ACTION = {
-	SUGGEST : { 
-		value: 0,
-		name: "SUGGEST"  
-	},
-
-	ACCUSE : { 
-		value: 1, 
-		name: "ACCUSE"
-	},
-
-	MOVE : { 
-		value: 2, 
-		name: "MOVE"
-	},
-
-	CHAT : { 
-		value: 3, 
-		name: "CHAT"
-	},
-
-	END_TURN : {
-		value: 4, 
-		name: "ENDTURN" 
-	},
-};
+var ROPE 		= new Gameobjects.weapon("rope");
+var LEADPIPE 	= new Gameobjects.weapon("lead pipe");
+var KNIFE 		= new Gameobjects.weapon("knife");
+var WRENCH 		= new Gameobjects.weapon("wrench");
+var CANDLESTICK = new Gameobjects.weapon("candlestick");
+var REVOLVER 	= new Gameobjects.weapon("revolver");
+var NOCARD 		= new Gameobjects.weapon("no card");
 
 
+var STUDY 			= new Gameobjects.room("Study");
+var HALL 			= new Gameobjects.room("Hall");
+var LOUNGE 			= new Gameobjects.room("Lounge");
+var BILLIARD 		= new Gameobjects.room("Billiard Room");
+var DINING 			= new Gameobjects.room("Dining Room");
+var CONSERVATORY 	= new Gameobjects.room("Conservatory");
+var BALLROOM 		= new Gameobjects.room("Ballroom");
+var KITCHEN 		= new Gameobjects.room("Kitchen");
+var LIBRARY			= new Gameobjects.room("Library");
 
-var DIRECTION = {
-	UP          : { value: 0, name: "Up"          },
-	DOWN        : { value: 1, name: "Down"        },
-	LEFT        : { value: 2, name: "Left"        },
-	RIGHT       : { value: 3, name: "Right"       },
-	SECRET_ROOM : { value: 4, name: "Secret Room" },
-};
 
-var WEAPON = {
-	ROPE        : { value: 0, name: "Rope"        },
-	LEADPIPE    : { value: 1, name: "Lead Pipe"   },
-	KNIFE       : { value: 2, name: "Wrench"      },
-	WRENCH      : { value: 3, name: "Wrench"      },
-	CANDLESTICK : { value: 4, name: "Candlestick" },
-	RELVOLVER   : { value: 5, name: "Relvolver"   },
-};
+var STUDYHALL 		= new Gameobjects.hall("Study-Hall");
+var HALLLOUNGE 		= new Gameobjects.hall("Hall-Lounge");
+var LIBRARYBILLIARD = new Gameobjects.hall("Library-Billiard Room");
+var BILLIARDDINING 	= new Gameobjects.hall("Billiard-Dining Room");
+var CONSERVEBALL 	= new Gameobjects.hall("Conservatory-Ballroom");
+var BALLKITCHEN 	= new Gameobjects.hall("Ballroom-Kitchen");
+var STUDYLIBRARY 	= new Gameobjects.hall("Study-Library");
+var LIBRARYCONSERVE = new Gameobjects.hall("Library-Conservatory");
+var HALLBILLIARD 	= new Gameobjects.hall("Hall-Billiard Room");
+var BILLIARDBALL 	= new Gameobjects.hall("Billiard Room-Ballroom");
+var LOUNGEDINING 	= new Gameobjects.hall("Lounge-Dining Room");
+var DININGKITCHEN 	= new Gameobjects.hall("Dining Room-Kitchen");
+	
 
-var ROOM = {
-	STUDY        : { value: 0, name: "Study"        },
-	HALL         : { value: 1, name: "Hall"         },
-	LOUNGE       : { value: 2, name: "Lounge"       },
-	BILLIARD     : { value: 3, name: "Billiard"     },
-	DINING       : { value: 4, name: "Dining"       },
-	CONSERVATORY : { value: 5, name: "Conservatory" },
-	BALLROOM     : { value: 6, name: "Ballroom"     },
-	KITCHEN      : { value: 7, name: "Kitchen"      },
-	LIBRARY      : { value: 8, name: "Library"      },
-};
+var SCARLET = new Gameobjects.suspect("Ms. Scarlet");
+var MUSTARD = new Gameobjects.suspect("Col. Mustard");
+var WHITE	= new Gameobjects.suspect("Mr. White");
+var GREEN	= new Gameobjects.suspect("Mr. Green");
+var PEACOCK = new Gameobjects.suspect("Ms. Peacock");
+var PLUM	= new Gameobjects.suspect("Prof. Plum");
 
-var SUSPECT = {
-	SCARLET : { value: 0, name: "Scarlet" },
-	MUSTARD : { value: 1, name: "Mustard" },
-	WHITE   : { value: 2, name: "White"   },
-	GREEN   : { value: 3, name: "Green"   },
-	PEACOCK : { value: 4, name: "Peacock" },
-	PLUM    : { value: 5, name: "Plum"    },
-};
+
+var myTri = new Gameobjects.triglyphus(null, null, null);
+
+
+var SKIP = new Gameobjects.announcementType("SKIP");
+var MOVE = new Gameobjects.announcementType("MOVE");
+var SUGGEST = new Gameobjects.announcementType("SUGGEST");
+var FALSE = new Gameobjects.announcementType("FALSE");
+var ACCUSE = new Gameobjects.announcementType("ACCUSE");
+var WINNER = new Gameobjects.announcementType("WINNER");
+var LOSER = new Gameobjects.announcementType("LOSER");
+var NEWPLAYER = new Gameobjects.announcementType("NEWPLAYER");
+var SHOWHAND = new Gameobjects.announcementType("SHOWHAND");
+var YOURTURN = new Gameobjects.announcementType("YOURTURN");
+var CHAT = new announcementType("CHAT");
+
+
+var Q_SUGGEST = new Gameobjects.queryType("SUGGEST");
+var Q_ACCUSE = new Gameobjects.queryType("ACCUSE");
+var Q_CARDS = new Gameobjects.queryType("CARDS");
+var Q_ACTION = new Gameobjects.queryType("ACTION");
+
+
+var A_MOVE = new Gameobjects.actionType("MOVE");
+var A_SUGGEST = new Gameobjects.actionType("SUGGEST");
+var A_ACCUSE = new Gameobjects.actionType("ACCUSE");
+var A_ENDTURN = new Gameobjects.actionType("ENDTURN");
+
+
+var UP = new Gameobjects.direction("UP");
+var DOWN = new Gameobjects.direction("DOWN");
+var LEFT = new Gameobjects.direction("LEFT");
+var RIGHT = new Gameobjects.direction("RIGHT");
+var SECRETROOM = new Gameobjects.direction("SECRETROOM");

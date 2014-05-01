@@ -1,41 +1,26 @@
 /**
  * Client Message and Transport Subsystem (CMTS)
  * This subsystem is responsible for sending and receiving messages from the
- * game server. All messages follow formatted in a JSON structure described
- * below: 
- *
- * message:
- *   player_uuid: ""
- *   message_type:
- *      - "ACTION"
- *      - "PRIVATEANNOUNCEMENT"
- *      - "ANNOUNCEMENT"
- *      - ...
- *   command:
- *      - "SUGGEST"
- *		- "ACCUSE"
- *      - "MOVE"
- *      - "CHAT"
- *      - ...
- *  payload:
- *      { ... }
+ * game server. All messages follow formatted in a JSON structure.
  */
 
 var Message = {
 
-	create: function(message_type, command, payload) {
-		this.msg = {}
-
-		this.msg.message_type = message_type.name;
-		this.msg.command      = command.name;
-
-		// Payload needs to be a dictionary
-		this.msg.payload      = payload;
-	
-		return this.msg;
+	announcement: function(type) {
+		var a = new Gameobjects.announcement();
+		a.type = type;
+		a.playerName = player_name;
+		a.playerCharacter = player_character;
+		return a;
 	},
 
-
+	query: function(type) {
+		var q = new Gameobjects.query();
+		a.type = type;
+		a.playerName = player_name;
+		a.playerCharacter = player_character;
+		return q;
+	},
 
 }; // Message
 

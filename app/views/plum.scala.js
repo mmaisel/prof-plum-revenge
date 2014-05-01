@@ -5,9 +5,12 @@
  * on the necessary data to the subsystems responsible for handling that data.
  */
 
-var club_uuid = "@club_uuid";
+var club_uuid   = "@club_uuid";
 var player_name = "@player_name";
-var player_uuid = "@player_uuid"
+var player_uuid = "@player_uuid";
+
+// TODO: make something do this dynamically
+var player_character = PLUM;
 
 
 /**
@@ -32,21 +35,21 @@ $(document).ready(function() {
 
 	// Directions
 	$("#up_button").click(function() {
-		ActionMenu.moveToken(DIRECTION.UP);
+		ActionMenu.move(UP);
 	});
 	$("#left_button").click(function() {
-		ActionMenu.moveToken(DIRECTION.LEFT);
+		ActionMenu.move(LEFT);
 	});
 	$("#down_button").click(function() {
-		ActionMenu.moveToken(DIRECTION.DOWN);
+		ActionMenu.move(DOWN);
 	});
 	$("#right_button").click(function() {
-		ActionMenu.moveToken(DIRECTION.RIGHT);
+		ActionMenu.move(RIGHT);
 	});
 
 	// Secret Room
 	$("#secret_room_button").click(function() {
-		ActionMenu.moveToken(DIRECTION.SECRET_ROOM);
+		ActionMenu.move(SECRETROOM);
 	})
 
 
