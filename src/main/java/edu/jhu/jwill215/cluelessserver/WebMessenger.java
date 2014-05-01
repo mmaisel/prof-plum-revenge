@@ -1,15 +1,17 @@
-package models;
+package edu.jhu.jwill215.cluelessserver;
 
-import java.io.*;
-import java.util.*;
-
-import models.Game.Announcement;
-import models.Game.Action;
-import models.Player.Query;
+import edu.jhu.jwill215.cluelessserver.Game.Announcement;
+import edu.jhu.jwill215.cluelessserver.Game.Action;
+import edu.jhu.jwill215.cluelessserver.Player.Query;
 
 public class WebMessenger implements IMessenger {
 
 	InfiniteMessenger tempMsgr = new InfiniteMessenger();
+    String id;
+
+    WebMessenger(String id) {
+        this.id = id;
+    }
 
 	@Override
 	public Object query(Query type, Object...objects) {

@@ -41,7 +41,18 @@ On a windows machine, you will have to fix the install.sh file line terminaters.
 
 Back on your host OS, the Play web server running on the Vagrant VM should be forwarded to localhost:8080 in your browser.
 
-## Play Commands
+## Cluelesss Server
+
+To run Clueless Server, package with Maven and run. Right right only UnitTest
+
+```
+
+    maven package
+
+    java -cp target/clueless-server-1.0-SNAPSHOT.jar edu.jhu.jwill215.cluelessserver.UnitTest
+
+
+```
 
 This file will be packaged with your application, when using `play dist`.
 

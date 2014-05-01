@@ -15,9 +15,14 @@ import java.util.ArrayList;
 public class Club {
 	
 
+    int id;
 	ArrayList<Player> players = new ArrayList<Player>();
 	Game myGame;
-	
+
+    Club(int id) {
+        this.id = id;
+    }
+
 	public void run(){
 		this.query(Query.WELCOME);
 		while ((boolean)this.query(Query.MAINMENU)) {}

@@ -1,13 +1,13 @@
-package models;
+package edu.jhu.jwill215.cluelessserver;
 
 import java.io.*;
 import java.util.*;
 
-import models.Game.Announcement;
-import models.Game.Action;
-import models.Player.Query;
+import edu.jhu.jwill215.cluelessserver.Game.Announcement;
+import edu.jhu.jwill215.cluelessserver.Game.Action;
+import edu.jhu.jwill215.cluelessserver.Player.Query;
 
-public class ConsoleMessenger implements IMessenger {
+public class InfiniteMessenger implements IMessenger {
 
 	private PrintStream out = System.out;
 	private InputStream in = System.in;
@@ -27,6 +27,7 @@ public class ConsoleMessenger implements IMessenger {
 			}
 			out.format("%s: %s :", (String)objects[0], options);
 			int answer = this.getNumber(actions.size());
+			if (actions.get(0) == Action.ACCUSE) answer=1;
 			Action action = actions.get(answer);
 			ArrayList<Object> complexReturn = new ArrayList<Object>();
 			complexReturn.add(action);
@@ -131,15 +132,23 @@ public class ConsoleMessenger implements IMessenger {
 	}
 	
 	int getNumber(int max){
-		int answer = '_';
-		try {
-			while ((answer < 0) || (answer > max)) {
-				answer = Character.getNumericValue((char) this.mySR.read()); //(char)System.in.read();
-			}
-		} catch (IOException e) {
+		//int answer = '_';
+		//try {
+			//while ((answer < 0) || (answer >= max)) {
+			//	answer = Character.getNumericValue((char) this.mySR.read()); //(char)System.in.read();
+		out.println();
+			//}
+		//} catch (IOException e) {
 			// TODO Auto-generated catch block
+		//}
+		//return answer;
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return answer;
+		return 0;
 	}
 
 	@Override

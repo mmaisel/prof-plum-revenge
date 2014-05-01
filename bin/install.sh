@@ -17,3 +17,7 @@ sudo ln -s /opt/play-2.2.2/play /usr/bin/play
 
 # install redis
 sudo apt-get install redis-server
+
+
+# install maven
+sudo apt-get install maven

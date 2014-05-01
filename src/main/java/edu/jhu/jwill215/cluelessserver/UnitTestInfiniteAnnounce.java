@@ -1,4 +1,4 @@
-package models;
+package edu.jhu.jwill215.cluelessserver;
 import java.util.ArrayList;
 
 /**

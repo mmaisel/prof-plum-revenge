@@ -42,7 +42,7 @@ public class WebClub {
 
             String club_debug_log = "Current Players in Club Room - " + club_uuid + "\n";
             for (String slot: clubSlots) {
-                club_debug_log += "\t" + clubSlots.indexOf(slot) + "  " + slot + "\n";
+               club_debug_log += "\t" + clubSlots.indexOf(slot) + "  " + slot + "\n";
             }
             Logger.debug(club_debug_log);
 

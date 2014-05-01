@@ -1,4 +1,4 @@
-package models;
+package edu.jhu.jwill215.cluelessserver;
 import java.util.ArrayList;
 
 /**
@@ -16,7 +16,7 @@ public class UnitTest {
 	 */
 	public static void main(String[] args) {
         int i = 1;
-		ConsoleClub myClub = new ConsoleClub(i);
+		Club myClub = new Club(i);
 		myClub.run();
 	}
 	
