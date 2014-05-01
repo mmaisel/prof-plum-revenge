@@ -4,7 +4,7 @@
  * interface functionality.
  */
 
-
+ 
 /**
  * Action Menu
  * These functions represent the buttons inside the action menu box in the UI.
@@ -86,8 +86,46 @@ var ActionMenu = {
 
 // TODO: Implement this
 var GameBoard = {
-
+	addToHand : function (card) {
+		//var newNode = document.createElement("div");
+		//newNode.class = "col-md-1";
+		//newNode.innerHTML = card.toString();
+		//TODO: make cards images as follows:
+		var newNode = document.createElement("img");
+		newNode.src =  "/assets/images/card.jpg";
+		newNode.alt = card.toString();
+		newNode.title = card.toString();
+		//newNode.src = "/assets/images/" + card.toString() + ".jpg";
+		document.getElementById("hand").appendChild(newNode);
+	},
+	showCards : function (cards) {
+		for (var card in cards) {
+			this.addToHand(card);
+		}
+	},
+	tokens : { 
+		0: "scarlet_token",
+		1: "mustard_token",
+		2: "white_token",
+		3: "green_token",
+		4: "peacock_token",
+		5: "plum_token",
+	},
+	movePlayer : function (player, space) {
+		var token = document.getElementById(this.tokens[player.value]);
+		var formerParent = token.parentNode;
+		var room = document.getElementById(space.name);
+		var row = room.children[Math.floor(player.value/2)];
+		var col = row.children[player.value%2];
+		var storedInnerHtml = col.innerHTML;
+		col.innerHTML = "";
+		col.appendChild(token);	
+		formerParent.innerHTML = storedInnerHtml;
+		//token.parentNode.removeChild(token);
+	},
 };
+GameBoard.showCards( [1, 2, 3] );
+GameBoard.movePlayer(SUSPECT.MUSTARD, ROOM.LIBRARY);
 
 var ChatRoom = {
 

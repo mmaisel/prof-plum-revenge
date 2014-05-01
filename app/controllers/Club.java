@@ -5,6 +5,9 @@ import play.data.*;
 import play.mvc.*;
 import play.cache.*;
 
+import com.typesafe.plugin.RedisPlugin;
+import redis.clients.jedis.*;
+
 import views.html.*;
 import models.*;
 
@@ -16,7 +19,6 @@ public class Club extends Controller {
         // placeholder for initial club rooms
         String[] openClubUUIDs = {"1"};
 
-        flash("danger", "Club Room is full, and can not join!");
         // get player info from session if it exists
         String player_name = session("player.name");
         String player_uuid = session("player.uuid");
@@ -37,6 +39,13 @@ public class Club extends Controller {
         String club_uuid = clubForm.get("club_uuid");
         // placeholder, get array index of player list to use when joining a club
 
+        Jedis j = play.Play.application().plugin(RedisPlugin.class).jedisPool().getResource();
+        try {
+            /// ... do stuff here
+            j.set("foo", "bar");
+        } finally {
+            play.Play.application().plugin(RedisPlugin.class).jedisPool().returnResource(j);
+        }
         // see if club is already on the cache
         models.WebClub club = (models.WebClub)Cache.get(club_uuid);
         if(club==null) {
