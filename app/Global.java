@@ -11,11 +11,12 @@ public class Global extends GlobalSettings {
     public void onStart(Application app) {
         JedisPool p = app.plugin(RedisPlugin.class).jedisPool();
         Jedis j = p.getResource();
-        j.set("foo","yay");
+        // set up a club with players
+        ArrayList<String> players = new ArrayList<String>();
+        Cache.set("club:1:players", players);
         p.returnResource(j);
-        Cache.set("foo2",5);
-        Map<String, String> m = new HashMap<String,String>();
-        m.put("test","value");
-        Cache.set("foo3",m);
+
+        WebClub club = new WebClub();
+
     }
 }
