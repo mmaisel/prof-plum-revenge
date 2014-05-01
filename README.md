@@ -47,9 +47,7 @@ To run Clueless Server, package with Maven and run. This command executes UnitTe
 
 ```
 
-    maven package
-    
-    #if 'maven' doesn't work, try 'mvn'
+    mvn package
 
     java -cp target/clueless-server-1.0-SNAPSHOT.jar edu.jhu.jwill215.cluelessserver.UnitTest
 
@@ -65,7 +63,7 @@ Message queue for passing query/announcement back and forth between Server contr
     redis-cli
 
     # monitory activity
-    monitory
+    monitor
 
     # clear all keys
     FLUSHDB
