@@ -43,10 +43,9 @@ Back on your host OS, the Play web server running on the Vagrant VM should be fo
 
 ## Cluelesss Server
 
-To run Clueless Server, package with Maven and run. Right right only UnitTest
+To run Clueless Server, package with Maven and run. This command executes UnitTest.
 
 ```
-
     mvn clean compile assembly:single
 
     java -cp target/clueless-server-1.0-SNAPSHOT-jar-with-dependencies.jar edu.jhu.jwill215.cluelessserver.UnitTest
@@ -55,7 +54,7 @@ To run Clueless Server, package with Maven and run. Right right only UnitTest
 
 ## Redis
 
-Message queue for passing query/announcement back and forth between clients and Clueless server
+Message queue for passing query/announcement back and forth between Server controllers and Clueless gameplay
 
 ```
 
@@ -63,7 +62,7 @@ Message queue for passing query/announcement back and forth between clients and 
     redis-cli
 
     # monitory activity
-    monitory
+    monitor
 
     # clear all keys
     FLUSHDB
