@@ -51,8 +51,25 @@ To run Clueless Server, package with Maven and run. Right right only UnitTest
 
     java -cp target/clueless-server-1.0-SNAPSHOT.jar edu.jhu.jwill215.cluelessserver.UnitTest
 
+```
+
+## Redis
+
+Message queue for passing query/announcement back and forth between clients and Clueless server
 
 ```
+
+    # pull up redis cli
+    redis-cli
+
+    # monitory activity
+    monitory
+
+    # clear all keys
+    FLUSHDB
+
+```
+
 
 This file will be packaged with your application, when using `play dist`.
 
