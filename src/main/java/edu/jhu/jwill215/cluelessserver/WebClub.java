@@ -17,12 +17,13 @@ public class WebClub {
     int id;
 	ArrayList<Player> players = new ArrayList<Player>();
 	Game myGame;
+    JedisPool pool = new JedisPool(new JedisPoolConfig(), "localhost");
 
     @SuppressWarnings("unchecked")
     WebClub(int id) {
 
         this.id = id;
-        Jedis j = new Jedis("localhost", 6380);
+        Jedis j = this.pool.getResource();
 
         int i = 0;
         for (; ; ) {
@@ -36,6 +37,8 @@ public class WebClub {
             System.out.println(player_name);
             i++;
         }
+
+        this.pool.returnResource(j);
     }
 
 	public void play(){
