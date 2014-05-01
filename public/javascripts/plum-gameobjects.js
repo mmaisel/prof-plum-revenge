@@ -14,8 +14,9 @@ var Gameobjects = {
 	},
 
 
-	suspect: function(name) {
+	suspect: function(name, value) {
 		this.name = name;
+		this.value = value;
 	},
 
 
@@ -151,12 +152,24 @@ var LOUNGEDINING 	= new Gameobjects.hall("Lounge-Dining Room");
 var DININGKITCHEN 	= new Gameobjects.hall("Dining Room-Kitchen");
 	
 
-var SCARLET = new Gameobjects.suspect("Ms. Scarlet");
-var MUSTARD = new Gameobjects.suspect("Col. Mustard");
-var WHITE	= new Gameobjects.suspect("Mr. White");
-var GREEN	= new Gameobjects.suspect("Mr. Green");
-var PEACOCK = new Gameobjects.suspect("Ms. Peacock");
-var PLUM	= new Gameobjects.suspect("Prof. Plum");
+
+/**
+ * These should match tokens ordering from cs.js
+ * 	tokens : { 
+		0: "scarlet_token",
+		1: "mustard_token",
+		2: "white_token",
+		3: "green_token",
+		4: "peacock_token",
+		5: "plum_token",
+	},
+ */
+var SCARLET = new Gameobjects.suspect("Ms. Scarlet", 0);
+var MUSTARD = new Gameobjects.suspect("Col. Mustard", 1);
+var WHITE	= new Gameobjects.suspect("Mr. White", 2);
+var GREEN	= new Gameobjects.suspect("Mr. Green", 3);
+var PEACOCK = new Gameobjects.suspect("Ms. Peacock", 4);
+var PLUM	= new Gameobjects.suspect("Prof. Plum", 5);
 
 
 var myTri = new Gameobjects.triglyphus(null, null, null);
