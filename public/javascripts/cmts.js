@@ -15,11 +15,11 @@ var Message = {
 	},
 
 	query: function(type) {
-		var q = new Gameobjects.query();
+		var a = new Gameobjects.query();
 		a.type = type;
 		a.playerName = player_name;
 		a.playerCharacter = player_character;
-		return q;
+		return a;
 	},
 
 }; // Message

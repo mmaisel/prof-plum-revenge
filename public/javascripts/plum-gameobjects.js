@@ -172,7 +172,7 @@ var LOSER = new Gameobjects.announcementType("LOSER");
 var NEWPLAYER = new Gameobjects.announcementType("NEWPLAYER");
 var SHOWHAND = new Gameobjects.announcementType("SHOWHAND");
 var YOURTURN = new Gameobjects.announcementType("YOURTURN");
-var CHAT = new announcementType("CHAT");
+var CHAT = new Gameobjects.announcementType("CHAT");
 
 
 var Q_SUGGEST = new Gameobjects.queryType("SUGGEST");

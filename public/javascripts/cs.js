@@ -125,7 +125,7 @@ var GameBoard = {
 	},
 };
 GameBoard.showCards( [1, 2, 3] );
-GameBoard.movePlayer(SUSPECT.MUSTARD, ROOM.LIBRARY);
+GameBoard.movePlayer(MUSTARD, LIBRARY);
 
 var ChatRoom = {
 
