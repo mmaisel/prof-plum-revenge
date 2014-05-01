@@ -47,9 +47,9 @@ To run Clueless Server, package with Maven and run. Right right only UnitTest
 
 ```
 
-    maven package
+    mvn clean compile assembly:single
 
-    java -cp target/clueless-server-1.0-SNAPSHOT.jar edu.jhu.jwill215.cluelessserver.UnitTest
+    java -cp target/clueless-server-1.0-SNAPSHOT-jar-with-dependencies.jar edu.jhu.jwill215.cluelessserver.UnitTest
 
 ```
 
