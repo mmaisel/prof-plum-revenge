@@ -10,13 +10,350 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Main Club Room</h3>
                     </div>
-                    <div class="panel-body">
-                        Welcome to Clueless!
-                    </div>
+
+                    <div id="gameboard" class="panel-body">
+                        
+                            <!-- TODO: Eventually convert all of these styles
+                            into something in the CSS document. It will make
+                            all of this much easier to look at -->
+
+                            <!-- First Row -->
+                            <div class="row">
+                                <div class="col-md-offset-1 col-md-2" style="background-image: url(/assets/images/study.jpg);" id="Study" title"study1">
+                                    <div class="row">
+                                        <div class="col-md-1"><img src="/assets/images/scarlet_token.png" id = "scarlet_token" /></div>
+                                        <div class="col-md-offset-6 col-md-1"><img src="/assets/images/mustard_token.png" id = "mustard_token" /></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1"><img src="/assets/images/white_token.png" id = "white_token" /></div>
+                                        <div class="col-md-offset-6 col-md-1"><img src="/assets/images/green_token.png" id = "green_token" /></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1"><img src="/assets/images/peacock_token.png" id = "peacock_token" /></div>
+                                        <div class="col-md-offset-6 col-md-1"><img src="/assets/images/plum_token.png" id = "plum_token" /></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 hallway">
+                                    <div class="row">
+                                        <div class="col-md-1">A</div>
+                                        <div class="col-md-offset-6 col-md-1">B</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">C</div>
+                                        <div class="col-md-offset-6 col-md-1">D</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">E</div>
+                                        <div class="col-md-offset-6 col-md-1">F</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2" style="background-image: url(/assets/images/hall.jpg);" id="Hall">
+                                    <div class="row">
+                                        <div class="col-md-1">A</div>
+                                        <div class="col-md-offset-6 col-md-1">B</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">C</div>
+                                        <div class="col-md-offset-6 col-md-1">D</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">E</div>
+                                        <div class="col-md-offset-6 col-md-1">F</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 hallway">
+                                    <div class="row">
+                                        <div class="col-md-1">A</div>
+                                        <div class="col-md-offset-6 col-md-1">B</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">C</div>
+                                        <div class="col-md-offset-6 col-md-1">D</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">E</div>
+                                        <div class="col-md-offset-6 col-md-1">F</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2" style="background-image: url(/assets/images/lounge.jpg);" id="Lounge">
+                                    <div class="row">
+                                        <div class="col-md-1">A</div>
+                                        <div class="col-md-offset-6 col-md-1">B</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">C</div>
+                                        <div class="col-md-offset-6 col-md-1">D</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">E</div>
+                                        <div class="col-md-offset-6 col-md-1">F</div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Second Row -->
+                            <div class="row">
+                                <div class="col-md-offset-1 col-md-2 hallway">
+                                    <div class="row">
+                                        <div class="col-md-1">A</div>
+                                        <div class="col-md-offset-6 col-md-1">B</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">C</div>
+                                        <div class="col-md-offset-6 col-md-1">D</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">E</div>
+                                        <div class="col-md-offset-6 col-md-1">F</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-offset-2 col-md-2 hallway">
+                                    <div class="row">
+                                        <div class="col-md-1">A</div>
+                                        <div class="col-md-offset-6 col-md-1">B</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">C</div>
+                                        <div class="col-md-offset-6 col-md-1">D</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">E</div>
+                                        <div class="col-md-offset-6 col-md-1">F</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-offset-2 col-md-2 hallway">
+                                    <div class="row">
+                                        <div class="col-md-1">A</div>
+                                        <div class="col-md-offset-6 col-md-1">B</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">C</div>
+                                        <div class="col-md-offset-6 col-md-1">D</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">E</div>
+                                        <div class="col-md-offset-6 col-md-1">F</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Third Row -->
+                            <div class="row">
+                                <div class="col-md-offset-1 col-md-2" style="background-image: url(/assets/images/library.jpg);" id="Library">
+                                    <div class="row">
+                                        <div class="col-md-1">A</div>
+                                        <div class="col-md-offset-6 col-md-1">B</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">C</div>
+                                        <div class="col-md-offset-6 col-md-1">D</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">E</div>
+                                        <div class="col-md-offset-6 col-md-1">F</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 hallway">
+                                    <div class="row">
+                                        <div class="col-md-1">A</div>
+                                        <div class="col-md-offset-6 col-md-1">B</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">C</div>
+                                        <div class="col-md-offset-6 col-md-1">D</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">E</div>
+                                        <div class="col-md-offset-6 col-md-1">F</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2" style="background-image: url(/assets/images/billiard.jpg);" id="Billiard">
+                                    <div class="row">
+                                        <div class="col-md-1">A</div>
+                                        <div class="col-md-offset-6 col-md-1">B</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">C</div>
+                                        <div class="col-md-offset-6 col-md-1">D</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">E</div>
+                                        <div class="col-md-offset-6 col-md-1">F</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 hallway">
+                                    <div class="row">
+                                        <div class="col-md-1">A</div>
+                                        <div class="col-md-offset-6 col-md-1">B</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">C</div>
+                                        <div class="col-md-offset-6 col-md-1">D</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">E</div>
+                                        <div class="col-md-offset-6 col-md-1">F</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2" style="background-image: url(/assets/images/dining.jpg);" id="Dining">
+                                    <div class="row">
+                                        <div class="col-md-1">A</div>
+                                        <div class="col-md-offset-6 col-md-1">B</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">C</div>
+                                        <div class="col-md-offset-6 col-md-1">D</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">E</div>
+                                        <div class="col-md-offset-6 col-md-1">F</div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Fourth Row -->
+                            <div class="row">
+                                <div class="col-md-offset-1 col-md-2 hallway">
+                                    <div class="row">
+                                        <div class="col-md-1">A</div>
+                                        <div class="col-md-offset-6 col-md-1">B</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">C</div>
+                                        <div class="col-md-offset-6 col-md-1">D</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">E</div>
+                                        <div class="col-md-offset-6 col-md-1">F</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-offset-2 col-md-2 hallway">
+                                    <div class="row">
+                                        <div class="col-md-1">A</div>
+                                        <div class="col-md-offset-6 col-md-1">B</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">C</div>
+                                        <div class="col-md-offset-6 col-md-1">D</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">E</div>
+                                        <div class="col-md-offset-6 col-md-1">F</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-offset-2 col-md-2 hallway">
+                                    <div class="row">
+                                        <div class="col-md-1">A</div>
+                                        <div class="col-md-offset-6 col-md-1">B</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">C</div>
+                                        <div class="col-md-offset-6 col-md-1">D</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">E</div>
+                                        <div class="col-md-offset-6 col-md-1">F</div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Fifth Row -->
+                            <div class="row">
+                                <div class="col-md-offset-1 col-md-2" style="background-image: url(/assets/images/conservatory.jpg);" id="Conservatory">
+                                    <div class="row">
+                                        <div class="col-md-1">A</div>
+                                        <div class="col-md-offset-6 col-md-1">B</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">C</div>
+                                        <div class="col-md-offset-6 col-md-1">D</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">E</div>
+                                        <div class="col-md-offset-6 col-md-1">F</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 hallway">
+                                    <div class="row">
+                                        <div class="col-md-1">A</div>
+                                        <div class="col-md-offset-6 col-md-1">B</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">C</div>
+                                        <div class="col-md-offset-6 col-md-1">D</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">E</div>
+                                        <div class="col-md-offset-6 col-md-1">F</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2" style="background-image: url(/assets/images/ballroom.jpg);" id="Ballroom">
+                                    <div class="row">
+                                        <div class="col-md-1">A</div>
+                                        <div class="col-md-offset-6 col-md-1">B</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">C</div>
+                                        <div class="col-md-offset-6 col-md-1">D</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">E</div>
+                                        <div class="col-md-offset-6 col-md-1">F</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 hallway">
+                                    <div class="row">
+                                        <div class="col-md-1">A</div>
+                                        <div class="col-md-offset-6 col-md-1">B</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">C</div>
+                                        <div class="col-md-offset-6 col-md-1">D</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">E</div>
+                                        <div class="col-md-offset-6 col-md-1">F</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2" style="background-image: url(/assets/images/kitchen.jpg);" id="Kitchen">
+                                    <div class="row">
+                                        <div class="col-md-1">A</div>
+                                        <div class="col-md-offset-6 col-md-1">B</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">C</div>
+                                        <div class="col-md-offset-6 col-md-1">D</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">E</div>
+                                        <div class="col-md-offset-6 col-md-1">F</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of Game Board -->    
                 </div>
             </div>
+
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Historical Game Statistics</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row" id="hand">
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
+
+
     <div class="col-md-3">
         <div class="row">
             <div class="panel panel-default">
