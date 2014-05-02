@@ -40,14 +40,14 @@ var CMTS = {
 
 	sendMessage : function(message) {
 		console.log("[SEND]: " + JSON.stringify(message));
-		CMTS.postJSON("/api/game/" + club_uuid, message, function(response) {
+		CMTS.postJSON("/api/club/" + club_uuid + "/" + player_uuid , message, function(response) {
 			console.log("[RESPONSE]: " + JSON.stringify(response));
 		});
 		// TODO: Do your $postJSON() call here to post the message to server
 	},
 
 	getMessage : function() {
-		$.getJSON("/api/game/" + club_uuid, function(message) {
+		$.getJSON("/api/club/" + club_uuid + "/" + player_uuid, function(message) {
 			console.log("[GET]: " + JSON.stringify(message));
 			// TODO: Do your $getJSON() call here to get latest message from 
 			// server then extract the type and command and call into playTurn()
