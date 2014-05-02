@@ -48,13 +48,13 @@ public class Club extends Controller {
         return redirect(controllers.routes.Club.clubroom(club_uuid, player_name, String.valueOf(player_uuid)));
     }
 
-    public static Result plumJs(String player_name, String player_uuid, String club_uuid) {
+    public static Result plumJs(String club_uuid, String player_name, String player_uuid) {
         return ok(views.js.plum.render(club_uuid, player_name, player_uuid));
     }
 
     public static Result clubroom(String club_uuid, String player_name, String player_uuid) {
         // session("connected", player_uuid);
-        return ok(club.render("Club Room " + club_uuid, player_name, player_uuid, club_uuid));
+        return ok(club.render("Club Room " + club_uuid, club_uuid, player_name, player_uuid));
     }
 
 }

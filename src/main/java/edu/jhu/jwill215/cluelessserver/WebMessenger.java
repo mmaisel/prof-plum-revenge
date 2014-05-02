@@ -4,6 +4,7 @@ import edu.jhu.jwill215.cluelessserver.Game.Announcement;
 import edu.jhu.jwill215.cluelessserver.Game.Action;
 import edu.jhu.jwill215.cluelessserver.Player.Query;
 import redis.clients.jedis.*;
+import org.json.simple.JSONObject;
 
 public class WebMessenger implements IMessenger {
 
@@ -13,8 +14,9 @@ public class WebMessenger implements IMessenger {
 
     WebMessenger(String player_id, String club_id, JedisPool pool) {
         this.pool = pool;
-        this.in = "club:" + club_id + ":player" + player_id + ":in";
-        this.out = "club:" + club_id + ":player" + player_id + ":out";
+        this.in = "club:" + club_id + ":player:" + player_id + ":in";
+        this.out = "club:" + club_id + ":player:" + player_id + ":out";
+        this.info(Announcement.CHAT, "{\"type\": \"CHAT\", \"playerName\": \"GameMaster\", \"message\": \"Welcome to Clueless!\"");
     }
 
 	@Override
@@ -49,6 +51,11 @@ public class WebMessenger implements IMessenger {
         Jedis j = this.pool.getResource();
 		String announcement = "";
 		switch(type) {
+            case CHAT: {
+                announcement = "{\"type\": \"CHAT\", \"playerName\": \"Game Master\", \"message\": \"Hello World!\"}";
+                j.rpush(this.out, announcement);
+                break;
+            }
             case NEWPLAYER: {
                 break;
             }
@@ -80,7 +87,6 @@ public class WebMessenger implements IMessenger {
                 break;
             }
 		}
-        j.rpush(this.out, "DERP");
         this.pool.returnResource(j);
 	}
 	

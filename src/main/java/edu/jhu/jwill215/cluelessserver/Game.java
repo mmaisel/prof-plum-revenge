@@ -235,7 +235,7 @@ public class Game {
 		this.announce(Announcement.MOVE, suspect, space);
 	}
 	
-	public enum Announcement {SKIP, MOVE, SUGGEST, FALSE, ACCUSE, WINNER, LOSER, NEWPLAYER, SHOWHAND}
+	public enum Announcement {CHAT, SKIP, MOVE, SUGGEST, FALSE, ACCUSE, WINNER, LOSER, NEWPLAYER, SHOWHAND}
 	
 	private void announce(Announcement type, Object...objects) {
 
