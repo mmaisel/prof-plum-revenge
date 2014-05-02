@@ -7,15 +7,19 @@ import redis.clients.jedis.*;
 
 public class WebMessenger implements IMessenger {
 
-	InfiniteMessenger tempMsgr = new InfiniteMessenger();
-    String id;
+    JedisPool pool;
+    String in;
+    String out;
 
-    WebMessenger(String id) {
-        this.id = id;
+    WebMessenger(String player_id, String club_id, JedisPool pool) {
+        this.pool = pool;
+        this.in = "club:" + club_id + ":player" + player_id + ":in";
+        this.out = "club:" + club_id + ":player" + player_id + ":out";
     }
 
 	@Override
 	public Object query(Query type, Object...objects) {
+        Jedis j = this.pool.getResource();
 		switch(type) {
             case ACTION: {
                 break;
@@ -36,21 +40,13 @@ public class WebMessenger implements IMessenger {
                 break;
             }
 		}
-		
-		//There must be a better way to do this...
-		//One day I will learn java, one day.
-        switch(objects.length) {
-		case 2:		
-			return tempMsgr.query(type, objects[0], objects[1]);
-		case 1:		
-			return tempMsgr.query(type, objects[0]);
-		default:		
-			return tempMsgr.query(type);
-		}
+        this.pool.returnResource(j);
+        return null;
 	}
 
 	@Override
 	public void info(Announcement type, Object... objects) {
+        Jedis j = this.pool.getResource();
 		String announcement = "";
 		switch(type) {
             case NEWPLAYER: {
@@ -84,6 +80,8 @@ public class WebMessenger implements IMessenger {
                 break;
             }
 		}
+        j.rpush(this.out, "DERP");
+        this.pool.returnResource(j);
 	}
 	
 }

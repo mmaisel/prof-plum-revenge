@@ -11,4 +11,5 @@ libraryDependencies ++= Seq(
 
 resolvers += "Sedis repository" at "http://pk11-scratch.googlecode.com/svn/trunk/"
 
+
 play.Project.playJavaSettings

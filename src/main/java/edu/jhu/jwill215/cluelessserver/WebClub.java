@@ -31,7 +31,7 @@ public class WebClub {
             if (player_name == null) {
                 break;
             }
-            WebMessenger msgr = new WebMessenger(String.valueOf(i));
+            WebMessenger msgr = new WebMessenger(String.valueOf(i), String.valueOf(this.id), this.pool);
             Player player = new Player(player_name, msgr);
             players.add(player);
             System.out.println(player_name);
