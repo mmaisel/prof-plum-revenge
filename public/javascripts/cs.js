@@ -82,10 +82,79 @@ var ActionMenu = {
 
 
 
-
-
-// TODO: Implement this
 var GameBoard = {
+	
+	playTurn: function(message) {
+		console.log("playTurn: Got: " + message.type.toString());
+
+		// NOP
+		if (message.type === NOP) {
+			return; // Nothing to do here
+		} 
+
+		// SKIP
+		else if (message.type === SKIP) {
+			// TODO: Provide some kind of visual feedback to tell the player
+			// that they have been skipped.
+		} 
+
+		// MOVE
+		else if (message.type === MOVE) {
+			GameBoard.movePlayer(message.playerCharacter, message.room);
+		} 
+
+		// SUGGEST
+		else if (message.type === SUGGEST) {
+
+		}
+
+		// FALSE
+		else if (message.type === FALSE) {
+
+		}
+
+		// ACCUSE
+		else if (message.type === ACCUSE) {
+
+		}
+
+		// WINNER
+		else if (message.type === WINNER) {
+
+		}
+
+		// LOSER
+		else if (message.type === LOSER) {
+
+		}
+
+		// NEWPLAYER
+		else if (message.type === NEWPLAYER) {
+
+		}
+
+		// SHOWHAND
+		else if (message.type === SHOWHAND) {
+
+		}	
+
+		// YOURTURN
+		else if (message.type === YOURTURN) {
+
+		}
+
+		// CHAT
+		else if (message.type === CHAT) {
+			ChatRoom.addText(message.playerName, message.text);
+		}
+
+		// Unsupported message type
+		else {
+			console.log("ERROR: Bad message type received - " + msg.type.toString());
+		}
+
+	},
+
 	addToHand : function (card) {
 		//var newNode = document.createElement("div");
 		//newNode.class = "col-md-1";
@@ -111,10 +180,10 @@ var GameBoard = {
 		4: "peacock_token",
 		5: "plum_token",
 	},
-	movePlayer : function (player, space) {
+	movePlayer : function (player, room) {
 		var token = document.getElementById(this.tokens[player.value]);
 		var formerParent = token.parentNode;
-		var room = document.getElementById(space.name);
+		var room = document.getElementById(room.toString());
 		var row = room.children[Math.floor(player.value/2)];
 		var col = row.children[player.value%2];
 		var storedInnerHtml = col.innerHTML;
@@ -130,21 +199,32 @@ GameBoard.movePlayer(MUSTARD, LIBRARY);
 var ChatRoom = {
 
 	// When a message is submitted it is displayed to all users.
-	// TODO: Instead of updating the message output here we should construct the
-	// JSON message first and the let the server tell us (our client) when to
-	// display the message along with the other clients
 	// TODO: Find a way to make the textarea autoscroll as messages come in
 	// TODO: I still have the bug where the "Send" button isn't being disabled
 	// after sending a message. It happened after I added the 
 	// event.preventDefaults() function call in plum.scala.js.
-	OnSubmit: function(text) {
-		$("#chat_box").append("[Player1]: " + text + "\n");
+	onSubmit: function(text) {
+		var msg = new Message.query(A_CHAT);
+		msg.text = text;
+		CMTS.sendMessage(msg);
+
+		// DEBUG
+		/*a = new Gameobjects.announcement();
+		a.type = CHAT;
+		a.playerName = player_name;
+		a.text = text;
+		GameBoard.playTurn(a);*/
+
 		$("#message_input").val("");
+	},
+
+	addText: function(name, text) {
+		$("#chat_box").append("[" + name + "]: " + text + "\n");
 	},
 
 	// Make sure that the submit button isn't enabled until the user has typed
 	// something into the input form.
-	Validate: function() {
+	validate: function() {
 		if ( $("#message_input").val().length > 0 ) {
 			$("#send_button").removeAttr("disabled");
 		} else {
@@ -163,32 +243,28 @@ var GameInfo = {
 
 };
 
-// Update gameboard every second
-//var gameboardInterval = window.setInterval('updateGameBoard()', 1000);
 
-var updateGameBoard = function() {
-    $.getJSON("/api/game/" + club_uuid, function(gameboard) {
-        //console.log(gameboard)
-        //$('#gameboard').text(gameboard.status);
-    });
-};
 
-function getGameTick() {
 
-};
+/**
+ * Once the page is completely loaded we can start communicating with the
+ * game server every 1000ms to pull items from our announcement queue.
+ * TODO: When the game ends we need to end this by calling 
+ * 		clearInterval(gameInterval);
+ */
+var gameInterval = setInterval( function() { announcementCallback() }, 1000 );
 
-function displayCard() {
 
-};
-
-function makeSuggestion() {
-	alert("Make a suggestion");
-};
-
-function sendCard() {
-
-};
-
-function playTurn(message_type, command) {
-
-};
+/**
+ * This callback is processed every 1000 milliseconds. This function 
+ * obtians the next announcement item from the game server queue and processes
+ * the message in order to forward onto playTurn(). If the message returned is
+ * 
+ */
+function announcementCallback() {
+	// Get the next announcement message from the server
+	var msg = CMTS.getMessage();
+	if (msg != null) {
+		GameBoard.playTurn(msg);
+	}
+}; 

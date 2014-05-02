@@ -18,6 +18,7 @@ var player_character = PLUM;
  */
 $(document).ready(function() {
 
+
 	/**
 	 * Action Menu
 	 */
@@ -58,12 +59,12 @@ $(document).ready(function() {
 	 */
 
 	// Ensure that the send button is disabled until the user inputs text
-	ChatRoom.Validate();
-	$("#message_input").change(ChatRoom.Validate);
+	ChatRoom.validate();
+	$("#message_input").change(ChatRoom.validate);
 
 	// Send Message
 	$("#message_form").submit(function(event) {
-		ChatRoom.OnSubmit($("#message_input").val());
+		ChatRoom.onSubmit($("#message_input").val());
 		event.preventDefault(); // Needed to prevent random refreshes
 
 	});

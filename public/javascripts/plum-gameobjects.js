@@ -28,13 +28,14 @@ var Gameobjects = {
 
 
 	announcement: function() {
-		type = null;
-		playerName = null;
-		playerCharacter = null;
-		trigylphx = null;
+		type = null; // Type of message
+		playerName = null; // Player's name
+		playerCharacter = null; // Character
+		trigylphx = null; // triglyphus
 		card = null;
 		room = null;
-		cards = null;
+		cards = null; // Array of Cards
+		text = null;  // Chat room text
 	},
 
 
@@ -47,8 +48,9 @@ var Gameobjects = {
 		type = null;
 		playerName = null;
 		spaces = null;
-		cards = null;
+		cards = null; 
 		actions = null;
+		text = null; // Chat room text
 	},
 
 
@@ -186,6 +188,7 @@ var NEWPLAYER = new Gameobjects.announcementType("NEWPLAYER");
 var SHOWHAND = new Gameobjects.announcementType("SHOWHAND");
 var YOURTURN = new Gameobjects.announcementType("YOURTURN");
 var CHAT = new Gameobjects.announcementType("CHAT");
+var NOP = new Gameobjects.announcementType("NOP");
 
 
 var Q_SUGGEST = new Gameobjects.queryType("SUGGEST");
@@ -198,6 +201,7 @@ var A_MOVE = new Gameobjects.actionType("MOVE");
 var A_SUGGEST = new Gameobjects.actionType("SUGGEST");
 var A_ACCUSE = new Gameobjects.actionType("ACCUSE");
 var A_ENDTURN = new Gameobjects.actionType("ENDTURN");
+var A_CHAT = new Gameobjects.actionType("CHAT");
 
 
 var UP = new Gameobjects.direction("UP");
