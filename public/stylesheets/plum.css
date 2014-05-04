@@ -1,10 +1,11 @@
 /* Button sizes for the action menu */
 .plum_fixed_width_action {
-	width: 102px;
+	width: 108px;
+	height: 24px;
 }
 
 .plum_fixed_width_move {
-	width: 34px;
+	width:  32px;
 	height: 24px;
 }
 

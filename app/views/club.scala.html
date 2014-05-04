@@ -1,12 +1,12 @@
 @(title: String, club_uuid: String, player_name: String, player_uuid: String)
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- Suggest Modal -->
+<div class="modal fade" id="select_options" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
-        <h4 class="modal-title" id="myModalLabel">Make a Suggestion</h4>
+        <h4 class="modal-title" id="myModalLabel"></h4>
       </div>
       <div class="modal-body">
 		  <div class="row">
@@ -16,7 +16,7 @@
 						<h3 class="panel-title">Suspect</h3>
 					</div>
 					<div class="panel-body">
-						<form role="form">
+						<form role="form" id="suspect_form">
 						<div class="radio">
 							<label>
 								<input type="radio" name="optionsSuspect" value="Col. Mustard">Col. Mustard </input>
@@ -57,7 +57,7 @@
 						<h3 class="panel-title">Weapon</h3>
 					</div>
 					<div class="panel-body">
-						<form role="form">
+						<form role="form" id="weapon_form">
 						<div class="radio">
 							<label>
 								<input type="radio" name="optionsWeapon" value="rope">Rope </input>
@@ -98,50 +98,50 @@
 						<h3 class="panel-title">Room</h3>
 					</div>
 					<div class="panel-body">
-						<form role="form">
+						<form role="form" id="room_form">
 						<div class="radio">
 							<label>
-								<input type="radio" name="optionsRoom" value="Study" disabled>Study </input>
+								<input type="radio" name="optionsRoom" value="Study" id="study_radio" disabled>Study </input>
 							</label>
 						</div>
 						<div class="radio">
 							<label>
-								<input type="radio" name="optionsRoom" value="Hall" disabled>Hall </input>
+								<input type="radio" name="optionsRoom" value="Hall" id="hall_radio" disabled>Hall </input>
 							</label>
 						</div>
 						<div class="radio">
 							<label>
-								<input type="radio" name="optionsRoom" value="Lounge" disabled>Lounge</input>
+								<input type="radio" name="optionsRoom" value="Lounge" id="lounge_radio" disabled>Lounge</input>
 							</label>
 						</div>
 						<div class="radio">
 							<label>
-								<input type="radio" name="optionsRoom" value="Billiard Room" disabled>Billiard Room</input>
+								<input type="radio" name="optionsRoom" value="Billiard Room" id="billiard_radio" disabled>Billiard Room</input>
 							</label>
 						</div>
 						<div class="radio">
 							<label>
-								<input type="radio" name="optionsRoom" value="Dining Room" disabled>Dining Room</input>
+								<input type="radio" name="optionsRoom" value="Dining Room" id="dining_radio" disabled>Dining Room</input>
 							</label>
 						</div>
 						<div class="radio">
 							<label>
-								<input type="radio" name="optionsRoom" value="Conservatory" disabled>Conservatory </input>
+								<input type="radio" name="optionsRoom" value="Conservatory" id="conservatory_radio" disabled>Conservatory </input>
 							</label>
 						</div>
 						<div class="radio">
 							<label>
-								<input type="radio" name="optionsRoom" value="Ballroom" disabled>Ballroom </input>
+								<input type="radio" name="optionsRoom" value="Ballroom" id="ballroom_radio" disabled>Ballroom </input>
 							</label>
 						</div>
 						<div class="radio">
 							<label>
-								<input type="radio" name="optionsRoom" value="Kitchen" disabled>Kitchen </input>
+								<input type="radio" name="optionsRoom" value="Kitchen" id="kitchen_radio" disabled>Kitchen </input>
 							</label>
 						</div>
 						<div class="radio">
 							<label>
-								<input type="radio" name="optionsRoom" value="Library" disabled>Library </input>
+								<input type="radio" name="optionsRoom" value="Library" id="library_radio" disabled>Library </input>
 							</label>
 						</div>
 						</form>
@@ -152,7 +152,7 @@
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-        <button type="button" class="btn btn-primary btn-default" data-dismiss="modal">Suggest!</button>
+        <button type="button" class="btn btn-primary btn-default" data-dismiss="modal" id="select_opts_button"></button>
       </div>
     </div>
   </div>
@@ -516,37 +516,41 @@
                         <div class="panel-body">
 
                             <!-- Action Menu Items -->
-                            <table class="plum_action_menu"><tr>
-                                <td>
-                                    <table class="plum_action_menu" align="left">
-                                        <tr>
-                                            <td><button class="plum_fixed_width_action" data-toggle="modal" data-target="#myModal" id="suggestion_button">Suggestion</button></td>
-                                        </tr>
-                                        <tr id="plum_action_table">
-                                            <td><button class="plum_fixed_width_action" id="accuse_button">Accuse</button></td>
-                                        </tr>
-                                        <tr id="plum_action_table">
-                                            <td><button class="plum_fixed_width_action" id="secret_room_button">Secret Room</button></td>
-                                        </tr>
-                                    </table>
-                                </td>
+                            <table class="plum_action_menu"><tr><td>
+                                <table class="plum_action_menu" align="left">
+                                    <tr>
+                                        <td><button class="plum_fixed_width_action" data-toggle="modal" data-target="#select_options" id="suggestion_button">Suggest</button></td>
+                                    </tr>
+                                    
+                                    <tr id="plum_action_table">
+                                        <td><button class="plum_fixed_width_action" data-toggle="modal" data-target="#select_options" id="accuse_button">Accuse</button></td>
+                                    </tr>
 
-                                <td>
-                                    <table class="plum_move_table">
-                                        <tr>
-                                            <td></td>
-                                            <td><button id="up_button" class="glyphicon glyphicon-arrow-up plum_fixed_width_move"></button></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td><button id="left_button"  class="glyphicon glyphicon-arrow-left plum_fixed_width_move"></button></td>
-                                            <td><button id="down_button"  class="glyphicon glyphicon-arrow-down plum_fixed_width_move"></button></td>
-                                            <td><button id="right_button" class="glyphicon glyphicon-arrow-right plum_fixed_width_move"></button></td>
-                                        </tr>
-										
-                                    </table>
-                                <td>
-                            </tr></table>
+                                    <tr id="plum_action_table">
+                                        <td><button class="plum_fixed_width_action" id="secret_room_button">Secret Room</button></td>
+                                    </tr>
+
+                                    <tr id="plum_action_table">
+                                        <td><button class="plum_fixed_width_action" id="end_turn_button">End Turn</button></td>
+                                    </tr>
+
+                                </table></td><td>
+
+                                <table class="plum_move_table">
+                                    <tr>
+                                        <td></td>
+                                        <td><button id="up_button" class="glyphicon glyphicon-arrow-up plum_fixed_width_move"></button></td>
+                                        <td></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><button id="left_button"  class="glyphicon glyphicon-arrow-left plum_fixed_width_move"></button></td>
+                                        <td><button id="down_button"  class="glyphicon glyphicon-arrow-down plum_fixed_width_move"></button></td>
+                                        <td><button id="right_button" class="glyphicon glyphicon-arrow-right plum_fixed_width_move"></button></td>
+                                    </tr>
+
+                                </table>
+                            <td></tr></table>
 
                         </div>
                     </div>

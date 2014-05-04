@@ -12,29 +12,19 @@
  */
 var ActionMenu = {
 
-	accuse: function() {
-		// First display the accusation options to the player.
-		var accusation = ActionMenu.accuseDialogue();
-		// TODO: What if the user cancels out instead?
-
+	accuse: function(room, suspect, weapon) {
 		// Create message based on user input
 		var msg = Message.query(Q_ACCUSE);
-
-		msg.trigylphx = accusation;
+		msg.trigylphx = new Gameobjects.triglyphus(room, suspect, weapon);
 		
 		// Send the message to the server
 		CMTS.sendMessage(msg);
 	},
 
-	suggest: function() {
-		// First get the suggestion from the user
-		var suggestion = ActionMenu.suggestDialogue();
-		// TODO: What if the user cancels out instead?
-
+	suggest: function(suspect, weapon) {
 		// Create message based on user input
 		var msg = Message.query(Q_SUGGEST);
-
-		msg.trigylphx = suggestion;
+		msg.trigylphx = new Gameobjects.triglyphus(null, suspect, weapon);
 		
 		// Send the message to the server
 		CMTS.sendMessage(msg);
@@ -42,41 +32,18 @@ var ActionMenu = {
 
 
 	move: function(direction) {
-		// The server already prevents players from moving in certain directions
-		// so we don't need to be concerned about that here. We also don't need 
-		// to worry about the animation here since the server will give us the
-		// update anyway
 		var msg = Message.query(Q_ACTION);
-
-		msg.spaces = ActionMenu.analyzeDirection(direction);
 
 		// Send the message to the server
 		CMTS.sendMessage(msg);
 	},
 
-	accuseDialogue: function() {
-		// TODO: Provide the ability for the user to cancel out
-		// TODO: Display a dialogue box to the user; Create Triglyphus 
-		// containing the three items the user chose; Return Triglyphus
-		var t = new Gameobjects.triglyphus(null, null, null);
-		return t;
-	},
 
-	suggestDialogue: function() {
-		// TODO: Provide the ability for the user to cancel out
-		// TODO: Display a dialogue box to the user; Create Triglyphus 
-		// containing the two items the user chose since the room is implied; 
-		// Return Triglyphus
-		var t = new Gameobjects.triglyphus(null, null, null);
-		return t;
+	endTurn: function() {
+		var msg = Message.query(Q_ACTION);
+		msg.actions = [ A_ENDTURN ];
+		CMTS.sendMessage(msg);
 	},
-
-	analyzeDirection: function(direction) {
-		// TODO: We need to find out where the character is and where they will 
-		// be going based on the direction. This function should return the room
-		// gameobject
-		return null;
-	}
 
 }; // ActionMenu 
 
