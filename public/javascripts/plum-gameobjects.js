@@ -33,7 +33,7 @@ var Gameobjects = {
 		playerCharacter = null; // Character
 		trigylphx = null; // triglyphus
 		card = null;
-		room = null;
+		space = null;
 		cards = null; // Array of Cards
 		text = null;  // Chat room text
 	},
