@@ -17,6 +17,7 @@ public class UnitTest {
 	public static void main(String[] args) {
         int i = 1;
 		WebClub myClub = new WebClub(i);
+		myClub.play();
 	}
 	
 	void testGame() {

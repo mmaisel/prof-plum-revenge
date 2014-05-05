@@ -7,23 +7,43 @@ import edu.jhu.jwill215.cluelessserver.WebMessenger;
 import java.util.*;
 import redis.clients.jedis.*;
 
+
 /**
  * @author Jack Williard
  *
  */
 public class WebClub {
 
-
     int id;
-	ArrayList<Player> players = new ArrayList<Player>();
 	Game myGame;
     JedisPool pool = new JedisPool(new JedisPoolConfig(), "localhost");
 
     @SuppressWarnings("unchecked")
     WebClub(int id) {
-
         this.id = id;
-        Jedis j = this.pool.getResource();
+    }
+
+	public void waitGameStart() {
+		Jedis j = this.pool.getResource();
+		
+		while (true) {
+		
+			String result = (String) j.get("club:" + this.id + ":start");
+			if (result == "true") break;
+			
+			try {
+				Thread.sleep(1000);
+			} catch(InterruptedException ex) {
+				Thread.currentThread().interrupt();
+			}
+		}
+		
+		this.pool.returnResource(j);
+	}
+	
+	public void play(){
+		ArrayList<Player> players = new ArrayList<Player>();
+	    Jedis j = this.pool.getResource();
 
         int i = 0;
         for (; ; ) {
@@ -39,13 +59,22 @@ public class WebClub {
         }
 
         this.pool.returnResource(j);
-    }
-
-	public void play(){
         this.myGame = new Game(players);
         this.myGame.play();
     }
+
+	public static void main(String[] args) {
+		
+		//TODO: get club id from args
+		int i = 1;
+		WebClub myClub = new WebClub(i);
+		
+		myClub.waitGameStart();
+		
+		myClub.play();
+		
 	}
+}
 	
 
 	

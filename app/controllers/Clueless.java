@@ -17,6 +17,20 @@ import redis.clients.jedis.*;
 
 public class Clueless extends Controller {
 
+	public static Result startGame(String club_uuid) {
+	
+        Jedis j = play.Play.application().plugin(RedisPlugin.class).jedisPool().getResource();
+		String success = "Game failed to start.";
+        try {
+            // set game start to true
+            j.set("club:" + club_uuid + ":start", "true");
+			success = "Game Starting...";
+        } finally {
+            play.Play.application().plugin(RedisPlugin.class).jedisPool().returnResource(j);
+        }
+		return ok(success);
+	}
+
     public static Result getMessage(String club_uuid, String player_uuid) {
 
         Jedis j = play.Play.application().plugin(RedisPlugin.class).jedisPool().getResource();
