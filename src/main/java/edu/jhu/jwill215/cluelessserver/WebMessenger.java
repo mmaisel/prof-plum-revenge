@@ -110,7 +110,7 @@ public class WebMessenger implements IMessenger {
             }
             case ACCUSE: {	
 				announcement = "{\"type\": \"ACCUSE\", "
-					+ "\"playerName\": \"" + ((Player)objects[0]).name 
+					+ "\"playerName\": \"" + ((Suspect)objects[0]).prettyName()
 					+ "\", \"triglyph.room\": \""    + ((Triglyph)objects[1]).room.prettyName() 
 					+ "\", \"triglyph.suspect\": \"" + ((Triglyph)objects[1]).suspect.prettyName() 
 					+ "\", \"triglyph.weapon\": \""  + ((Triglyph)objects[1]).weapon.prettyName() 
