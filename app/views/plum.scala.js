@@ -11,8 +11,16 @@ var player_uuid = "@player_uuid";
 
 // TODO: make something do this dynamically
 var player_character = PLUM;
+var player_location = KITCHEN;
+
+var player_locations = new Array();
+player_locations[player_character.name] = player_location;
+console.log(player_locations);
 
 var accusation = false;
+
+
+var debug_switch = false;
 
 /**
  * JQuery handlers for everything in the game
@@ -48,7 +56,7 @@ $(document).ready(function() {
 
 
 	// Suggestion
-	$("#suggestion_button").click(function() {
+	$("#suggest_button").click(function() {
 		accusation = false;
 
 		// Disable all room options for suggestions
@@ -111,10 +119,31 @@ $(document).ready(function() {
 
 
 	$("#end_turn_button").click(function() {
+		//if (debug_switch == false) {
+		//debug_switch = true;
+		// Disable all action menu buttons
+		$("#up_button").attr("disabled", "disabled");
+		$("#left_button").attr("disabled", "disabled");
+		$("#down_button").attr("disabled", "disabled");
+		$("#right_button").attr("disabled", "disabled");
+		$("#secret_room_button").attr("disabled", "disabled");
+		$("#accuse_button").attr("disabled", "disabled");
+		$("#suggest_button").attr("disabled", "disabled");
+		//$("#end_turn_button").attr("disabled", "disabled");
 		ActionMenu.endTurn();
+		/*} else {
+			// Do things here to trigger stuff (at least until server works)
+			debug_switch = false;
+			$("#" + DININGKITCHEN).data("occupied", true);
+			var a = new Gameobjects.announcement();
+			a.type = YOURTURN;
+			GameBoard.playTurn(a);
+		}*/
 	});
 
 	// Directions
+	// TODO: When the button is clicked we need to disable it (YOURTURN 
+	// announcement will re-enable the available moves)
 	$("#up_button").click(function() {
 		ActionMenu.move(UP);
 	});

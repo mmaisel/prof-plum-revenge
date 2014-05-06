@@ -29,6 +29,12 @@ table.plum_move_table td {
 	margin-top: 1px; 
 }
 
-.hallway { 
+.gameboard-tile {
 	background-color:#FFAD40;
+	height: 60px; 
+	width: 141px;
+}
+
+.hallway-text {
+	color: #FFAD40;
 }

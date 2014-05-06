@@ -32,7 +32,33 @@ var ActionMenu = {
 
 
 	move: function(direction) {
+		// There has got to be a better way to do this, but not right now...
+		var loc = GAMEBOARDMOVES[player_location];
+		var going_to = null;
+		if (direction == UP) {
+			going_to = loc.up;
+		} else if (direction == DOWN) {
+			going_to = loc.down;
+		} else if (direction == RIGHT) {
+			going_to = loc.right;
+		} else if (direction == LEFT) {
+			going_to = loc.left;
+		} else if (direction == SECRETROOM) {
+			going_to = loc.secret;
+		} else {
+			console.log("FAILED: Bad direction");
+			return;
+		}
+
+		/*var a = new Gameobjects.announcement();
+		a.type = MOVE;
+		a.playerCharacter = PLUM;
+		a.room = BALLKITCHEN;
+		GameBoard.playTurn(a);*/
+
 		var msg = Message.query(Q_ACTION);
+		msg.playerCharacter = player_character;
+		msg.room = going_to;
 
 		// Send the message to the server
 		CMTS.sendMessage(msg);
@@ -51,68 +77,125 @@ var ActionMenu = {
 
 var GameBoard = {
 	
-	playTurn: function(message) {
-		console.log("playTurn: Got: " + message.type.toString());
+	playTurn: function(msg) {
+		console.log("playTurn: Got: " + msg.type.toString());
 
 		// NOP
-		if (message.type === NOP) {
+		if (msg.type === NOP) {
 			return; // Nothing to do here
 		} 
 
 		// SKIP
-		else if (message.type === SKIP) {
+		else if (msg.type === SKIP) {
 			// TODO: Provide some kind of visual feedback to tell the player
 			// that they have been skipped.
 		} 
 
 		// MOVE
-		else if (message.type === MOVE) {
-			GameBoard.movePlayer(message.playerCharacter, message.room);
+		else if (msg.type === MOVE) {
+			var old_loc = player_locations[msg.playerCharacter.name];
+			var new_loc = msg.room;
+
+			// Move the token to the new location
+			GameBoard.movePlayer(msg.playerCharacter, new_loc);
+
+			// If the player moved from a hallway then it is no longer occupied
+			$("#" + old_loc.name).data("occupied", false);
+
+			// Update local player location
+			player_locations[msg.playerCharacter.name] = new_loc;
+			console.log(player_locations);
+
+			// If the player has moved to a hallway then it is now occupied
+			if (GameBoard.isHallway(new_loc) == true) {
+				$("#" + new_loc.name).data("occupied", true);
+			}
 		} 
 
 		// SUGGEST
-		else if (message.type === SUGGEST) {
+		else if (msg.type === SUGGEST) {
 
 		}
 
 		// FALSE
-		else if (message.type === FALSE) {
+		else if (msg.type === FALSE) {
 
 		}
 
 		// ACCUSE
-		else if (message.type === ACCUSE) {
+		else if (msg.type === ACCUSE) {
 
 		}
 
 		// WINNER
-		else if (message.type === WINNER) {
+		else if (msg.type === WINNER) {
 
 		}
 
 		// LOSER
-		else if (message.type === LOSER) {
+		else if (msg.type === LOSER) {
 
 		}
 
 		// NEWPLAYER
-		else if (message.type === NEWPLAYER) {
+		else if (msg.type === NEWPLAYER) {
+			// TODO : Add a token onto the board depending on the location
 
+			// New players get a location on the board, so add it to our
+			// internal location tracker to keep track of all player 
+			// locations to make it easy to find them later
+			player_locations[msg.playerCharacter.name] = msg.room;
+			console.log(JSON.stringify(player_locations));
 		}
 
 		// SHOWHAND
-		else if (message.type === SHOWHAND) {
+		else if (msg.type === SHOWHAND) {
 
 		}	
 
 		// YOURTURN
-		else if (message.type === YOURTURN) {
+		else if (msg.type === YOURTURN) {
+			// Get the player location... Since this message should only go to
+			// us we can use our internal representation to find out where
+			// we are at on the game board.
+			var loc = GAMEBOARDMOVES[player_location];
+			console.log(loc);
 
+			// Here we figure out what moves are available and enable those 
+			// buttons. Finding out where we're at on the gameboard and then
+			// finding the available spaces to move to.
+			if (loc.up != null) {
+				if (GameBoard.isOccupied(loc.up) == false) {
+					$("#up_button").removeAttr("disabled");
+				}
+			}
+
+			if (loc.down != null) {
+				if (GameBoard.isOccupied(loc.down) == false) {
+					$("#down_button").removeAttr("disabled");
+				}
+			}
+
+			if (loc.left != null) {
+				if (GameBoard.isOccupied(loc.left) == false) {
+					$("#left_button").removeAttr("disabled");
+				}
+			}
+
+			if (loc.right != null) {
+				if (GameBoard.isOccupied(loc.right) == false) {
+					$("#right_button").removeAttr("disabled");
+				}
+			}
+
+			if (loc.secret != null) {
+				$("#secret_room_button").removeAttr("disabled");
+			}
 		}
 
 		// CHAT
-		else if (message.type === CHAT) {
-			ChatRoom.addText(message.playerName, message.text);
+		else if (msg.type === CHAT) {
+			ChatRoom.addText(msg.playerName, msg.text);
 		}
 
 		// Unsupported message type
@@ -120,6 +203,26 @@ var GameBoard = {
 			console.log("ERROR: Bad message type received - " + msg.type.toString());
 		}
 
+	},
+
+	isOccupied: function(location) {
+		// Only hallways can be occupied
+		if (GameBoard.isHallway(location) == true) {
+			if ($("#" + location.name).data("occupied") == true) {
+				console.log(location.name + " is occupied");
+				return true;
+			}
+		}
+
+		return false;
+	},
+
+	isHallway: function(location) {
+		if (location.name.indexOf('-') != -1) {
+			return true; // A hallway
+		} else {
+			return false; // Not a hallway
+		}
 	},
 
 	addToHand : function (card) {
@@ -134,11 +237,13 @@ var GameBoard = {
 		//newNode.src = "/assets/images/" + card.toString() + ".jpg";
 		document.getElementById("hand").appendChild(newNode);
 	},
+
 	showCards : function (cards) {
 		for (var card in cards) {
 			this.addToHand(card);
 		}
 	},
+
 	tokens : { 
 		0: "scarlet_token",
 		1: "mustard_token",
@@ -147,6 +252,7 @@ var GameBoard = {
 		4: "peacock_token",
 		5: "plum_token",
 	},
+
 	movePlayer : function (player, room) {
 		var token = document.getElementById(this.tokens[player.value]);
 		var formerParent = token.parentNode;
@@ -160,8 +266,8 @@ var GameBoard = {
 		//token.parentNode.removeChild(token);
 	},
 };
-GameBoard.showCards( [1, 2, 3] );
-GameBoard.movePlayer(MUSTARD, LIBRARY);
+//GameBoard.showCards( [1, 2, 3] );
+//GameBoard.movePlayer(MUSTARD, LIBRARY);
 
 var ChatRoom = {
 
@@ -176,7 +282,7 @@ var ChatRoom = {
 		CMTS.sendMessage(msg);
 
 		// DEBUG
-		/*a = new Gameobjects.announcement();
+		/*var a = new Gameobjects.announcement();
 		a.type = CHAT;
 		a.playerName = player_name;
 		a.text = text;
@@ -200,17 +306,6 @@ var ChatRoom = {
 	},
 
 }; // ChatRoom
-
-
-
-
-
-// TODO: Implement this
-var GameInfo = {
-
-};
-
-
 
 
 /**
