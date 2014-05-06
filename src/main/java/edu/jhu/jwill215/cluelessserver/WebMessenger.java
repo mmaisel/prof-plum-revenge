@@ -79,17 +79,9 @@ public class WebMessenger implements IMessenger {
 		}
 		j.rpush(this.out, query);
         this.pool.returnResource(j);
-		//There must be a better way to do this...
-		//One day I will learn java, one day.
-        switch(objects.length) {
-		case 2:		
-			return tempMsgr.query(type, objects[0], objects[1]);
-		case 1:		
-			return tempMsgr.query(type, objects[0]);
-		default:		
-			return tempMsgr.query(type);
-		}
-        //return null;
+		
+		//TODO: replace this with board query response
+		return tempMsgr.query(type, objects);
 	}
 
 	@Override
