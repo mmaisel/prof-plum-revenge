@@ -40,7 +40,7 @@ public class WebMessenger implements IMessenger {
 				if (canMove) {
 					query = query + "\"spaces\": {" ;
 					@SuppressWarnings("unchecked")
-					ArrayList<ISpace> moves = (ArrayList<ISpace>)objects[1];
+					ArrayList<ISpace> moves = (ArrayList<ISpace>)objects[2];
 					for (ISpace s : moves) {
 						query = query + "\"" + s.prettyName() + "\" , ";
 					}
@@ -77,6 +77,7 @@ public class WebMessenger implements IMessenger {
                 break;
             }
 		}
+		j.rpush(this.out, query);
         this.pool.returnResource(j);
 		//There must be a better way to do this...
 		//One day I will learn java, one day.
@@ -133,7 +134,7 @@ public class WebMessenger implements IMessenger {
             }
             case MOVE:{
 				announcement = "{\"type\": \"MOVE\", "
-					+ "\"playerName\": \"" + ((Player)objects[0]).name 
+					+ "\"playerName\": \"" + ((Suspect)objects[0]).prettyName() 
 					+ "\"space\": \"" + ((ISpace)objects[1]).prettyName()
 					+ "\"}";
                 break;

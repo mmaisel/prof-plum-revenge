@@ -69,7 +69,7 @@ public class WebClub {
 		int i = 1;
 		WebClub myClub = new WebClub(i);
 		
-		myClub.waitGameStart();
+		//myClub.waitGameStart();
 		
 		myClub.play();
 		
