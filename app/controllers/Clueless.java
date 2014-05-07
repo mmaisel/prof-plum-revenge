@@ -40,7 +40,7 @@ public class Clueless extends Controller {
 
         try {
             // get message from player's out queue
-            message = j.rpop("club:" + club_uuid + ":player:" + player_uuid + ":out");
+            message = j.lpop("club:" + club_uuid + ":player:" + player_uuid + ":out");
         } finally {
             play.Play.application().plugin(RedisPlugin.class).jedisPool().returnResource(j);
         }

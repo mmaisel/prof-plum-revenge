@@ -28,25 +28,29 @@ public class WebMessenger implements IMessenger {
 		switch(type) {
             case ACTION: {
 				boolean canMove = false;
-				query = "{\"type\": \"ACTION\", " ;
+				query = "{\"type\":\"Q_ACTION\", \"actions\": [" ;
 	
 				@SuppressWarnings("unchecked")
 				ArrayList<Action> actions = (ArrayList<Action>)objects[1];
 				for (Action a : actions) {
 					if (a==Action.MOVE) canMove = true;
-					query = query + "\"" + a.toString() + "\" , ";
+					query = query + "\"A_" + a.toString() + "\" , ";
 				}
-				query = query + "} ,";
+				if (actions.size() > 0) query=query.substring(0,query.length()-2);
+				query = query + "] ,";
 				if (canMove) {
-					query = query + "\"spaces\": {" ;
+					query = query + "\"spaces\": [" ;
 					@SuppressWarnings("unchecked")
 					ArrayList<ISpace> moves = (ArrayList<ISpace>)objects[2];
 					for (ISpace s : moves) {
 						query = query + "\"" + s.prettyName() + "\" , ";
 					}
-					query = query +  "} ,";
+					if (moves.size() > 0) query=query.substring(0,query.length()-2);
+					query = query +  "]";
+				} else {
+					query=query.substring(0,query.length()-2);
 				}
-				query = query + "\"}";
+				query = query + "}";
                 break;
             }
 			//deprecated
@@ -54,23 +58,23 @@ public class WebMessenger implements IMessenger {
             //    break;
             //}
             case SUGGEST: {
-				query = "{\"type\": \"SUGGEST\"}"; 
+				query = "{\"type\": \"Q_SUGGEST\"}"; 
                 break;
             }
             case ACCUSE: {
-				query = "{\"type\": \"ACCUSE\"}"; 
+				query = "{\"type\": \"Q_ACCUSE\"}"; 
                 break;
             }
             case CARDS: {
-				query = "{\"type\": \"CARDS\", \"cards\": { " ;
+				query = "{\"type\": \"Q_CARDS\", \"cards\": [ " ;
 				
 				@SuppressWarnings("unchecked")
 				ArrayList<ICard> cards = (ArrayList<ICard>)objects[1];
 				for (ICard c : cards) {
 					query = query + "\"" + c.prettyName() + "\" , ";
 				}
-				
-				query = query + "}}";
+				if (cards.size() > 0) query=query.substring(0,query.length()-2);
+				query = query + "]}";
                 break;
             }
             default: {
@@ -126,8 +130,8 @@ public class WebMessenger implements IMessenger {
             }
             case MOVE:{
 				announcement = "{\"type\": \"MOVE\", "
-					+ "\"playerName\": \"" + ((Suspect)objects[0]).prettyName() 
-					+ "\"space\": \"" + ((ISpace)objects[1]).prettyName()
+					+ " \"playerName\":\"" + ((Suspect)objects[0]).prettyName() 
+					+ "\", \"space\":\"" + ((ISpace)objects[1]).prettyName()
 					+ "\"}";
                 break;
             }
@@ -154,13 +158,14 @@ public class WebMessenger implements IMessenger {
             }
             case SHOWHAND: {
 				announcement = "{\"type\": \"SHOWHAND\", "
-					+ "\"cards\": {";
+					+ "\"cards\":[";
 				@SuppressWarnings("unchecked")
 				ArrayList<ICard> cards = (ArrayList<ICard>)objects[1];
 				for (ICard c : cards) {
 					announcement = announcement + "\"" + c.prettyName() + "\" , ";
 				}
-				announcement = announcement + "}}";
+				if (cards.size() > 0) announcement=announcement.substring(0,announcement.length()-2);
+				announcement = announcement + "]}";
                 break;
             }
             default: {
