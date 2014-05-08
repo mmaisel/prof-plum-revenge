@@ -23,7 +23,7 @@ public class WebMessenger implements IMessenger {
 
 	static class JsonBuilder {
 		static String printA(ArrayList<Action> al) {
-			if (al.size() <= 0) {return "no action";}
+			if (al.size() <= 0) {return "\"no action\"";}
 			String ret = "[";
 			for (Action a : al) {
 				ret = ret + JsonBuilder.print(a) + ",";
@@ -31,7 +31,7 @@ public class WebMessenger implements IMessenger {
 			return ret.substring(0,ret.length()-1) + "]";
 		}
 		static String printS(ArrayList<ISpace> al) {
-			if (al.size() <= 0) {return "no space";}
+			if (al.size() <= 0) {return "\"no space\"";}
 			String ret = "[";
 			for (ISpace a : al) {
 				ret = ret + JsonBuilder.print(a) + ",";
@@ -39,7 +39,7 @@ public class WebMessenger implements IMessenger {
 			return ret.substring(0,ret.length()-1) + "]";
 		}
 		static String printC(ArrayList<ICard> al) {
-			if (al.size() <= 0) {return "no card";}
+			if (al.size() <= 0) {return "\"no card\"";}
 			String ret = "[";
 			for (ICard a : al) {
 				ret = ret + JsonBuilder.print(a) + ",";

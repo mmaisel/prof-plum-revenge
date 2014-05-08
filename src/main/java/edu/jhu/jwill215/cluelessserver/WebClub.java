@@ -29,7 +29,7 @@ public class WebClub {
 		while (true) {
 		
 			String result = (String) j.get("club:" + this.id + ":start");
-			if (result == "true") break;
+			if (result != null) break;
 			
 			try {
 				Thread.sleep(1000);
@@ -69,7 +69,7 @@ public class WebClub {
 		int i = 1;
 		WebClub myClub = new WebClub(i);
 		
-		//myClub.waitGameStart();
+		myClub.waitGameStart();
 		
 		myClub.play();
 		

@@ -597,7 +597,7 @@
             <div class="row">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Current Player Turn</h3>
+                        <h3 class="panel-title" id="startgame">Current Player Turn</h3>
                     </div>
                     <div class="panel-body">
 
@@ -638,5 +638,8 @@
     <script src="@routes.Assets.at("javascripts/cmts.js")" type="text/javascript"></script>
     <script src="@routes.Assets.at("javascripts/cs.js")" type="text/javascript"></script>
     <script type="text/javascript" charset="utf-8" src="@routes.Club.plumJs(club_uuid, player_name, player_uuid)"></script>
-
+	<script> document.getElementById("startgame").onclick(console.out(jQuery.ajax({
+			'type': 'GET',
+			'url':"/api/startGame/1" //+ club_uuid 
+		}))) </script>
 }
