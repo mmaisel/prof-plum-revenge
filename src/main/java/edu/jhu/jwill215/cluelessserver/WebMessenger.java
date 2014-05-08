@@ -78,24 +78,24 @@ public class WebMessenger implements IMessenger {
 				ArrayList<ISpace> moves = new ArrayList();
 				if (objects.length>2) { moves = (ArrayList<ISpace>)objects[2]; }
 				
-				query = "{\"type\":\"Q_ACTION\"," +
+				query = "{\"type\":{\"name\":\"Q_ACTION\"}," +
 					"\"actions\":" + JsonBuilder.printA(actions) + "," +
 					"\"spaces\":" + JsonBuilder.printS(moves) + "}";
                 break;
             }
             case SUGGEST: {
-				query = "{\"type\": \"Q_SUGGEST\"}"; 
+				query = "{\"type\":{\"name\":\"Q_SUGGEST\"}}"; 
                 break;
             }
             case ACCUSE: {
-				query = "{\"type\": \"Q_ACCUSE\"}"; 
+				query = "{\"type\":{\"name\":\"Q_ACCUSE\"}}"; 
                 break;
             }
             case CARDS: {
 				@SuppressWarnings("unchecked")
 				ArrayList<ICard> cards = (ArrayList<ICard>)objects[1];
 				
-				query = "{\"type\":\"Q_CARDS\"," +
+				query = "{\"type\":{\"name\":\"Q_CARDS\"}," +
 				"\"cards\":" + JsonBuilder.printC(cards) + "}";
                 break;
             }
@@ -118,7 +118,7 @@ public class WebMessenger implements IMessenger {
                 break;
             }
             case NEWPLAYER: {
-				announcement = "{\"type\":\"NEWPLAYER\"," 
+				announcement = "{\"type\":{\"name\":\"NEWPLAYER\"}," 
 					+ "\"playerName\":\"" + ((Player)objects[0]).name + "\","
 					+ "\"playerCharacter\":\"" + ((Player)objects[0]).character.prettyName() + "\"" 
 					+ "}";
@@ -128,7 +128,7 @@ public class WebMessenger implements IMessenger {
 				@SuppressWarnings("unchecked")
 				Triglyph t = (Triglyph)objects[1];
 			
-				announcement = "{\"type\":\"ACCUSE\", "
+				announcement = "{\"type\":{\"name\":\"ACCUSE\"}, "
 					+ "\"playerName\": \"" + ((Player)objects[0]).name + "\","
 					+ "\"triglyph\":" + JsonBuilder.print(t) + "}";
                 break;
@@ -136,26 +136,26 @@ public class WebMessenger implements IMessenger {
             case FALSE: {
 				String cardString = "no card";
 				if (objects[0] != null) cardString = ((ICard)objects[0]).prettyName();
-				announcement = "{\"type\":\"FALSE\", "
+				announcement = "{\"type\":{\"name\":\"FALSE\"}, "
 				+ "\"card\":\"" + cardString + "\"" 
 				+ "}";
                 break;
             }
             case LOSER: {
-				announcement = "{\"type\":\"LOSER\","
+				announcement = "{\"type\":{\"name\":\"LOSER\"},"
 					+ "\"playerName\": \"" + ((Player)objects[0]).name + "\""
 					+ "}";
                 break;
             }
             case MOVE:{
-				announcement = "{\"type\": \"MOVE\","
+				announcement = "{\"type\":{\"name\":\"MOVE\"},"
 					+ "\"playerCharacter\":\"" + ((Suspect)objects[0]).prettyName() + "\","
 					+ "\"space\":\"" + ((ISpace)objects[1]).prettyName() + "\""
 					+ "}";
                 break;
             }
             case SKIP: {
-				announcement = "{\"type\": \"SKIP\","
+				announcement = "{\"type\":{\"name\":\"SKIP\"},"
 					+ "\"playerName\":\"" + ((Player)objects[0]).name  + "\""
 					+ "}";
                 break;
@@ -164,13 +164,13 @@ public class WebMessenger implements IMessenger {
 				@SuppressWarnings("unchecked")
 				Triglyph t = (Triglyph)objects[1];
 			
-				announcement = "{\"type\":\"SUGGEST\","
+				announcement = "{\"type\":{\"name\":\"SUGGEST\"},"
 					+ "\"playerName\":\"" + ((Player)objects[0]).name + "\","
 					+ "\"triglyph\":" + JsonBuilder.print(t) + "}";
                 break;
             }
             case WINNER: {
-				announcement = "{\"type\":\"WINNER\","
+				announcement = "{\"type\":{\"name\":\"WINNER\"},"
 					+ "\"playerName\": \"" + ((Player)objects[0]).name + "\""
 					+ "}";
                 break;
@@ -179,7 +179,7 @@ public class WebMessenger implements IMessenger {
 				@SuppressWarnings("unchecked")
 				ArrayList<ICard> cards = (ArrayList<ICard>)objects[1];
 				
-				announcement = "{\"type\":\"SHOWHAND\","
+				announcement = "{\"type\":{\"name\":\"SHOWHAND\"},"
 					+ "\"cards\":" + JsonBuilder.printC(cards)
 					+ "}";
                 break;
