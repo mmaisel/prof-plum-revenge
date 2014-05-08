@@ -18,45 +18,71 @@ public class WebMessenger implements IMessenger {
         this.pool = pool;
         this.in = "club:" + club_id + ":player:" + player_id + ":in";
         this.out = "club:" + club_id + ":player:" + player_id + ":out";
-        this.info(Announcement.CHAT, "{\"type\": \"CHAT\", \"playerName\": \"GameMaster\", \"message\": \"Welcome to Clueless!\"");
+        //this.info(Announcement.CHAT, "{\"type\": \"CHAT\", \"playerName\": \"GameMaster\", \"message\": \"Welcome to Clueless!\"");
     }
 
+	static class JsonBuilder {
+		static String printA(ArrayList<Action> al) {
+			if (al.size() <= 0) {return "no action";}
+			String ret = "[";
+			for (Action a : al) {
+				ret = ret + JsonBuilder.print(a) + ",";
+			}
+			return ret.substring(0,ret.length()-1) + "]";
+		}
+		static String printS(ArrayList<ISpace> al) {
+			if (al.size() <= 0) {return "no space";}
+			String ret = "[";
+			for (ISpace a : al) {
+				ret = ret + JsonBuilder.print(a) + ",";
+			}
+			return ret.substring(0,ret.length()-1) + "]";
+		}
+		static String printC(ArrayList<ICard> al) {
+			if (al.size() <= 0) {return "no card";}
+			String ret = "[";
+			for (ICard a : al) {
+				ret = ret + JsonBuilder.print(a) + ",";
+			}
+			return ret.substring(0,ret.length()-1) + "]";
+		}
+		static String print(ICard  c) { return "\"" + c.prettyName() + "\""; }
+		static String print(Action a) { return "\"A_" + a.toString() + "\""; }
+		static String print(ISpace s) { return "\"" + s.prettyName() + "\""; }
+		static String print(Triglyph t) {
+			return "{" 
+				+  "\"room\":\""   + t.room.prettyName()    + "\","
+				+ "\"suspect\":\"" + t.suspect.prettyName() + "\","
+				+ "\"weapon\":\""  + t.weapon.prettyName()  + "\""
+				+ "}";
+		}
+		
+	}
+	
+	//class myDB {
+		private void rpush(String q) {
+			Jedis j = this.pool.getResource();
+			j.rpush(this.out, q);
+			this.pool.returnResource(j);
+		}
+	//}
+	
 	@Override
 	public Object query(Query type, Object...objects) {
-        Jedis j = this.pool.getResource();
 		String query = "";
 		switch(type) {
-            case ACTION: {
-				boolean canMove = false;
-				query = "{\"type\":\"Q_ACTION\", \"actions\": [" ;
-	
+            case ACTION: {				
 				@SuppressWarnings("unchecked")
 				ArrayList<Action> actions = (ArrayList<Action>)objects[1];
-				for (Action a : actions) {
-					if (a==Action.MOVE) canMove = true;
-					query = query + "\"A_" + a.toString() + "\" , ";
-				}
-				if (actions.size() > 0) query=query.substring(0,query.length()-2);
-				query = query + "] ,";
-				if (canMove) {
-					query = query + "\"spaces\": [" ;
-					@SuppressWarnings("unchecked")
-					ArrayList<ISpace> moves = (ArrayList<ISpace>)objects[2];
-					for (ISpace s : moves) {
-						query = query + "\"" + s.prettyName() + "\" , ";
-					}
-					if (moves.size() > 0) query=query.substring(0,query.length()-2);
-					query = query +  "]";
-				} else {
-					query=query.substring(0,query.length()-2);
-				}
-				query = query + "}";
+				@SuppressWarnings("unchecked")
+				ArrayList<ISpace> moves = new ArrayList();
+				if (objects.length>2) { moves = (ArrayList<ISpace>)objects[2]; }
+				
+				query = "{\"type\":\"Q_ACTION\"," +
+					"\"actions\":" + JsonBuilder.printA(actions) + "," +
+					"\"spaces\":" + JsonBuilder.printS(moves) + "}";
                 break;
             }
-			//deprecated
-            //case MOVE: {
-            //    break;
-            //}
             case SUGGEST: {
 				query = "{\"type\": \"Q_SUGGEST\"}"; 
                 break;
@@ -66,114 +92,103 @@ public class WebMessenger implements IMessenger {
                 break;
             }
             case CARDS: {
-				query = "{\"type\": \"Q_CARDS\", \"cards\": [ " ;
-				
 				@SuppressWarnings("unchecked")
 				ArrayList<ICard> cards = (ArrayList<ICard>)objects[1];
-				for (ICard c : cards) {
-					query = query + "\"" + c.prettyName() + "\" , ";
-				}
-				if (cards.size() > 0) query=query.substring(0,query.length()-2);
-				query = query + "]}";
+				
+				query = "{\"type\":\"Q_CARDS\"," +
+				"\"cards\":" + JsonBuilder.printC(cards) + "}";
                 break;
             }
             default: {
                 break;
             }
 		}
-		j.rpush(this.out, query);
-        this.pool.returnResource(j);
-		
+		this.rpush(query);
+	
 		//TODO: replace this with board query response
 		return tempMsgr.query(type, objects);
 	}
 
 	@Override
 	public void info(Announcement type, Object... objects) {
-        Jedis j = this.pool.getResource();
 		String announcement = "";
 		switch(type) {
             case CHAT: {
                 announcement = "{\"type\": \"CHAT\", \"playerName\": \"Game Master\", \"message\": \"Hello World!\"}";
-                //j.rpush(this.out, announcement);
                 break;
             }
             case NEWPLAYER: {
-				announcement = "{\"type\": \"NEWPLAYER\", " 
-					+ "\"playerName\": \"" + ((Player)objects[0]).name 
-					+ "\", \"playerCharacter\": \"" + ((Player)objects[0]).character.prettyName() 
-					+ "\"}";
+				announcement = "{\"type\":\"NEWPLAYER\"," 
+					+ "\"playerName\":\"" + ((Player)objects[0]).name + "\","
+					+ "\"playerCharacter\":\"" + ((Player)objects[0]).character.prettyName() + "\"" 
+					+ "}";
                 break;
             }
             case ACCUSE: {	
-				announcement = "{\"type\": \"ACCUSE\", "
-					+ "\"playerName\": \"" + ((Suspect)objects[0]).prettyName()
-					+ "\", \"triglyph.room\": \""    + ((Triglyph)objects[1]).room.prettyName() 
-					+ "\", \"triglyph.suspect\": \"" + ((Triglyph)objects[1]).suspect.prettyName() 
-					+ "\", \"triglyph.weapon\": \""  + ((Triglyph)objects[1]).weapon.prettyName() 
-					+ "\"}";
+				@SuppressWarnings("unchecked")
+				Triglyph t = (Triglyph)objects[1];
+			
+				announcement = "{\"type\":\"ACCUSE\", "
+					+ "\"playerName\": \"" + ((Player)objects[0]).name + "\","
+					+ "\"triglyph\":" + JsonBuilder.print(t) + "}";
                 break;
             }
             case FALSE: {
 				String cardString = "no card";
 				if (objects[0] != null) cardString = ((ICard)objects[0]).prettyName();
-				announcement = "{\"type\": \"FALSE\", "
-				+ "\"card\": \"" + cardString
-				+ "\"}";
+				announcement = "{\"type\":\"FALSE\", "
+				+ "\"card\":\"" + cardString + "\"" 
+				+ "}";
                 break;
             }
             case LOSER: {
-				announcement = "{\"type\": \"LOSER\", "
-					+ "\"playerName\": \"" + ((Player)objects[0]).name 
-					+ "\"}";
+				announcement = "{\"type\":\"LOSER\","
+					+ "\"playerName\": \"" + ((Player)objects[0]).name + "\""
+					+ "}";
                 break;
             }
             case MOVE:{
-				announcement = "{\"type\": \"MOVE\", "
-					+ " \"playerName\":\"" + ((Suspect)objects[0]).prettyName() 
-					+ "\", \"space\":\"" + ((ISpace)objects[1]).prettyName()
-					+ "\"}";
+				announcement = "{\"type\": \"MOVE\","
+					+ "\"playerCharacter\":\"" + ((Suspect)objects[0]).prettyName() + "\","
+					+ "\"space\":\"" + ((ISpace)objects[1]).prettyName() + "\""
+					+ "}";
                 break;
             }
             case SKIP: {
-				announcement = "{\"type\": \"SKIP\", "
-					+ "\"playerName\": \"" + ((Player)objects[0]).name 
-					+ "\"}";
+				announcement = "{\"type\": \"SKIP\","
+					+ "\"playerName\":\"" + ((Player)objects[0]).name  + "\""
+					+ "}";
                 break;
             }
             case SUGGEST: {
-				announcement = "{\"type\": \"SUGGEST\", "
-					+ "\"playerName\": \"" + ((Player)objects[0]).name 
-					+ "\", \"triglyph.room\": \""    + ((Triglyph)objects[1]).room.prettyName() 
-					+ "\", \"triglyph.suspect\": \"" + ((Triglyph)objects[1]).suspect.prettyName() 
-					+ "\", \"triglyph.weapon\": \""  + ((Triglyph)objects[1]).weapon.prettyName() 
-					+ "\"}";
+				@SuppressWarnings("unchecked")
+				Triglyph t = (Triglyph)objects[1];
+			
+				announcement = "{\"type\":\"SUGGEST\","
+					+ "\"playerName\":\"" + ((Player)objects[0]).name + "\","
+					+ "\"triglyph\":" + JsonBuilder.print(t) + "}";
                 break;
             }
             case WINNER: {
-				announcement = "{\"type\": \"WINNER\", "
-					+ "\"playerName\": \"" + ((Player)objects[0]).name 
-					+ "\"}";
+				announcement = "{\"type\":\"WINNER\","
+					+ "\"playerName\": \"" + ((Player)objects[0]).name + "\""
+					+ "}";
                 break;
             }
             case SHOWHAND: {
-				announcement = "{\"type\": \"SHOWHAND\", "
-					+ "\"cards\":[";
 				@SuppressWarnings("unchecked")
 				ArrayList<ICard> cards = (ArrayList<ICard>)objects[1];
-				for (ICard c : cards) {
-					announcement = announcement + "\"" + c.prettyName() + "\" , ";
-				}
-				if (cards.size() > 0) announcement=announcement.substring(0,announcement.length()-2);
-				announcement = announcement + "]}";
+				
+				announcement = "{\"type\":\"SHOWHAND\","
+					+ "\"cards\":" + JsonBuilder.printC(cards)
+					+ "}";
                 break;
             }
             default: {
                 break;
             }
 		}
-		j.rpush(this.out, announcement);
-        this.pool.returnResource(j);
+		this.rpush(announcement);
 	}
 	
 }
