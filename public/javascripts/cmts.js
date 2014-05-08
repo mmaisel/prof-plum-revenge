@@ -78,7 +78,7 @@ var CMTS = {
 
 			// Player character is a string 
 			if (xx.playerCharacter != undefined) {
-				m.playerCharacter = xx.playerCharacter;
+				m.playerCharacter = CHARACTER_TYPES[xx.playerCharacter];
 			}
 
 			// Triglyph is a dictionary of room, suspect, and weapon
@@ -90,6 +90,7 @@ var CMTS = {
 			}
 
 
+			// card is a string
 			if (xx.card != undefined) {
 				m.card = CARD_TYPES[xx.card];
 			}

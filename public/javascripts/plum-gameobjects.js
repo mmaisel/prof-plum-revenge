@@ -318,6 +318,14 @@ ACTION_TYPES[A_ACCUSE.name] = A_ACCUSE;
 ACTION_TYPES[A_ENDTURN.name] = A_ENDTURN;
 ACTION_TYPES[A_CHAT.name] = A_CHAT;
 
+var CHARACTER_TYPES = new Array();
+CHARACTER_TYPES[SCARLET.name] = SCARLET;
+CHARACTER_TYPES[MUSTARD.name] = MUSTARD;
+CHARACTER_TYPES[WHITE.name] = WHITE;
+CHARACTER_TYPES[GREEN.name] = GREEN;
+CHARACTER_TYPES[PEACOCK.name] = PEACOCK;
+CHARACTER_TYPES[PLUM.name] = PLUM;
+
 /**
  * Directional Information for Gameboard - make fun all you want, but at least
  * with a hardcoded table you can't mess it up with hard logic...

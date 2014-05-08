@@ -94,17 +94,21 @@ var GameBoard = {
 		// MOVE
 		else if (msg.type === MOVE) {
 			var old_loc = player_locations[msg.playerCharacter.name];
-			var new_loc = msg.room;
+			var new_loc = msg.space;
 
-			// Move the token to the new location
-			GameBoard.movePlayer(msg.playerCharacter, new_loc);
+			if (old_loc == undefined) {
+				// If the token isn't on the board yet then add it
+				GameBoard.addToken(msg.playerCharacter, msg.space);				
+			} else {
+				// Move the token to the new location
+				GameBoard.movePlayer(msg.playerCharacter, new_loc);
 
-			// If the player moved from a hallway then it is no longer occupied
-			$("#" + old_loc.name).data("occupied", false);
+				// If player moved from a hallway then its no longer occupied
+				$("#" + old_loc.name).data("occupied", false);				
+			}
 
 			// Update local player location
 			player_locations[msg.playerCharacter.name] = new_loc;
-			console.log(player_locations);
 
 			// If the player has moved to a hallway then it is now occupied
 			if (GameBoard.isHallway(new_loc) == true) {
@@ -144,8 +148,8 @@ var GameBoard = {
 			// New players get a location on the board, so add it to our
 			// internal location tracker to keep track of all player 
 			// locations to make it easy to find them later
-			player_locations[msg.playerCharacter.name] = msg.room;
-			console.log(JSON.stringify(player_locations));
+			//player_locations[msg.playerCharacter.name] = msg.space;
+			//console.log(JSON.stringify(player_locations));
 		}
 
 		// SHOWHAND
@@ -265,6 +269,17 @@ var GameBoard = {
 		formerParent.innerHTML = storedInnerHtml;
 		//token.parentNode.removeChild(token);
 	},
+
+	addToken: function(player, room) {
+		var token = document.createElement("img");
+		token.src =  "/assets/images/" + this.tokens[player.value] + ".png";
+		token.setAttribute("id", this.tokens[player.value]);
+		var room = document.getElementById(room.toString());
+		var row = room.children[Math.floor(player.value/2)];
+		var col = row.children[player.value%2];
+		col.innerHTML = "";
+		col.appendChild(token);	
+	}
 };
 //GameBoard.showCards( [1, 2, 3] );
 //GameBoard.movePlayer(MUSTARD, LIBRARY);
