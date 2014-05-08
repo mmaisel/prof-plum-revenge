@@ -39,7 +39,7 @@ var CMTS = {
 	},
 
 	sendMessage : function(message) {
-		console.log("[SEND]: " + JSON.stringify(message));
+		console.log("[POST]: " + JSON.stringify(message));
 		CMTS.postJSON("/api/club/" + club_uuid + "/" + player_uuid, message);
 	},
 
@@ -52,9 +52,6 @@ var CMTS = {
 	 * function that there is nothing to for the moment.
 	 */
 	getMessage : function() {
-		var message = new Gameobjects.announcement();
-		message.type = NOP; // Default values are good.
-
 		// jqhxr implements the Promise API so it is possible to implement a 
 		// chain of done (success) fail (error) and always (complete regardless
 		// of error or success) callbacks.
@@ -65,9 +62,76 @@ var CMTS = {
 		 * inside $.getJSON then that work would go here.
 		 */
 		jqxhr.done(function(msg) {
-			console.log("[GET]: " + JSON.stringify(msg));
-			message.type = msg.type;
-			// TODO: do a deep copy
+			var xx = msg.message;
+			console.log("[GET]: " + JSON.stringify(xx));
+
+			// Create a generic message
+			var m = new Gameobjects.message();
+
+			// Get the message type (query or annoucement... doesn't matter)
+			m.type = MESSAGE_TYPES[xx.type.name];
+			
+			// Player name is a string
+			if (xx.playerName != undefined) {
+				m.playerName = xx.playerName;
+			}
+
+			// Player character is a string 
+			if (xx.playerCharacter != undefined) {
+				m.playerCharacter = xx.playerCharacter;
+			}
+
+			// Triglyph is a dictionary of room, suspect, and weapon
+			if  (xx.triglyph != undefined) {
+				m.triglyph = new Gameobjects.triglyph(
+					xx.triglyph.room,
+					xx.triglyph.suspect,
+					xx.triglyph.weapon);
+			}
+
+
+			if (xx.card != undefined) {
+				m.card = CARD_TYPES[xx.card];
+			}
+			
+			// Space is a whitespace separated string
+			if (xx.space != undefined) {
+				m.space = SPACE_TYPES[xx.space];
+			}
+			
+			// Text is a string
+			if (xx.text != undefined) {
+				m.text = xx.text;	
+			}
+			
+			if (xx.spaces != undefined) {
+				m.spaces = [];
+				if (xx.spaces != "no space") {
+					for (var i = 0; i < xx.spaces.length; i++) {
+						m.spaces.push(SPACE_TYPES[xx.spaces[i]]);
+					}					
+				}
+			}
+	
+			if (xx.actions != undefined) {
+				m.actions = [];
+				for (var i = 0; i < xx.actions.length; i++) {
+					m.actions.push(ACTION_TYPES[xx.actions[i]]);
+				}
+			}
+
+			if (xx.cards != undefined) {
+				m.cards = [];
+				for (var i = 0; i < xx.cards.length; i++) {
+					m.cards.push(CARD_TYPES[xx.cards[i]]);
+				}
+			}
+
+
+			console.log(m);
+
+			GameBoard.playTurn(m);
+
 		});
 
 		/**
@@ -76,7 +140,6 @@ var CMTS = {
 		 */
 		jqxhr.fail(function() { // If there was an error connecting
 			console.log( "Problem with connecting to game server" );
-			message.type = NOP; // Nothing to return
 		});
 
 		/**	
@@ -84,10 +147,9 @@ var CMTS = {
 		 * you can add functionality to do cleanup or whatever here.
 		 */
 		jqxhr.always(function() {
-			console.log( "complete" );
+			//console.log( "complete" );
 			// Don't modify message here unless you really mean to.
 		});
 
-		return message;
 	},
 }

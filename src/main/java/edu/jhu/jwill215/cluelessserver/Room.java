@@ -15,8 +15,8 @@ enum Room implements ICard, ISpace {
 	HALL("Hall"),
 	LOUNGE("Lounge"),
 	LIBRARY("Library"),
-	BILLIARD("Billiard Room"),
-	DINING("Dining Room"),
+	BILLIARD("Billiard"),
+	DINING("Dining"),
 	CONSERVATORY("Conservatory"),
 	BALLROOM("Ballroom"),
 	KITCHEN("Kitchen");

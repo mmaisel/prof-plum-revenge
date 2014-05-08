@@ -13,13 +13,17 @@ var player_uuid = "@player_uuid";
 var player_character = PLUM;
 var player_location = KITCHEN;
 
+// Array of player locations for everyone on the board.
 var player_locations = new Array();
 player_locations[player_character.name] = player_location;
-console.log(player_locations);
 
+// Array of cards currently held by player
+var player_hand = new Array();
+
+// Switch to determine if player clicked accusation or suggestion
 var accusation = false;
 
-
+// Temporary debug switch for END TURN
 var debug_switch = false;
 
 /**
@@ -94,8 +98,8 @@ $(document).ready(function() {
 				weapon === undefined) {
 				// We need to do something here or send the server a bunch of 
 			 	// NULL arguments
-
 			}
+			
 
 			ActionMenu.accuse(room, suspect, weapon);
 		} 
@@ -106,6 +110,12 @@ $(document).ready(function() {
 				'#suspect_form').val();
 			var weapon = $('input[name=optionsWeapon]:checked', 
 				'#weapon_form').val();
+
+			if (suspect === undefined || 
+				weapon === undefined) {
+				// We need to do something here or send the server a bunch of 
+			 	// NULL arguments
+			}
 
 			ActionMenu.suggest(suspect, weapon);
 		}

@@ -15,7 +15,7 @@ var ActionMenu = {
 	accuse: function(room, suspect, weapon) {
 		// Create message based on user input
 		var msg = Message.query(Q_ACCUSE);
-		msg.trigylphx = new Gameobjects.triglyphus(room, suspect, weapon);
+		msg.triglyph = new Gameobjects.triglyph(room, suspect, weapon);
 		
 		// Send the message to the server
 		CMTS.sendMessage(msg);
@@ -24,7 +24,7 @@ var ActionMenu = {
 	suggest: function(suspect, weapon) {
 		// Create message based on user input
 		var msg = Message.query(Q_SUGGEST);
-		msg.trigylphx = new Gameobjects.triglyphus(null, suspect, weapon);
+		msg.triglyph = new Gameobjects.triglyph(null, suspect, weapon);
 		
 		// Send the message to the server
 		CMTS.sendMessage(msg);
@@ -314,19 +314,4 @@ var ChatRoom = {
  * TODO: When the game ends we need to end this by calling 
  * 		clearInterval(gameInterval);
  */
-var gameInterval = setInterval( function() { announcementCallback() }, 1000 );
-
-
-/**
- * This callback is processed every 1000 milliseconds. This function 
- * obtians the next announcement item from the game server queue and processes
- * the message in order to forward onto playTurn(). If the message returned is
- * 
- */
-function announcementCallback() {
-	// Get the next announcement message from the server
-	var msg = CMTS.getMessage();
-	if (msg != null) {
-		GameBoard.playTurn(msg);
-	}
-}; 
+var gameInterval = setInterval( function() { CMTS.getMessage(); }, 1000 );

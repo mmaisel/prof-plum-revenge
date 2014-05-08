@@ -20,7 +20,7 @@ var Gameobjects = {
 	},
 
 
-	triglyphus: function(room, suspect, weapon) {
+	triglyph: function(room, suspect, weapon) {
 		this.room = room;
 		this.suspect = suspect;
 		this.weapon = weapon;
@@ -31,7 +31,7 @@ var Gameobjects = {
 		type = null; // Type of message
 		playerName = null; // Player's name
 		playerCharacter = null; // Character
-		trigylphx = null; // triglyphus
+		triglyph = null; // triglyph
 		card = null;
 		space = null;
 		cards = null; // Array of Cards
@@ -77,6 +77,20 @@ var Gameobjects = {
 		this.secret = null; // SECRETROOM from current location
 	},
 
+
+	// Culmination of all message things recieved from the server
+	message: function() {
+		type = null; // Type of message
+		playerName = null; // Player's name
+		playerCharacter = null; // Character
+		triglyph = null; // triglyph
+		card = null;
+		space = null;
+		cards = null; // Array of Cards
+		text = null;  // Chat room text
+		spaces = null;
+		actions = null;
+	}
 };
 
 
@@ -92,7 +106,7 @@ Gameobjects.hall.prototype.toString = function() {
 Gameobjects.suspect.prototype.toString = function() {
 	return this.name;
 };
-Gameobjects.triglyphus.prototype.toString = function() {
+Gameobjects.triglyph.prototype.toString = function() {
 	var myString = "";
 	for (var i in this) {
 		if (i=="toString") continue;
@@ -153,9 +167,9 @@ Gameobjects.path.prototype.toString = function() {
  */
 var SCARLET = new Gameobjects.suspect("Ms. Scarlet", 0);
 var MUSTARD = new Gameobjects.suspect("Col. Mustard", 1);
-var WHITE	= new Gameobjects.suspect("Mr. White", 2);
+var WHITE	= new Gameobjects.suspect("Mrs. White", 2);
 var GREEN	= new Gameobjects.suspect("Mr. Green", 3);
-var PEACOCK = new Gameobjects.suspect("Ms. Peacock", 4);
+var PEACOCK = new Gameobjects.suspect("Mrs. Peacock", 4);
 var PLUM	= new Gameobjects.suspect("Prof. Plum", 5);
 
 var SKIP = new Gameobjects.announcementType("SKIP");
@@ -171,26 +185,22 @@ var YOURTURN = new Gameobjects.announcementType("YOURTURN");
 var CHAT = new Gameobjects.announcementType("CHAT");
 var NOP = new Gameobjects.announcementType("NOP");
 
+var Q_SUGGEST = new Gameobjects.queryType("Q_SUGGEST");
+var Q_ACCUSE = new Gameobjects.queryType("Q_ACCUSE");
+var Q_CARDS  = new Gameobjects.queryType("Q_CARDS");
+var Q_ACTION = new Gameobjects.queryType("Q_ACTION");
 
-var Q_SUGGEST = new Gameobjects.queryType("SUGGEST");
-var Q_ACCUSE = new Gameobjects.queryType("ACCUSE");
-var Q_CARDS = new Gameobjects.queryType("CARDS");
-var Q_ACTION = new Gameobjects.queryType("ACTION");
-
-
-var A_MOVE = new Gameobjects.actionType("MOVE");
-var A_SUGGEST = new Gameobjects.actionType("SUGGEST");
-var A_ACCUSE = new Gameobjects.actionType("ACCUSE");
-var A_ENDTURN = new Gameobjects.actionType("ENDTURN");
-var A_CHAT = new Gameobjects.actionType("CHAT");
-
+var A_MOVE = new Gameobjects.actionType("A_MOVE");
+var A_SUGGEST = new Gameobjects.actionType("A_SUGGEST");
+var A_ACCUSE = new Gameobjects.actionType("A_ACCUSE");
+var A_ENDTURN = new Gameobjects.actionType("A_ENDTURN");
+var A_CHAT = new Gameobjects.actionType("A_CHAT");
 
 var UP = new Gameobjects.direction("UP");
 var DOWN = new Gameobjects.direction("DOWN");
 var LEFT = new Gameobjects.direction("LEFT");
 var RIGHT = new Gameobjects.direction("RIGHT");
 var SECRETROOM = new Gameobjects.direction("SECRETROOM");
-
 
 var ROPE 		= new Gameobjects.weapon("rope");
 var LEADPIPE 	= new Gameobjects.weapon("lead pipe");
@@ -233,6 +243,80 @@ var DININGKITCHEN 	= new Gameobjects.hall("Dining-Kitchen");
 var CONSERVEBALL 	= new Gameobjects.hall("Conservatory-Ballroom");
 var BALLKITCHEN 	= new Gameobjects.hall("Ballroom-Kitchen");
 
+
+var MESSAGE_TYPES = new Array();
+MESSAGE_TYPES[SKIP.name] = SKIP;
+MESSAGE_TYPES[MOVE.name] = MOVE;
+MESSAGE_TYPES[SUGGEST.name] = SUGGEST;
+MESSAGE_TYPES[FALSE.name] = FALSE;
+MESSAGE_TYPES[ACCUSE.name] = ACCUSE;
+MESSAGE_TYPES[WINNER.name] = WINNER;
+MESSAGE_TYPES[LOSER.name] = LOSER;
+MESSAGE_TYPES[NEWPLAYER.name] = NEWPLAYER;
+MESSAGE_TYPES[SHOWHAND.name] = SHOWHAND;
+MESSAGE_TYPES[YOURTURN.name] = YOURTURN;
+MESSAGE_TYPES[CHAT.name] = CHAT;
+MESSAGE_TYPES[NOP.name] = NOP;
+MESSAGE_TYPES[Q_SUGGEST.name] = Q_SUGGEST;
+MESSAGE_TYPES[Q_ACCUSE.name] = Q_ACCUSE;
+MESSAGE_TYPES[Q_CARDS.name] = Q_CARDS;
+MESSAGE_TYPES[Q_ACTION.name] = Q_ACTION;
+
+
+var CARD_TYPES = new Array();
+CARD_TYPES[SCARLET.name] = SCARLET;
+CARD_TYPES[MUSTARD.name] = MUSTARD;
+CARD_TYPES[WHITE.name] = WHITE;
+CARD_TYPES[GREEN.name] = GREEN;
+CARD_TYPES[PEACOCK.name] = PEACOCK;
+CARD_TYPES[PLUM.name] = PLUM;
+CARD_TYPES[ROPE.name] = ROPE;
+CARD_TYPES[LEADPIPE.name] = LEADPIPE;
+CARD_TYPES[KNIFE.name] = KNIFE;
+CARD_TYPES[WRENCH.name] = WRENCH;
+CARD_TYPES[CANDLESTICK.name] = CANDLESTICK;
+CARD_TYPES[REVOLVER.name] = REVOLVER;
+CARD_TYPES[NOCARD.name] = NOCARD;
+CARD_TYPES[STUDY.name] = STUDY;
+CARD_TYPES[HALL.name] = HALL;
+CARD_TYPES[LOUNGE.name] = LOUNGE;
+CARD_TYPES[LIBRARY.name] = LIBRARY;
+CARD_TYPES[BILLIARD.name] = BILLIARD;
+CARD_TYPES[DINING.name] = DINING;
+CARD_TYPES[CONSERVATORY.name] = CONSERVATORY;
+CARD_TYPES[BALLROOM.name] = BALLROOM;
+CARD_TYPES[KITCHEN.name] = KITCHEN;
+
+
+var SPACE_TYPES = new Array();
+SPACE_TYPES[STUDY.name] = STUDY;
+SPACE_TYPES[HALL.name] = HALL;
+SPACE_TYPES[LOUNGE.name] = LOUNGE;
+SPACE_TYPES[LIBRARY.name] = LIBRARY;
+SPACE_TYPES[BILLIARD.name] = BILLIARD;
+SPACE_TYPES[DINING.name] = DINING;
+SPACE_TYPES[CONSERVATORY.name] = CONSERVATORY;
+SPACE_TYPES[BALLROOM.name] = BALLROOM;
+SPACE_TYPES[KITCHEN.name] = KITCHEN;
+SPACE_TYPES[STUDYHALL.name] = STUDYHALL;
+SPACE_TYPES[HALLLOUNGE.name] = HALLLOUNGE;
+SPACE_TYPES[STUDYLIBRARY.name] = STUDYLIBRARY;
+SPACE_TYPES[HALLBILLIARD.name] = HALLBILLIARD;
+SPACE_TYPES[LOUNGEDINING.name] = LOUNGEDINING;
+SPACE_TYPES[LIBRARYBILLIARD.name] = LIBRARYBILLIARD;
+SPACE_TYPES[BILLIARDDINING.name] = BILLIARDDINING;
+SPACE_TYPES[LIBRARYCONSERVE.name] = LIBRARYCONSERVE;
+SPACE_TYPES[BILLIARDBALL.name] = BILLIARDBALL;
+SPACE_TYPES[DININGKITCHEN.name] = DININGKITCHEN;
+SPACE_TYPES[CONSERVEBALL.name] = CONSERVEBALL;
+SPACE_TYPES[BALLKITCHEN.name] = BALLKITCHEN;
+
+var ACTION_TYPES = new Array();
+ACTION_TYPES[A_MOVE.name] = A_MOVE;
+ACTION_TYPES[A_SUGGEST.name] = A_SUGGEST;
+ACTION_TYPES[A_ACCUSE.name] = A_ACCUSE;
+ACTION_TYPES[A_ENDTURN.name] = A_ENDTURN;
+ACTION_TYPES[A_CHAT.name] = A_CHAT;
 
 /**
  * Directional Information for Gameboard - make fun all you want, but at least

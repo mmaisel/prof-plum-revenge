@@ -8,12 +8,12 @@ package edu.jhu.jwill215.cluelessserver;
  *
  */
 public enum Suspect implements ICard {
-	SCARLET("Miss Scarlet"),
-	MUSTARD("Colonel Mustard"),
+	SCARLET("Ms. Scarlet"),
+	MUSTARD("Col. Mustard"),
 	WHITE("Mrs. White"),
 	GREEN("Mr. Green"),
 	PEACOCK("Mrs. Peacock"),
-	PLUM("Professor Plum");	
+	PLUM("Prof. Plum");	
 	
 	private final String prettyName;
 	ISpace location;

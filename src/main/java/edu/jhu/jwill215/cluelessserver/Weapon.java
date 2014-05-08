@@ -9,12 +9,12 @@ package edu.jhu.jwill215.cluelessserver;
  */
 
 public enum Weapon implements ICard {
-	ROPE("Rope"), 
-	LEAD_PIPE("Lead Pipe"),
-	KNIFE("Knife"),
-	WRENCH("Wrench"),
-	CANDLESTICK("Candlestick"),
-	REVOLVER("Revolver");
+	ROPE("rope"), 
+	LEAD_PIPE("lead pipe"),
+	KNIFE("knife"),
+	WRENCH("wrench"),
+	CANDLESTICK("candlestick"),
+	REVOLVER("revolver");
 		
 	private final String prettyName;
 	

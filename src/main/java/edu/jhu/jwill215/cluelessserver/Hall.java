@@ -45,7 +45,7 @@ enum Hall implements ISpace {
 
 	@Override
 	public String prettyName() {
-		return String.format("%s-%s Hallway", this.adjacentSpaces.get(0).prettyName(), this.adjacentSpaces.get(1).prettyName());
+		return String.format("%s-%s", this.adjacentSpaces.get(0).prettyName(), this.adjacentSpaces.get(1).prettyName());
 	}
 
 	

@@ -35,7 +35,7 @@ public class Clueless extends Controller {
 
         Jedis j = play.Play.application().plugin(RedisPlugin.class).jedisPool().getResource();
         ObjectNode reply = Json.newObject();
-        JsonNode jsonReply = Json.parse("{\"name\": \"NOP\"}");
+        JsonNode jsonReply = Json.parse("{\"type\" : {\"name\": \"NOP\"}}");
         String message;
 
         try {
@@ -60,7 +60,7 @@ public class Clueless extends Controller {
         String stringMessage = Json.stringify(jsonMessage);
         List<String> result;
         ObjectNode reply = Json.newObject();
-        JsonNode jsonReply = Json.parse("{\"name\": \"NOP\"}");
+        JsonNode jsonReply = Json.parse("{\"type\" : {\"name\": \"NOP\"}}");
 
         Jedis j = play.Play.application().plugin(RedisPlugin.class).jedisPool().getResource();
         try {
