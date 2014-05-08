@@ -26,7 +26,7 @@ public class InfiniteMessenger implements IMessenger {
 				options = options + "[" + objectLocation++ + "] " + a.toString() + ", ";
 			}
 			out.format("%s: %s :", (String)objects[0], options);
-			int answer = this.getNumber(actions.size());
+			int answer = 0; //this.getNumber(actions.size());
 			if (actions.get(0) == Action.ACCUSE) answer=1;
 			Action action = actions.get(answer);
 			ArrayList<Object> complexReturn = new ArrayList<Object>();
@@ -148,7 +148,8 @@ public class InfiniteMessenger implements IMessenger {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 0;
+		//return 0;
+		return (new Random()).nextInt(max);
 	}
 
 	@Override
