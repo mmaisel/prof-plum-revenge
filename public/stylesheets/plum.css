@@ -38,3 +38,9 @@ table.plum_move_table td {
 .hallway-text {
 	color: #FFAD40;
 }
+
+.center_img {
+   display:block;
+   margin:auto;
+   text-align: center;
+}

@@ -1,5 +1,27 @@
 @(title: String, club_uuid: String, player_name: String, player_uuid: String)
 
+<!-- Show Card Modal -->
+<div class="modal fade" id="display_card" tabindex="-1" role="dialog" aria-labelledby="display_card_modellabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="display_card_modellabel">Someone has a card you suggested!</h4>
+			</div>
+
+			<div class="modal-body">
+				<div class="center_img" id="display_card_row">
+
+				</div> 	
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <!-- Suggest Modal -->
 <div class="modal fade" id="select_options" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">

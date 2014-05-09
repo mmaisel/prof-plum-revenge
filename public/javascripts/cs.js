@@ -89,6 +89,7 @@ var GameBoard = {
 		else if (msg.type === SKIP) {
 			// TODO: Provide some kind of visual feedback to tell the player
 			// that they have been skipped.
+			MessageBox.addInfoMessage(msg.playerName + " was skipped.");
 		} 
 
 		// MOVE
@@ -98,27 +99,38 @@ var GameBoard = {
 
 		// SUGGEST
 		else if (msg.type === SUGGEST) {
+			MessageBox.addInfoMessage(msg.playerName + " suggested that " + 
+				msg.triglyph.suspect + " did it in the " +
+				msg.triglyph.room + " with the " + 
+				msg.triglyph.weapon);
 
 		}
 
 		// FALSE
 		else if (msg.type === FALSE) {
-
+			if (msg.card !== NOCARD) {
+				GameBoard.displayCard(msg.card);
+			} else {
+				MessageBox.addPrivateMessage("No one had the cards you suggested!");
+			}
 		}
 
 		// ACCUSE
 		else if (msg.type === ACCUSE) {
-
+			MessageBox.addInfoMessage(msg.playerName + " accused " +
+				msg.triglyph.suspect + " of doing it in the " +
+				msg.triglyph.room + " with the " + 
+				msg.triglyph.weapon);
 		}
 
 		// WINNER
 		else if (msg.type === WINNER) {
-
+			MessageBox.addInfoMessage(msg.playerName + " won the game!");
 		}
 
 		// LOSER
 		else if (msg.type === LOSER) {
-
+			MessageBox.addInfoMessage(msg.playerName + " lost the game!");
 		}
 
 		// NEWPLAYER
@@ -318,6 +330,31 @@ var GameBoard = {
 			$("#" + new_loc.name).data("occupied", true);
 		}
 	},
+
+	displayCard: function(card) {
+		if ( $("#display_card_row").length ) {
+			// Remove the old image from the 
+			var element = document.getElementById("false_image");
+			if (element != null)
+				document.getElementById("display_card_row").removeChild(element);
+		}
+
+		var false_img = document.createElement("img");
+		if (card.color == undefined) {
+			// Non people cards can use toString()
+			false_img.src = "/assets/images/Cards/card_" + card.toString() + ".jpg";
+		} else {
+			// People cards get a special name
+			false_img.src = "/assets/images/Cards/card_" + card.color + ".jpg";
+		}
+		false_img.alt = card.toString();
+		false_img.title = card.toString();
+		false_img.setAttribute('id', 'false_image');
+
+
+		document.getElementById("display_card_row").appendChild(false_img);
+		$('#display_card').modal('show');
+	},
 };
 //GameBoard.showCards( [1, 2, 3] );
 //GameBoard.moveToken(MUSTARD, LIBRARY);
@@ -346,6 +383,10 @@ var MessageBox = {
 
 	addInfoMessage: function(text) {
 		$("#chat_box").append("[INFO]: " + text + "\n");
+	},
+
+	addPrivateMessage: function(text) {
+		$("#chat_box").append("[PRIVATE]: " + text + "\n");
 	},
 
 	addChatMessage: function(player, text) {
