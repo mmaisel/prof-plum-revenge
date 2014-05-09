@@ -67,20 +67,19 @@ public class WebClub {
         long player_id;
         JedisPool p = Play.application().plugin(RedisPlugin.class).jedisPool();
         Jedis j = p.getResource();
-
-        // see how many players are in slots currently
-        long num_of_players = j.llen("club:" + club_uuid + ":players");
-        // max number of players already in room
-        if (num_of_players > 6) {
-            player_id = -1;
-        } else {
-            player_id = num_of_players;
-            // add player to slot in club
+		
+		// see how many players are in slots currently
+		// if player slot available, add player to slot in club
+        if (j.llen("club:" + club_uuid + ":players") <= 6) {
             j.rpush("club:" + club_uuid + ":players", player_name);
         }
-        p.returnResource(j);
-        // return player id to be used in CMTS
-        return player_id;
+		for (player_id = j.llen("club:" + club_uuid + ":players")-1; player_id >=0; player_id--){
+			if ( j.lindex("club:" + club_uuid + ":players", player_id).equals(player_name)) break;
+		}
+	
+		p.returnResource(j);
+		// returns -1 if room is full
+		return player_id; 
     }
 
     /**
