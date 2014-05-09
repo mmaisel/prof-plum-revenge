@@ -3,8 +3,9 @@ package edu.jhu.jwill215.cluelessserver;
 import edu.jhu.jwill215.cluelessserver.Game.Announcement;
 import edu.jhu.jwill215.cluelessserver.Game.Action;
 import edu.jhu.jwill215.cluelessserver.Player.Query;
+import org.omg.CORBA.ACTIVITY_COMPLETED;
 import redis.clients.jedis.*;
-import org.json.simple.JSONObject;
+import org.json.simple.*;
 import java.util.*;
 
 public class WebMessenger implements IMessenger {
@@ -58,29 +59,84 @@ public class WebMessenger implements IMessenger {
 		}
 		
 	}
-	
-	//class myDB {
-		private void rpush(String q) {
-			Jedis j = this.pool.getResource();
-			j.rpush(this.out, q);
-			this.pool.returnResource(j);
-		}
-	//}
-	
+
+    /**
+     *  RPUSH to player's out queue
+     * @param q
+     */
+    private void rpush(String q) {
+        Jedis j = this.pool.getResource();
+        j.rpush(this.out, q);
+        this.pool.returnResource(j);
+    }
+
+    /**
+     *  BLPOP on player's in queue
+     * @param
+     */
+    private JSONObject blpop() {
+        Jedis j = this.pool.getResource();
+        List<String> result = j.blpop(0, this.in);
+        // 0 index of result list determines if there is a popped result within timeout, since we block forever, it shouldn't happen
+
+        JSONObject reply = new JSONObject();
+
+        if (result.get(0) != null) {
+            // get message, since reply is not null
+            String stringReply = result.get(1);
+            reply = (JSONObject)JSONValue.parse(stringReply);
+        }
+        this.pool.returnResource(j);
+        return reply;
+    }
+
 	@Override
 	public Object query(Query type, Object...objects) {
 		String query = "";
 		switch(type) {
             case ACTION: {				
-				@SuppressWarnings("unchecked")
-				ArrayList<Action> actions = (ArrayList<Action>)objects[1];
-				@SuppressWarnings("unchecked")
-				ArrayList<ISpace> moves = new ArrayList();
-				if (objects.length>2) { moves = (ArrayList<ISpace>)objects[2]; }
-				
-				query = "{\"type\":{\"name\":\"Q_ACTION\"}," +
-					"\"actions\":" + JsonBuilder.printA(actions) + "," +
-					"\"spaces\":" + JsonBuilder.printS(moves) + "}";
+
+                JSONObject queryJSON = new JSONObject();
+
+                // query type
+                LinkedHashMap querytype = new LinkedHashMap();
+                querytype.put("name", "Q_ACTION");
+                queryJSON.put("type", querytype);
+
+                // available actions
+                @SuppressWarnings("unchecked")
+                ArrayList<Action> actions = (ArrayList<Action>)objects[1];
+                // convert to JSON array
+                JSONArray actionsJSON = new JSONArray();
+                for (Action action : actions) {
+                    actionsJSON.add("A_" + action.toString());
+                }
+                queryJSON.put("actions", actionsJSON);
+
+                // available spaces
+                @SuppressWarnings("unchecked")
+                ArrayList<ISpace> spaces = new ArrayList();
+                if (objects.length>2) { spaces = (ArrayList<ISpace>)objects[2]; }
+                // convert to JSON array
+                JSONArray spacesJSON = new JSONArray();
+                for (ISpace space : spaces) {
+                    spacesJSON.add(space.prettyName());
+                }
+                queryJSON.put("spaces", spacesJSON);
+
+                // send to player
+                this.rpush(queryJSON.toJSONString());
+
+                // JSONObject answer = this.blpop();
+                // int answer = this.getNumber(actions.size());
+                // Action action = actions.get(answer);
+                // ArrayList<Object> complexReturn = new ArrayList<Object>();
+                // complexReturn.add(action);
+                // if (action == Action.MOVE) {
+                //     complexReturn.add(this.query(Query.MOVE, objects[0], objects[2]));
+                // }
+                // return complexReturn;
+
                 break;
             }
             case SUGGEST: {
