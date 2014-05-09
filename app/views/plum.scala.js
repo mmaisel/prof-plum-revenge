@@ -178,12 +178,12 @@ $(document).ready(function() {
 	 */
 
 	// Ensure that the send button is disabled until the user inputs text
-	ChatRoom.validate();
-	$("#message_input").change(ChatRoom.validate);
+	MessageBox.validate();
+	$("#message_input").change(MessageBox.validate);
 
 	// Send Message
 	$("#message_form").submit(function(event) {
-		ChatRoom.onSubmit($("#message_input").val());
+		MessageBox.onSubmit($("#message_input").val());
 		event.preventDefault(); // Needed to prevent random refreshes
 
 	});

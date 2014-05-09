@@ -93,27 +93,7 @@ var GameBoard = {
 
 		// MOVE
 		else if (msg.type === MOVE) {
-			var old_loc = player_locations[msg.playerCharacter.name];
-			var new_loc = msg.space;
-
-			if (old_loc == undefined) {
-				// If the token isn't on the board yet then add it
-				GameBoard.addToken(msg.playerCharacter, msg.space);				
-			} else {
-				// Move the token to the new location
-				GameBoard.movePlayer(msg.playerCharacter, new_loc);
-
-				// If player moved from a hallway then its no longer occupied
-				$("#" + old_loc.name).data("occupied", false);				
-			}
-
-			// Update local player location
-			player_locations[msg.playerCharacter.name] = new_loc;
-
-			// If the player has moved to a hallway then it is now occupied
-			if (GameBoard.isHallway(new_loc) == true) {
-				$("#" + new_loc.name).data("occupied", true);
-			}
+			GameBoard.movePlayer(msg.playerCharacter, msg.space);
 		} 
 
 		// SUGGEST
@@ -143,18 +123,36 @@ var GameBoard = {
 
 		// NEWPLAYER
 		else if (msg.type === NEWPLAYER) {
-			// TODO : Add a token onto the board depending on the location
+			MessageBox.addInfoMessage(msg.playerName + " joined the game as " +
+				msg.playerCharacter.toString());
 
-			// New players get a location on the board, so add it to our
-			// internal location tracker to keep track of all player 
-			// locations to make it easy to find them later
-			//player_locations[msg.playerCharacter.name] = msg.space;
-			//console.log(JSON.stringify(player_locations));
+			var label = null;
+			if (msg.playerCharacter.toString() == SCARLET.toString()) {
+				label = "scarlet_pname";
+			}
+			else if (msg.playerCharacter.toString() == MUSTARD.toString()) {
+				label = "mustard_pname";
+			}
+			else if (msg.playerCharacter.toString() == WHITE.toString()) {
+				label = "white_pname";
+			}
+			else if (msg.playerCharacter.toString() == GREEN.toString()) {
+				label = "green_pname";
+			}
+			else if (msg.playerCharacter.toString() == PEACOCK.toString()) {
+				label = "peacock_pname";
+			}
+			else if (msg.playerCharacter.toString() == PLUM.toString()) {
+				label = "plum_pname";
+			}
+
+			// Set player text in players window
+			$("#" + label).html(msg.playerName);
 		}
 
 		// SHOWHAND
 		else if (msg.type === SHOWHAND) {
-
+			GameBoard.showCards(msg.cards);
 		}	
 
 		// YOURTURN
@@ -199,7 +197,12 @@ var GameBoard = {
 
 		// CHAT
 		else if (msg.type === CHAT) {
-			ChatRoom.addText(msg.playerName, msg.text);
+			MessageBox.addChatMessage(msg.playerName, msg.text);
+		}
+
+		// Q_CARDS
+		else if (msg.type === Q_CARDS) {
+			// Coming soon to a theater near you....
 		}
 
 		// Unsupported message type
@@ -235,16 +238,25 @@ var GameBoard = {
 		//newNode.innerHTML = card.toString();
 		//TODO: make cards images as follows:
 		var newNode = document.createElement("img");
-		newNode.src =  "/assets/images/card.jpg";
+		if (card.color == undefined) {
+			// Non people cards can use toString()
+			newNode.src = "/assets/images/Cards/card_" + card.toString() + ".jpg";
+		} else {
+			// People cards get a special name
+			newNode.src = "/assets/images/Cards/card_" + card.color + ".jpg";
+		}
 		newNode.alt = card.toString();
 		newNode.title = card.toString();
+		// With 9 images this will make it fit on one line
+		//newNode.setAttribute('height', '100px');
+		//newNode.setAttribute('width', '60px');
 		//newNode.src = "/assets/images/" + card.toString() + ".jpg";
 		document.getElementById("hand").appendChild(newNode);
 	},
 
 	showCards : function (cards) {
 		for (var card in cards) {
-			this.addToHand(card);
+			this.addToHand(cards[card]);
 		}
 	},
 
@@ -257,7 +269,7 @@ var GameBoard = {
 		5: "plum_token",
 	},
 
-	movePlayer : function (player, room) {
+	moveToken : function (player, room) {
 		var token = document.getElementById(this.tokens[player.value]);
 		var formerParent = token.parentNode;
 		var room = document.getElementById(room.toString());
@@ -279,12 +291,38 @@ var GameBoard = {
 		var col = row.children[player.value%2];
 		col.innerHTML = "";
 		col.appendChild(token);	
-	}
+	},
+
+	// character - character_type
+	// space - space_type 
+	movePlayer: function(character, space) {
+		var old_loc = player_locations[character.toString()];
+		var new_loc = space;
+
+		if (old_loc == undefined) {
+			// If the token isn't on the board yet then add it
+			GameBoard.addToken(character, new_loc);				
+		} else {
+			// Move the token to the new location
+			GameBoard.moveToken(character, new_loc);
+
+			// If player moved from a hallway then its no longer occupied
+			$("#" + old_loc.name).data("occupied", false);				
+		}
+
+		// Update local player location
+		player_locations[character.toString()] = new_loc;
+
+		// If the player has moved to a hallway then it is now occupied
+		if (GameBoard.isHallway(new_loc) == true) {
+			$("#" + new_loc.name).data("occupied", true);
+		}
+	},
 };
 //GameBoard.showCards( [1, 2, 3] );
-//GameBoard.movePlayer(MUSTARD, LIBRARY);
+//GameBoard.moveToken(MUSTARD, LIBRARY);
 
-var ChatRoom = {
+var MessageBox = {
 
 	// When a message is submitted it is displayed to all users.
 	// TODO: Find a way to make the textarea autoscroll as messages come in
@@ -306,8 +344,12 @@ var ChatRoom = {
 		$("#message_input").val("");
 	},
 
-	addText: function(name, text) {
-		$("#chat_box").append("[" + name + "]: " + text + "\n");
+	addInfoMessage: function(text) {
+		$("#chat_box").append("[INFO]: " + text + "\n");
+	},
+
+	addChatMessage: function(player, text) {
+		$("#chat_box").append("[" + player.toString() + "]: " + text + "\n");
 	},
 
 	// Make sure that the submit button isn't enabled until the user has typed
@@ -320,7 +362,7 @@ var ChatRoom = {
 		}
 	},
 
-}; // ChatRoom
+}; // MessageBox
 
 
 /**

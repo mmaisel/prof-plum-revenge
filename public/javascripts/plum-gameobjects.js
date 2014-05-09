@@ -14,9 +14,10 @@ var Gameobjects = {
 	},
 
 
-	suspect: function(name, value) {
+	suspect: function(name, value, color) {
 		this.name = name;
 		this.value = value;
+		this.color = color;
 	},
 
 
@@ -165,12 +166,12 @@ Gameobjects.path.prototype.toString = function() {
 		5: "plum_token",
 	},
  */
-var SCARLET = new Gameobjects.suspect("Ms. Scarlet", 0);
-var MUSTARD = new Gameobjects.suspect("Col. Mustard", 1);
-var WHITE	= new Gameobjects.suspect("Mrs. White", 2);
-var GREEN	= new Gameobjects.suspect("Mr. Green", 3);
-var PEACOCK = new Gameobjects.suspect("Mrs. Peacock", 4);
-var PLUM	= new Gameobjects.suspect("Prof. Plum", 5);
+var SCARLET = new Gameobjects.suspect("Ms. Scarlet", 0, "scarlet");
+var MUSTARD = new Gameobjects.suspect("Col. Mustard", 1, "mustard");
+var WHITE	= new Gameobjects.suspect("Mrs. White", 2, "white");
+var GREEN	= new Gameobjects.suspect("Mr. Green", 3, "green");
+var PEACOCK = new Gameobjects.suspect("Mrs. Peacock", 4, "peacock");
+var PLUM	= new Gameobjects.suspect("Prof. Plum", 5, "plum");
 
 var SKIP = new Gameobjects.announcementType("SKIP");
 var MOVE = new Gameobjects.announcementType("MOVE");

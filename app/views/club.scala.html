@@ -3,12 +3,12 @@
 <!-- Suggest Modal -->
 <div class="modal fade" id="select_options" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
-        <h4 class="modal-title" id="myModalLabel"></h4>
-      </div>
-      <div class="modal-body">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
+		<h4 class="modal-title" id="myModalLabel"></h4>
+	  </div>
+	  <div class="modal-body">
 		  <div class="row">
 			  <div class="col-md-4">
 				<div class="panel panel-default">
@@ -92,7 +92,7 @@
 					</div>
 				</div>
 			  </div>
-		      <div class="col-md-4">
+			  <div class="col-md-4">
 				<div class="panel panel-default">
 					<div class="panel panel-heading">
 						<h3 class="panel-title">Room</h3>
@@ -149,495 +149,495 @@
 				</div>
 			  </div>
 		  </div>
-      </div>
-      <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-        <button type="button" class="btn btn-primary btn-default" data-dismiss="modal" id="select_opts_button"></button>
-      </div>
-    </div>
+	  </div>
+	  <div class="modal-footer">
+		<!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+		<button type="button" class="btn btn-primary btn-default" data-dismiss="modal" id="select_opts_button"></button>
+	  </div>
+	</div>
   </div>
 </div>
 
 @main(title) {
-    <h1 class="page-header">@title</h1>
-    <div class="row">
-        <div class="col-md-9">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Gameboard</h3>
-                        </div>
-                        <div id="gameboard" class="panel-body">
-                        
-                            <!-- First Row -->
-                            <div class="row">
-                                <div class="col-md-offset-1 col-md-2 gameboard-tile" style="background-image: url(/assets/images/study.jpg);" id="Study">
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                </div>
+	<h1 class="page-header">@title</h1>
+	<div class="row">
+		<div class="col-md-9">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Gameboard</h3>
+						</div>
+						<div id="gameboard" class="panel-body">
+						
+							<!-- First Row -->
+							<div class="row">
+								<div class="col-md-offset-1 col-md-2 gameboard-tile" style="background-image: url(/assets/images/study.jpg);" id="Study">
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+								</div>
 
-                                <div class="col-md-2 gameboard-tile hallway-text" id="Study-Hall">
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                </div>
+								<div class="col-md-2 gameboard-tile hallway-text" id="Study-Hall">
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+								</div>
 
-                                <div class="col-md-2 gameboard-tile" style="background-image: url(/assets/images/hall.jpg);" id="Hall">
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                </div>
+								<div class="col-md-2 gameboard-tile" style="background-image: url(/assets/images/hall.jpg);" id="Hall">
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+								</div>
 
-                                <div class="col-md-2 gameboard-tile hallway-text" id="Hall-Lounge">
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                </div>
+								<div class="col-md-2 gameboard-tile hallway-text" id="Hall-Lounge">
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+								</div>
 
-                                <div class="col-md-2 gameboard-tile" style="background-image: url(/assets/images/lounge.jpg);" id="Lounge">
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <!-- Second Row -->
-                            <div class="row">
-                                <div class="col-md-offset-1 col-md-2 gameboard-tile hallway-text" id="Study-Library">
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-offset-2 col-md-2 gameboard-tile hallway-text" id="Hall-Billiard">
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-offset-2 col-md-2 gameboard-tile hallway-text" id="Lounge-Dining">
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Third Row -->
-                            <div class="row">
-                                <div class="col-md-offset-1 col-md-2 gameboard-tile" style="background-image: url(/assets/images/library.jpg);" id="Library">
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-2 gameboard-tile hallway-text" id="Library-Billiard">
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-2 gameboard-tile" style="background-image: url(/assets/images/billiard.jpg);" id="Billiard">
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-2 gameboard-tile hallway-text" id="Billiard-Dining">
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-2 gameboard-tile" style="background-image: url(/assets/images/dining.jpg);" id="Dining">
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                </div>
-                            </div>
+								<div class="col-md-2 gameboard-tile" style="background-image: url(/assets/images/lounge.jpg);" id="Lounge">
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+								</div>
+							</div>
 
 
-                            <!-- Fourth Row -->
-                            <div class="row">
-                                <div class="col-md-offset-1 col-md-2 gameboard-tile hallway-text" id="Library-Conservatory">
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                </div>
+							<!-- Second Row -->
+							<div class="row">
+								<div class="col-md-offset-1 col-md-2 gameboard-tile hallway-text" id="Study-Library">
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+								</div>
 
-                                <div class="col-md-offset-2 col-md-2 gameboard-tile hallway-text" id="Billiard-Ballroom">
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                </div>
+								<div class="col-md-offset-2 col-md-2 gameboard-tile hallway-text" id="Hall-Billiard">
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+								</div>
 
-                                <div class="col-md-offset-2 col-md-2 gameboard-tile hallway-text" id="Dining-Kitchen">
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                </div>
-                            </div>
+								<div class="col-md-offset-2 col-md-2 gameboard-tile hallway-text" id="Lounge-Dining">
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Third Row -->
+							<div class="row">
+								<div class="col-md-offset-1 col-md-2 gameboard-tile" style="background-image: url(/assets/images/library.jpg);" id="Library">
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+								</div>
+
+								<div class="col-md-2 gameboard-tile hallway-text" id="Library-Billiard">
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+								</div>
+
+								<div class="col-md-2 gameboard-tile" style="background-image: url(/assets/images/billiard.jpg);" id="Billiard">
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+								</div>
+
+								<div class="col-md-2 gameboard-tile hallway-text" id="Billiard-Dining">
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+								</div>
+
+								<div class="col-md-2 gameboard-tile" style="background-image: url(/assets/images/dining.jpg);" id="Dining">
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+								</div>
+							</div>
 
 
-                            <!-- Fifth Row -->
-                            <div class="row">
-                                <div class="col-md-offset-1 col-md-2 gameboard-tile" style="background-image: url(/assets/images/conservatory.jpg);" id="Conservatory">
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                </div>
+							<!-- Fourth Row -->
+							<div class="row">
+								<div class="col-md-offset-1 col-md-2 gameboard-tile hallway-text" id="Library-Conservatory">
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+								</div>
 
-                                <div class="col-md-2 gameboard-tile hallway-text" id="Conservatory-Ballroom">
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                </div>
+								<div class="col-md-offset-2 col-md-2 gameboard-tile hallway-text" id="Billiard-Ballroom">
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+								</div>
 
-                                <div class="col-md-2 gameboard-tile" style="background-image: url(/assets/images/ballroom.jpg);" id="Ballroom">
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                </div>
+								<div class="col-md-offset-2 col-md-2 gameboard-tile hallway-text" id="Dining-Kitchen">
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+								</div>
+							</div>
 
-                                <div class="col-md-2 gameboard-tile hallway-text" id="Ballroom-Kitchen">
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                </div>
 
-                                <div class="col-md-2 gameboard-tile" style="background-image: url(/assets/images/kitchen.jpg);" id="Kitchen">
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1"></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">_</div>
-                                        <div class="col-md-offset-6 col-md-1">_</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Card Hand</h3>
-                        </div>
-                        <div class="panel-body">
+							<!-- Fifth Row -->
+							<div class="row">
+								<div class="col-md-offset-1 col-md-2 gameboard-tile" style="background-image: url(/assets/images/conservatory.jpg);" id="Conservatory">
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+								</div>
+
+								<div class="col-md-2 gameboard-tile hallway-text" id="Conservatory-Ballroom">
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+								</div>
+
+								<div class="col-md-2 gameboard-tile" style="background-image: url(/assets/images/ballroom.jpg);" id="Ballroom">
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+								</div>
+
+								<div class="col-md-2 gameboard-tile hallway-text" id="Ballroom-Kitchen">
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+								</div>
+
+								<div class="col-md-2 gameboard-tile" style="background-image: url(/assets/images/kitchen.jpg);" id="Kitchen">
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1"></div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">_</div>
+										<div class="col-md-offset-6 col-md-1">_</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-8">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Card Hand</h3>
+						</div>
+						<div class="panel-body">
 							<div class="row" id="hand">
 							
 							</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Action Menu</h3>
-                        </div>
-                        <div class="panel-body">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Action Menu</h3>
+						</div>
+						<div class="panel-body">
 
-                            <!-- Action Menu Items -->
-                            <table class="plum_action_menu"><tr><td>
-                                <table class="plum_action_menu" align="left">
-                                    <tr>
-                                        <td><button class="plum_fixed_width_action" data-toggle="modal" data-target="#select_options" id="suggest_button">Suggest</button></td>
-                                    </tr>
-                                    
-                                    <tr id="plum_action_table">
-                                        <td><button class="plum_fixed_width_action" data-toggle="modal" data-target="#select_options" id="accuse_button">Accuse</button></td>
-                                    </tr>
+							<!-- Action Menu Items -->
+							<table class="plum_action_menu"><tr><td>
+								<table class="plum_action_menu" align="left">
+									<tr>
+										<td><button class="plum_fixed_width_action" data-toggle="modal" data-target="#select_options" id="suggest_button">Suggest</button></td>
+									</tr>
+									
+									<tr id="plum_action_table">
+										<td><button class="plum_fixed_width_action" data-toggle="modal" data-target="#select_options" id="accuse_button">Accuse</button></td>
+									</tr>
 
-                                    <tr id="plum_action_table">
-                                        <td><button class="plum_fixed_width_action" id="secret_room_button">Secret Room</button></td>
-                                    </tr>
+									<tr id="plum_action_table">
+										<td><button class="plum_fixed_width_action" id="secret_room_button">Secret Room</button></td>
+									</tr>
 
-                                    <tr id="plum_action_table">
-                                        <td><button class="plum_fixed_width_action" id="end_turn_button">End Turn</button></td>
-                                    </tr>
+									<tr id="plum_action_table">
+										<td><button class="plum_fixed_width_action" id="end_turn_button">End Turn</button></td>
+									</tr>
 
-                                </table></td><td>
+								</table></td><td>
 
-                                <table class="plum_move_table">
-                                    <tr>
-                                        <td></td>
-                                        <td><button id="up_button" class="glyphicon glyphicon-arrow-up plum_fixed_width_move"></button></td>
-                                        <td></td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><button id="left_button"  class="glyphicon glyphicon-arrow-left plum_fixed_width_move"></button></td>
-                                        <td><button id="down_button"  class="glyphicon glyphicon-arrow-down plum_fixed_width_move"></button></td>
-                                        <td><button id="right_button" class="glyphicon glyphicon-arrow-right plum_fixed_width_move"></button></td>
-                                    </tr>
+								<table class="plum_move_table">
+									<tr>
+										<td></td>
+										<td><button id="up_button" class="glyphicon glyphicon-arrow-up plum_fixed_width_move"></button></td>
+										<td></td>
+									</tr>
+									
+									<tr>
+										<td><button id="left_button"  class="glyphicon glyphicon-arrow-left plum_fixed_width_move"></button></td>
+										<td><button id="down_button"  class="glyphicon glyphicon-arrow-down plum_fixed_width_move"></button></td>
+										<td><button id="right_button" class="glyphicon glyphicon-arrow-right plum_fixed_width_move"></button></td>
+									</tr>
 
-                                </table>
-                            <td></tr></table>
+								</table>
+							<td></tr></table>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="row">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Chat and Game History</h3>
-                    </div>
-                    <div class="panel-body" style="height: 340px;">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="row">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Chat and Game History</h3>
+					</div>
+					<div class="panel-body" style="height: 340px;">
 
-                        <!-- TODO: Need to implement the tab to switch between
-                        the game information and chat room -->
-                        
-                        <!-- Chat Room -->
-                        <textarea id="chat_box" readonly="readonly"
-                                  style="width: 250px; height: 270px;
-                                         margin: 2px; resize: none"></textarea>
-                        </textarea>
-                        <form id="message_form">
-                            <input type=text id="message_input"
-                                   style="width: 180px; height: 24px; margin: 2px" />
-                            <input type="submit" id="send_button" value="Send"
-                                   style="width: 60px; margin: 2px" disabled />
-                        </form>
+						<!-- TODO: Need to implement the tab to switch between
+						the game information and chat room -->
+						
+						<!-- Chat Room -->
+						<textarea id="chat_box" readonly="readonly"
+								  style="width: 250px; height: 270px;
+										 margin: 2px; resize: none"></textarea>
+						</textarea>
+						<form id="message_form">
+							<input type=text id="message_input"
+								   style="width: 180px; height: 24px; margin: 2px" />
+							<input type="submit" id="send_button" value="Send"
+								   style="width: 60px; margin: 2px" disabled />
+						</form>
 
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title" id="startgame">Current Player Turn</h3>
-                    </div>
-                    <div class="panel-body">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title" id="startgame">Current Player Turn</h3>
+					</div>
+					<div class="panel-body">
 
-                        <!-- First Row -->
-                        <div class="row">
-                            <div class="col-md-2" style="background-image: url(/assets/images/scarlet.png); height: 32px; width: 32px"></div>
-                            <div class="col-md-4" style="height: 32px;">Player 1</div>
+						<!-- First Row -->
+						<div class="row">
+							<div class="col-md-2" style="background-image: url(/assets/images/scarlet.png); height: 32px; width: 32px"></div>
+							<div class="col-md-4" style="height: 32px;" id="scarlet_pname">Player 1</div>
 
-                            <div class="col-md-offset-1 col-md-2" style="background-image: url(/assets/images/plum.png); height: 32px; width: 32px"></div>
-                            <div class="col-md-4" style="height: 32px;">Player 2</div>
-                        </div>
+							<div class="col-md-offset-1 col-md-2" style="background-image: url(/assets/images/mustard.png); height: 32px; width: 32px"></div>
+							<div class="col-md-4" style="height: 32px;" id="mustard_pname">Player 2</div>
+						</div>
 
-                        <!-- Second Row -->
-                        <div class="row top-buffer">
-                            <div class="col-md-2" style="background-image: url(/assets/images/mustard.png); height: 32px; width: 32px"></div>
-                            <div class="col-md-4" style="height: 32px;">Player 3</div>
+						<!-- Second Row -->
+						<div class="row top-buffer">
+							<div class="col-md-2" style="background-image: url(/assets/images/white.png); height: 32px; width: 32px"></div>
+							<div class="col-md-4" style="height: 32px;" id="white_pname">Player 3</div>
 
-                            <div class="col-md-offset-1 col-md-2" style="background-image: url(/assets/images/white.png); height: 32px; width: 32px"></div>
-                            <div class="col-md-4" style="height: 32px;">Player 4</div>
-                        </div>
+							<div class="col-md-offset-1 col-md-2" style="background-image: url(/assets/images/green.png); height: 32px; width: 32px"></div>
+							<div class="col-md-4" style="height: 32px;" id="green_pname">Player 4</div>
+						</div>
 
-                        <!-- Third Row -->
-                        <div class="row top-buffer">
-                            <div class="col-md-2" style="background-image: url(/assets/images/peacock.png); height: 32px; width: 32px"></div>
-                            <div class="col-md-4" style="height: 32px;">Player 5</div>
+						<!-- Third Row -->
+						<div class="row top-buffer">
+							<div class="col-md-2" style="background-image: url(/assets/images/peacock.png); height: 32px; width: 32px"></div>
+							<div class="col-md-4" style="height: 32px;" id="peacock_pname">Player 5</div>
 
-                            <div class="col-md-offset-1 col-md-2" style="background-image: url(/assets/images/green.png); height: 32px; width: 32px"></div>
-                            <div class="col-md-4" style="height: 32px;">Player 6</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+							<div class="col-md-offset-1 col-md-2" style="background-image: url(/assets/images/plum.png); height: 32px; width: 32px"></div>
+							<div class="col-md-4" style="height: 32px;" id="plum_pname">Player 6</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-    <script src="@routes.Assets.at("javascripts/plum-gameobjects.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("javascripts/cmts.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("javascripts/cs.js")" type="text/javascript"></script>
-    <script type="text/javascript" charset="utf-8" src="@routes.Club.plumJs(club_uuid, player_name, player_uuid)"></script>
+	<script src="@routes.Assets.at("javascripts/plum-gameobjects.js")" type="text/javascript"></script>
+	<script src="@routes.Assets.at("javascripts/cmts.js")" type="text/javascript"></script>
+	<script src="@routes.Assets.at("javascripts/cs.js")" type="text/javascript"></script>
+	<script type="text/javascript" charset="utf-8" src="@routes.Club.plumJs(club_uuid, player_name, player_uuid)"></script>
 	<script> document.getElementById("startgame").onclick(console.out(jQuery.ajax({
 			'type': 'GET',
 			'url':"/api/startGame/1" //+ club_uuid 
