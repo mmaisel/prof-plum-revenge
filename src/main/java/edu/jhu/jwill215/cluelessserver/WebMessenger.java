@@ -64,6 +64,16 @@ public class WebMessenger implements IMessenger {
      *  RPUSH to player's out queue
      * @param q
      */
+    private void rpush(JSONObject q) {
+        Jedis j = this.pool.getResource();
+        j.rpush(this.out, q.toJSONString());
+        this.pool.returnResource(j);
+    }
+
+    /**
+     *  RPUSH to player's out queue
+     * @param q
+     */
     private void rpush(String q) {
         Jedis j = this.pool.getResource();
         j.rpush(this.out, q);
@@ -92,16 +102,14 @@ public class WebMessenger implements IMessenger {
 
 	@Override
 	public Object query(Query type, Object...objects) {
-		String query = "";
+        JSONObject query = new JSONObject();
+        LinkedHashMap message_type = new LinkedHashMap();
 		switch(type) {
-            case ACTION: {				
+            case ACTION: {
 
-                JSONObject queryJSON = new JSONObject();
-
-                // query type
-                LinkedHashMap querytype = new LinkedHashMap();
-                querytype.put("name", "Q_ACTION");
-                queryJSON.put("type", querytype);
+                // action query type
+                message_type.put("name", "Q_ACTION");
+                query.put("type", message_type);
 
                 // available actions
                 @SuppressWarnings("unchecked")
@@ -111,7 +119,7 @@ public class WebMessenger implements IMessenger {
                 for (Action action : actions) {
                     actionsJSON.add("A_" + action.toString());
                 }
-                queryJSON.put("actions", actionsJSON);
+                query.put("actions", actionsJSON);
 
                 // available spaces
                 @SuppressWarnings("unchecked")
@@ -122,11 +130,12 @@ public class WebMessenger implements IMessenger {
                 for (ISpace space : spaces) {
                     spacesJSON.add(space.prettyName());
                 }
-                queryJSON.put("spaces", spacesJSON);
+                query.put("spaces", spacesJSON);
 
                 // send to player
-                this.rpush(queryJSON.toJSONString());
+                this.rpush(query);
 
+                // wait for reply from player
                 // JSONObject answer = this.blpop();
                 // int answer = this.getNumber(actions.size());
                 // Action action = actions.get(answer);
@@ -140,27 +149,40 @@ public class WebMessenger implements IMessenger {
                 break;
             }
             case SUGGEST: {
-				query = "{\"type\":{\"name\":\"Q_SUGGEST\"}}"; 
+                // suggest query type
+                message_type.put("name", "Q_SUGGEST");
+                query.put("type", message_type);
+                this.rpush(query);
                 break;
             }
             case ACCUSE: {
-				query = "{\"type\":{\"name\":\"Q_ACCUSE\"}}"; 
+                // accuse query type
+                message_type.put("name", "Q_ACCUSE");
+                query.put("type", message_type);
+                this.rpush(query);
                 break;
             }
             case CARDS: {
+                message_type.put("name", "Q_CARDS");
+                query.put("type", message_type);
+                // cards
 				@SuppressWarnings("unchecked")
 				ArrayList<ICard> cards = (ArrayList<ICard>)objects[1];
-				
-				query = "{\"type\":{\"name\":\"Q_CARDS\"}," +
-				"\"cards\":" + JsonBuilder.printC(cards) + "}";
+                // convert to JSON array
+                JSONArray cardsJSON = new JSONArray();
+                for (ICard card : cards) {
+                    cardsJSON.add(card.prettyName());
+                }
+                query.put("cards", cardsJSON);
+
+                this.rpush(query);
                 break;
             }
             default: {
                 break;
             }
 		}
-		this.rpush(query);
-	
+
 		//TODO: replace this with board query response
 		return tempMsgr.query(type, objects);
 	}
