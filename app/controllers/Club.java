@@ -12,7 +12,26 @@ import models.*;
 
 import java.util.Calendar;
 
+import com.typesafe.plugin.RedisPlugin;
+import redis.clients.jedis.*;
+
 public class Club extends Controller {
+
+	public static Result startGame(String club_uuid) {
+	
+        Jedis j = play.Play.application().plugin(RedisPlugin.class).jedisPool().getResource();
+		String success = "Game failed to start.";
+        try {
+            // set game start to true
+            //j.set("club:" + club_uuid + ":start", "true");
+			models.WebClub.play(Integer.parseInt(club_uuid));
+			success = "Game Starting...";
+        } finally {
+            play.Play.application().plugin(RedisPlugin.class).jedisPool().returnResource(j);
+        }
+		return ok(success);
+	}
+
 
     public static Result index() {
         // placeholder for initial club rooms

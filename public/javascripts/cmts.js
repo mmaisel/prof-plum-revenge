@@ -26,6 +26,13 @@ var Message = {
 
 var CMTS = {
 
+	startGame: function () {
+		console.out(jQuery.ajax({
+			'type': 'GET',
+			'url':"/api/startGame/" + club_uuid 
+		})) 
+	},
+
 	// H4x0rzzzz!!!
 	postJSON: function(url, data, callback) {
 	    return jQuery.ajax({

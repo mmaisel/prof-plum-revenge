@@ -1,1 +1,1 @@
-java -jar cluelessserver.jar
+java -cp clueless-server-1.0-SNAPSHOT-jar-with-dependencies.jar edu.jhu.jwill215.cluelessserver.UnitTest

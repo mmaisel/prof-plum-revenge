@@ -14,7 +14,7 @@ GET     /assets/javascripts/plum.js  controllers.Club.plumJs(player_name, player
 # Club API
 GET     /api/club/:club_uuid/:player_uuid                            controllers.Clueless.getMessage(club_uuid, player_uuid)
 POST    /api/club/:club_uuid/:player_uuid                            controllers.Clueless.sendMessage(club_uuid, player_uuid)
-GET 	/api/startGame/:club_uuid			controllers.Clueless.startGame(club_uuid)
+GET 	/api/startGame/:club_uuid			controllers.Club.startGame(club_uuid)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

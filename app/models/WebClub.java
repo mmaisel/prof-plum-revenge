@@ -3,6 +3,7 @@
  */
 package models;
 
+import edu.jhu.jwill215.cluelessserver.*;
 import play.*;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,6 +23,38 @@ public class WebClub {
     public WebClub() {
     }
 
+	 /**
+     * Use to start a new game thread that monitors the database for changes.
+	 * Uses players in database to populate game.
+     *
+     * @param game_uuid
+     * @return null
+     */
+	public static void play(int game_uuid){
+		ArrayList<Player> players = new ArrayList<Player>();
+		JedisPool p = Play.application().plugin(RedisPlugin.class).jedisPool();
+	    Jedis j = p.getResource();
+
+        int i = 0;
+        for (; ; ) {
+            String player_name = (String) j.lpop("club:" + game_uuid + ":players");
+            if (player_name == null) {
+                break;
+            }
+            WebMessenger msgr = new WebMessenger(String.valueOf(i), String.valueOf(game_uuid), p);
+            Player player = new Player(player_name, (IMessenger) msgr);
+            players.add(player);
+            System.out.println(player_name);
+            i++;
+        }
+
+        p.returnResource(j);
+        ThreadableGame myGame = new ThreadableGame(players);
+        //this.myGame.play();
+		new Thread(myGame).start();
+    }
+	
+	
     /**
      * New player joins a club room, return -1 if club is full!
      *
