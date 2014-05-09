@@ -8,7 +8,7 @@ var Message = {
 
 	announcement: function(type) {
 		var a = new Gameobjects.announcement();
-		a.type = type;
+		a.type = type.toString();
 		a.playerName = player_name;
 		a.playerCharacter = player_character;
 		return a;
@@ -16,7 +16,7 @@ var Message = {
 
 	query: function(type) {
 		var a = new Gameobjects.query();
-		a.type = type;
+		a.type = type.toString();
 		a.playerName = player_name;
 		a.playerCharacter = player_character;
 		return a;
