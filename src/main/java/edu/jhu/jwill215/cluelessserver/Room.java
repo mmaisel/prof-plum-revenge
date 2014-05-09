@@ -10,7 +10,7 @@ import java.util.*;
  * @author Jack Williard
  *
  */
-enum Room implements ICard, ISpace {
+public enum Room implements ICard, ISpace {
 	STUDY("Study"),
 	HALL("Hall"),
 	LOUNGE("Lounge"),

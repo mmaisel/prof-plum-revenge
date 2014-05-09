@@ -9,7 +9,7 @@ import java.util.*;
  * @author Jack Williard
  *
  */
-enum Hall implements ISpace {
+public enum Hall implements ISpace {
 	STUDYHALL, HALLLOUNGE, LIBRARYBILLIARD, BILLIARDDINING,	CONSERVEBALL, BALLKITCHEN,
 	STUDYLIBRARY, LIBRARYCONSERVE, HALLBILLIARD, BILLIARDBALL, LOUNGEDINING, DININGKITCHEN;
 	

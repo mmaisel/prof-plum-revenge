@@ -8,7 +8,7 @@ package edu.jhu.jwill215.cluelessserver;
  *
  */
 
-interface ICard {
+public interface ICard {
 
-	String prettyName();
+	public String prettyName();
 }

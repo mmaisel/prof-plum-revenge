@@ -11,15 +11,15 @@ import java.util.*;
  *
  */
 public class Player {
-	String name = "Jack Smith";
-	Suspect character;
+	public String name = "Jack Smith";
+	public Suspect character;
 	ArrayList<ICard> cards = new ArrayList<ICard>();
 	boolean frozen = false;
 	boolean canSuggest = false;
 	int wins = 0;
 	IMessenger msgr;
 
-    Player (String player_name, IMessenger myMsgr) {
+    public Player (String player_name, IMessenger myMsgr) {
         this.name = player_name;
         this.msgr = myMsgr;
     }

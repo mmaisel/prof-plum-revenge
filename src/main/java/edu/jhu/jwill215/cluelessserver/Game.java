@@ -17,7 +17,7 @@ public class Game {
 	private Triglyph secret = new Triglyph();
 	private Random randomGenerator = new Random();
 	
-    Game(ArrayList<Player> initialPlayers) {
+    public Game(ArrayList<Player> initialPlayers) {
     	this.players = initialPlayers;
 		
 		//make sure settings don't carry over from previous game.

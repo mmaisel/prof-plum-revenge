@@ -12,14 +12,22 @@ import java.util.ArrayList;
  * @author Jack Williard
  *
  */
-public class Club {
+public class ConsoleClub {
 	
+		/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+        int i = 1;
+		ConsoleClub myClub = new ConsoleClub(i);
+		myClub.run();
+	}
 
     int id;
 	ArrayList<Player> players = new ArrayList<Player>();
 	Game myGame;
 
-    Club(int id) {
+    ConsoleClub(int id) {
         this.id = id;
     }
 
