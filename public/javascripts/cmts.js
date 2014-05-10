@@ -9,16 +9,16 @@ var Message = {
 	announcement: function(type) {
 		var a = new Gameobjects.announcement();
 		a.type = type.toString();
-		a.playerName = player_name;
-		a.playerCharacter = player_character;
+		//a.playerName = player_name;
+		//a.playerCharacter = player_character;
 		return a;
 	},
 
 	query: function(type) {
 		var a = new Gameobjects.query();
 		a.type = type.toString();
-		a.playerName = player_name;
-		a.playerCharacter = player_character;
+		//a.playerName = player_name;
+		//a.playerCharacter = player_character;
 		return a;
 	},
 

@@ -57,8 +57,8 @@ var ActionMenu = {
 		GameBoard.playTurn(a);*/
 
 		var msg = Message.query(Q_ACTION);
-		msg.playerCharacter = player_character;
-		msg.room = going_to;
+		msg.action = A_MOVE;
+		msg.space = going_to;
 
 		// Send the message to the server
 		CMTS.sendMessage(msg);
@@ -72,7 +72,6 @@ var ActionMenu = {
 	},
 
 }; // ActionMenu 
-
 
 
 var GameBoard = {
@@ -156,6 +155,12 @@ var GameBoard = {
 			}
 			else if (msg.playerCharacter.toString() == PLUM.toString()) {
 				label = "plum_pname";
+			}
+
+			// Update our internal player_character variable
+			if (msg.playerName == player_name) {
+				player_character = msg.playerCharacter;
+				console.log("Found our own player character: " + player_character.toString());
 			}
 
 			// Set player text in players window
@@ -313,7 +318,7 @@ var GameBoard = {
 
 		if (old_loc == undefined) {
 			// If the token isn't on the board yet then add it
-			GameBoard.addToken(character, new_loc);				
+			GameBoard.addToken(character, new_loc);
 		} else {
 			// Move the token to the new location
 			GameBoard.moveToken(character, new_loc);
@@ -324,6 +329,12 @@ var GameBoard = {
 
 		// Update local player location
 		player_locations[character.toString()] = new_loc;
+
+		// update our internal location variable
+		if (character == player_character) {
+			player_location = new_loc;
+			console.log("Got my player location: " + player_location.toString());
+		}
 
 		// If the player has moved to a hallway then it is now occupied
 		if (GameBoard.isHallway(new_loc) == true) {

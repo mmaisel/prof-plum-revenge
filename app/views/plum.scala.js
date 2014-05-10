@@ -9,9 +9,9 @@ var club_uuid   = "@club_uuid";
 var player_name = "@player_name";
 var player_uuid = "@player_uuid";
 
-// TODO: make something do this dynamically
-var player_character = PLUM;
-var player_location = KITCHEN;
+// We need these for easy access for A_MOVE actions
+var player_character = null;
+var player_location = null;
 
 // Array of player locations for everyone on the board.
 var player_locations = new Array();
