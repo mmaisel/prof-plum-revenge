@@ -166,5 +166,20 @@ $(document).ready(function() {
 		GameBoard.refuteSuggestion(CARD_TYPES[card_type]);
 	});
 
+
+	var link = $('<button>Start Game</button>')
+		.attr({
+			type: "button",
+			id: "start_game_button",
+			//class: "start_button_style"
+		});	
+	$("#link_to_start").append(link);
+
+
+	$("#start_game_button").click(function() {
+		var g = $.getJSON("/api/startGame/" + club_uuid);
+       $("#start_game_button").attr("disabled", "disabled");
+	});
+
 });
 

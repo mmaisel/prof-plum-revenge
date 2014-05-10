@@ -174,6 +174,10 @@ var GameBoard = {
 
 		// SHOWHAND
 		else if (msg.type === SHOWHAND) {
+			// We get this message once in the beginning so it makes sense to
+			// disable this button here: 
+			$("#start_game_button").attr("disabled", "disabled");
+			
 			GameBoard.showCards(msg.cards);
 		}	
 
