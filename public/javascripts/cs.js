@@ -371,25 +371,26 @@ var GameBoard = {
 	},
 
 	addToHand : function (card) {
-		//var newNode = document.createElement("div");
-		//newNode.class = "col-md-1";
-		//newNode.innerHTML = card.toString();
-		//TODO: make cards images as follows:
-		var newNode = document.createElement("img");
+		// Create an image
+		var source = "";
+		var filename = "";
 		if (card.color == undefined) {
+			filename = "card_" + card.toString() + ".jpg";
 			// Non people cards can use toString()
-			newNode.src = "/assets/images/Cards/card_" + card.toString() + ".jpg";
+			source = "/assets/images/Cards/" + filename.toLowerCase();
 		} else {
+			filename = "card_" + card.color + ".jpg"
 			// People cards get a special name
-			newNode.src = "/assets/images/Cards/card_" + card.color + ".jpg";
+			source = "/assets/images/Cards/" + filename.toLowerCase();
 		}
-		newNode.alt = card.toString();
-		newNode.title = card.toString();
-		// With 9 images this will make it fit on one line
-		//newNode.setAttribute('height', '100px');
-		//newNode.setAttribute('width', '60px');
-		//newNode.src = "/assets/images/" + card.toString() + ".jpg";
-		document.getElementById("hand").appendChild(newNode);
+
+		var image = $('<img>').attr({	
+			alt: card.toString(), 
+			src: source,
+		});		
+
+		// Append the image row
+		$('#hand').append(image);
 	},
 
 	showCards : function (cards) {
@@ -466,13 +467,17 @@ var GameBoard = {
 	displayCard: function(card) {
 		$("#display_card_row").empty();
 
+		// Create an image
 		var source = "";
+		var filename = "";
 		if (card.color == undefined) {
+			filename = "card_" + card.toString() + ".jpg";
 			// Non people cards can use toString()
-			source = "/assets/images/Cards/card_" + card.toString() + ".jpg";
+			source = "/assets/images/Cards/" + filename.toLowerCase();
 		} else {
+			filename = "card_" + card.color + ".jpg"
 			// People cards get a special name
-			source = "/assets/images/Cards/card_" + card.color + ".jpg";
+			source = "/assets/images/Cards/" + filename.toLowerCase();
 		}
 
 		var image = $('<img>').attr({	
@@ -506,12 +511,15 @@ var GameBoard = {
 
 			// Create an image
 			var source = "";
+			var filename = "";
 			if (cards[i].color == undefined) {
+				filename = "card_" + cards[i].toString() + ".jpg";
 				// Non people cards can use toString()
-				source = "/assets/images/Cards/card_" + cards[i].toString() + ".jpg";
+				source = "/assets/images/Cards/" + filename.toLowerCase();
 			} else {
+				filename = "card_" + cards[i].color + ".jpg"
 				// People cards get a special name
-				source = "/assets/images/Cards/card_" + cards[i].color + ".jpg";
+				source = "/assets/images/Cards/" + filename.toLowerCase();
 			}
 
 			var image = $('<img>').attr({	
