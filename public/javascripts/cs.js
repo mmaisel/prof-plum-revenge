@@ -184,12 +184,53 @@ var GameBoard = {
 
 		// Q_SUGGEST
 		else if (msg.type === Q_SUGGEST) {
+			accusation = false;
 
+			// Disable all room options for suggestions
+			// TODO: Determine which room 
+			$("#study_radio").attr("disabled", "disabled");
+			$("#hall_radio").attr("disabled", "disabled");
+			$("#lounge_radio").attr("disabled", "disabled");
+			$("#billiard_radio").attr("disabled", "disabled");
+			$("#dining_radio").attr("disabled", "disabled");
+			$("#conservatory_radio").attr("disabled", "disabled");
+			$("#ballroom_radio").attr("disabled", "disabled");
+			$("#kitchen_radio").attr("disabled", "disabled");
+			$("#library_radio").attr("disabled", "disabled");
+
+			// Set button text
+			$("#select_opts_button").html('Suggest!');
+
+			// Set heading text
+			$("#myModalLabel").html("Make a Suggestion");
+
+			// Pull down the modal
+			$("#select_options").modal("toggle");
 		}
 		
 		// Q_ACCUSE
 		else if (msg.type === Q_ACCUSE) {
+			accusation = true;
 
+			// Enable the room options for accusations
+			$("#study_radio").removeAttr("disabled");
+			$("#hall_radio").removeAttr("disabled");
+			$("#lounge_radio").removeAttr("disabled");
+			$("#billiard_radio").removeAttr("disabled");
+			$("#dining_radio").removeAttr("disabled");
+			$("#conservatory_radio").removeAttr("disabled");
+			$("#ballroom_radio").removeAttr("disabled");
+			$("#kitchen_radio").removeAttr("disabled");
+			$("#library_radio").removeAttr("disabled");
+
+			// Set button text
+			$("#select_opts_button").html('Accuse!');
+
+			// Set heading text
+			$("#myModalLabel").html("Make an Accusation");
+
+			// Pull down the modal
+			$("#select_options").modal("toggle");
 		}
 
 		// Q_ACTION

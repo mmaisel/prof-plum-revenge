@@ -21,6 +21,26 @@
 	</div>
 </div>
 
+<!-- Choose Card Modal -->
+<div class="modal fade" id="display_card" tabindex="-1" role="dialog" aria-labelledby="choose_card_modellabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="choose_card_modellabel">Choose a card to refute the suggestion</h4>
+			</div>
+
+			<div class="modal-body">
+				<div class="center_img" id="choose_card_row">
+
+				</div> 	
+			</div>
+
+			<div class="modal-footer">
+				<!--<button type="button" class="btn btn-primary btn-default" data-dismiss="modal">Close</button>-->
+			</div>
+		</div>
+	</div>
+</div>
 
 <!-- Suggest Modal -->
 <div class="modal fade" id="select_options" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -552,11 +572,11 @@
 							<table class="plum_action_menu"><tr><td>
 								<table class="plum_action_menu" align="left">
 									<tr>
-										<td><button class="plum_fixed_width_action" data-toggle="modal" data-target="#select_options" id="suggest_button">Suggest</button></td>
+										<td><button class="plum_fixed_width_action" id="suggest_button">Suggest</button></td>
 									</tr>
 									
 									<tr id="plum_action_table">
-										<td><button class="plum_fixed_width_action" data-toggle="modal" data-target="#select_options" id="accuse_button">Accuse</button></td>
+										<td><button class="plum_fixed_width_action" id="accuse_button">Accuse</button></td>
 									</tr>
 
 									<tr id="plum_action_table">

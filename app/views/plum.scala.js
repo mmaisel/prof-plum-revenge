@@ -34,48 +34,25 @@ $(document).ready(function() {
 
 	// Accuse
 	$("#accuse_button").click(function() {
-		accusation = true;
+		// First we send a message to the server and wait for a reply. After 
+		// the reply then we can push out the modal
+		var msg = Message.query(Q_ACCUSE);
+		CMTS.sendMessage(msg);
 
-		// Enable the room options for accusations
-		$("#study_radio").removeAttr("disabled");
-		$("#hall_radio").removeAttr("disabled");
-		$("#lounge_radio").removeAttr("disabled");
-		$("#billiard_radio").removeAttr("disabled");
-		$("#dining_radio").removeAttr("disabled");
-		$("#conservatory_radio").removeAttr("disabled");
-		$("#ballroom_radio").removeAttr("disabled");
-		$("#kitchen_radio").removeAttr("disabled");
-		$("#library_radio").removeAttr("disabled");
-
-		// Set button text
-		$("#select_opts_button").html('Accuse!');
-
-		// Set heading text
-		$("#myModalLabel").html("Make an Accusation");
+		// We don't need them to send extra messages :)
+		$("#accuse_button").attr("disabled", "disabled");
 	});
 
 
 	// Suggestion
 	$("#suggest_button").click(function() {
-		accusation = false;
+		// First we send a message to the server and wait for a reply. After 
+		// the reply then we can push out the modal
+		var msg = Message.query(Q_SUGGEST);
+		CMTS.sendMessage(msg);
 
-		// Disable all room options for suggestions
-		// TODO: Determine which room 
-		$("#study_radio").attr("disabled", "disabled");
-		$("#hall_radio").attr("disabled", "disabled");
-		$("#lounge_radio").attr("disabled", "disabled");
-		$("#billiard_radio").attr("disabled", "disabled");
-		$("#dining_radio").attr("disabled", "disabled");
-		$("#conservatory_radio").attr("disabled", "disabled");
-		$("#ballroom_radio").attr("disabled", "disabled");
-		$("#kitchen_radio").attr("disabled", "disabled");
-		$("#library_radio").attr("disabled", "disabled");
-
-		// Set button text
-		$("#select_opts_button").html('Suggest!');
-
-		// Set heading text
-		$("#myModalLabel").html("Make a Suggestion");
+		// We don't need them to send extra messages :)
+		$("#suggest_button").attr("disabled", "disabled");
 	});
 
 	// Selection Suggest/Accuse Options
@@ -141,20 +118,25 @@ $(document).ready(function() {
 	// TODO: When the button is clicked we need to disable it (YOURTURN 
 	// announcement will re-enable the available moves)
 	$("#up_button").click(function() {
+		$("#up_button").attr("disabled", "disabled");
 		ActionMenu.move(UP);
 	});
 	$("#left_button").click(function() {
+		$("#left_button").attr("disabled", "disabled");
 		ActionMenu.move(LEFT);
 	});
 	$("#down_button").click(function() {
+		$("#down_button").attr("disabled", "disabled");
 		ActionMenu.move(DOWN);
 	});
 	$("#right_button").click(function() {
+		$("#right_button").attr("disabled", "disabled");
 		ActionMenu.move(RIGHT);
 	});
 
 	// Secret Room
 	$("#secret_room_button").click(function() {
+		$("#secret_room_button").attr("disabled", "disabled");
 		ActionMenu.move(SECRETROOM);
 	})
 
