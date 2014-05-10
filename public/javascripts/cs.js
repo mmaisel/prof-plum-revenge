@@ -67,7 +67,7 @@ var ActionMenu = {
 
 	endTurn: function() {
 		var msg = Message.query(Q_ACTION);
-		msg.actions = [ A_ENDTURN ];
+		msg.action = A_ENDTURN;
 		CMTS.sendMessage(msg);
 	},
 
@@ -184,7 +184,7 @@ var GameBoard = {
 
 		// Q_SUGGEST
 		else if (msg.type === Q_SUGGEST) {
-
+			
 		}
 		
 		// Q_ACCUSE

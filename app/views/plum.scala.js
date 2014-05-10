@@ -15,7 +15,6 @@ var player_location = null;
 
 // Array of player locations for everyone on the board.
 var player_locations = new Array();
-player_locations[player_character.name] = player_location;
 
 // Array of cards currently held by player
 var player_hand = new Array();
