@@ -151,11 +151,9 @@ class WebMessenger implements IMessenger {
                     //complexReturn.add(this.query(Query.MOVE, objects[0], objects[2]));
 					String query_space = query_reply.get("space").toString();
 					JSONObject query_space_name = (JSONObject)JSONValue.parse(query_space);
-					ISpace space = Room.HALL;
-					try {space = Hall.valueOf(query_space_name.get("name").toString()); } 
-						catch(IllegalArgumentException iaex) {}
-					try {space = Room.valueOf(query_space_name.get("name").toString()); } 
-						catch(IllegalArgumentException iaex) {}
+					String qsn = query_space_name.get("name").toString();
+					ISpace space = Hall.fromString( qsn ); 
+					if (space == null) space = Room.fromString( qsn ); 
 					complexReturn.add(space);
                 }
 
