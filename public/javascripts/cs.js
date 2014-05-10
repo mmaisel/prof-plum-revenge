@@ -108,7 +108,6 @@ var GameBoard = {
 				msg.triglyph.suspect + " did it in the " +
 				msg.triglyph.room + " with the " + 
 				msg.triglyph.weapon);
-
 		}
 
 		// FALSE
@@ -116,7 +115,7 @@ var GameBoard = {
 			if (msg.card !== NOCARD) {
 				GameBoard.displayCard(msg.card);
 			} else {
-				MessageBox.addPrivateMessage("No one had the cards you suggested!");
+				MessageBox.addInfoMessage("No one had the suggested cards");
 			}
 		}
 
@@ -144,22 +143,22 @@ var GameBoard = {
 				msg.playerCharacter.toString());
 
 			var label = null;
-			if (msg.playerCharacter.toString() == SCARLET.toString()) {
+			if (msg.playerCharacter === SCARLET) {
 				label = "scarlet_pname";
 			}
-			else if (msg.playerCharacter.toString() == MUSTARD.toString()) {
+			else if (msg.playerCharacter === MUSTARD) {
 				label = "mustard_pname";
 			}
-			else if (msg.playerCharacter.toString() == WHITE.toString()) {
+			else if (msg.playerCharacter === WHITE) {
 				label = "white_pname";
 			}
-			else if (msg.playerCharacter.toString() == GREEN.toString()) {
+			else if (msg.playerCharacter === GREEN) {
 				label = "green_pname";
 			}
-			else if (msg.playerCharacter.toString() == PEACOCK.toString()) {
+			else if (msg.playerCharacter === PEACOCK) {
 				label = "peacock_pname";
 			}
-			else if (msg.playerCharacter.toString() == PLUM.toString()) {
+			else if (msg.playerCharacter === PLUM) {
 				label = "plum_pname";
 			}
 
@@ -181,6 +180,11 @@ var GameBoard = {
 		// CHAT
 		else if (msg.type === CHAT) {
 			MessageBox.addChatMessage(msg.playerName, msg.text);
+		}
+
+		// NEXTPLAYER
+		else if (msg.type === NEXTPLAYER) {
+			GameBoard.highlightNextPlayer(msg.playerCharacter);
 		}
 
 		// Q_CARDS
@@ -548,6 +552,56 @@ var GameBoard = {
 		$("#suggest_button").attr("disabled", "disabled");
 		$("#accuse_button").attr("disabled", "disabled");
 		$("#end_turn_button").attr("disabled", "disabled");
+	},
+
+	highlightNextPlayer: function(character) {
+		if (character === SCARLET) {
+			// Set the next player label
+			$("#scarlet_pname").css('background-color', 'yellow');
+		} else {
+			// Clear out the old label
+			$("#scarlet_pname").css('background-color', 'white');
+		}
+		
+		if (character === MUSTARD) {
+			// Set the next player label
+			$("#mustard_pname").css('background-color', 'yellow');
+		} else {
+			// Clear out the old label
+			$("#mustard_pname").css('background-color', 'white');
+		}
+		
+		if (character === WHITE) {
+			// Set the next player label
+			$("#white_pname").css('background-color', 'yellow');
+		} else {
+			// Clear out the old label
+			$("#white_pname").css('background-color', 'white');
+		}
+		
+		if (character === GREEN) {
+			// Set the next player label
+			$("#green_pname").css('background-color', 'yellow');
+		} else {
+			// Clear out the old label
+			$("#green_pname").css('background-color', 'white');
+		}
+		
+		if (character === PEACOCK) {
+			// Set the next player label
+			$("#peacock_pname").css('background-color', 'yellow');
+		} else {
+			// Clear out the old label
+			$("#peacock_pname").css('background-color', 'white');
+		}
+		
+		if (character === PLUM) {
+			// Set the next player label
+			$("#plum_pname").css('background-color', 'yellow');
+		} else {
+			// Clear out the old label
+			$("#plum_pname").css('background-color', 'white');
+		}
 	},
 };
 //GameBoard.showCards( [1, 2, 3] );

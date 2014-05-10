@@ -106,14 +106,8 @@ $(document).ready(function() {
 
 	$("#end_turn_button").click(function() {
 		// Disable all action menu buttons
-		$("#up_button").attr("disabled", "disabled");
-		$("#left_button").attr("disabled", "disabled");
-		$("#down_button").attr("disabled", "disabled");
-		$("#right_button").attr("disabled", "disabled");
-		$("#secret_room_button").attr("disabled", "disabled");
-		$("#accuse_button").attr("disabled", "disabled");
-		$("#suggest_button").attr("disabled", "disabled");
-		$("#end_turn_button").attr("disabled", "disabled");
+		GameBoard.disableActionButtons();
+		// Send message to server saying it is the end of our turn
 		ActionMenu.endTurn();
 	});
 

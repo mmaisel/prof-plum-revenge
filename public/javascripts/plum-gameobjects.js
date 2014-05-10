@@ -188,6 +188,7 @@ var LOSER = new Gameobjects.announcementType("LOSER", 7);
 var NEWPLAYER = new Gameobjects.announcementType("NEWPLAYER", 8);
 var SHOWHAND = new Gameobjects.announcementType("SHOWHAND", 9);
 var NOP = new Gameobjects.announcementType("NOP", 10);
+var NEXTPLAYER = new Gameobjects.announcementType("NEXTPLAYER", 11);
 
 var Q_SUGGEST = new Gameobjects.queryType("Q_SUGGEST");
 var Q_ACCUSE = new Gameobjects.queryType("Q_ACCUSE");
@@ -260,6 +261,7 @@ MESSAGE_TYPES[NEWPLAYER.name] = NEWPLAYER;
 MESSAGE_TYPES[SHOWHAND.name] = SHOWHAND;
 MESSAGE_TYPES[CHAT.name] = CHAT;
 MESSAGE_TYPES[NOP.name] = NOP;
+MESSAGE_TYPES[NEXTPLAYER.name] = NEXTPLAYER;
 MESSAGE_TYPES[Q_SUGGEST.name] = Q_SUGGEST;
 MESSAGE_TYPES[Q_ACCUSE.name] = Q_ACCUSE;
 MESSAGE_TYPES[Q_CARDS.name] = Q_CARDS;

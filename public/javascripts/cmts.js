@@ -76,7 +76,12 @@ var CMTS = {
 			var m = new Gameobjects.message();
 
 			// Get the message type (query or annoucement... doesn't matter)
-			m.type = MESSAGE_TYPES[xx.type.name];
+			if (xx.type.name === undefined) {
+				// Compatibility with the NEXTPLAYER announcement XXXX TODO
+				m.type = MESSAGE_TYPES[xx.type];
+			} else {
+				m.type = MESSAGE_TYPES[xx.type.name];
+			}
 			
 			// Player name is a string
 			if (xx.playerName != undefined) {
