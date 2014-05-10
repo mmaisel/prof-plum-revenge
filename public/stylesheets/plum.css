@@ -44,3 +44,13 @@ table.plum_move_table td {
    margin:auto;
    text-align: center;
 }
+
+.image_radio_button > input[type=radio]{
+  display:none;
+}
+input[type=radio] + img{
+  cursor:pointer;
+  border:3px solid transparent;
+}
+input[type=radio]:checked + img{
+  border:3px solid #f00;

@@ -156,5 +156,17 @@ $(document).ready(function() {
 
 	});
 
+
+	/**
+	 * Display Cards
+	 */
+	$('#choose_card_button').click(function() {
+		var card_type = $('input[name=radioImages]:checked', 
+				'#choose_card_form').val();
+
+		// When the user clicks an image in the refute suggestion window, the
+		GameBoard.refuteSuggestion(CARD_TYPES[card_type]);
+	});
+
 });
 

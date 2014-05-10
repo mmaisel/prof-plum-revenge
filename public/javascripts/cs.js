@@ -179,7 +179,7 @@ var GameBoard = {
 
 		// Q_CARDS
 		else if (msg.type === Q_CARDS) {
-			// Coming soon to a theater near you....
+			GameBoard.displayCards(msg.cards);
 		}
 
 		// Q_SUGGEST
@@ -203,6 +203,11 @@ var GameBoard = {
 
 			// Set heading text
 			$("#myModalLabel").html("Make a Suggestion");
+
+			$('#select_options').modal({
+				backdrop: 'static',
+				keyboard: false
+			});
 
 			// Pull down the modal
 			$("#select_options").modal("toggle");
@@ -228,6 +233,12 @@ var GameBoard = {
 
 			// Set heading text
 			$("#myModalLabel").html("Make an Accusation");
+
+
+			$('#select_options').modal({
+				backdrop: 'static',
+				keyboard: false
+			});
 
 			// Pull down the modal
 			$("#select_options").modal("toggle");
@@ -300,10 +311,6 @@ var GameBoard = {
 				else if (msg.actions[action] === A_ENDTURN) {
 					$("#end_turn_button").removeAttr("disabled");
 					//console.log("enabled some end turn button");
-				}
-
-				else if (msg.actions[action] === A_CHAT) {
-					//$("#secret_room_button").removeAttr("disabled");
 				}
 
 				else {
@@ -445,28 +452,83 @@ var GameBoard = {
 	},
 
 	displayCard: function(card) {
-		if ( $("#display_card_row").length ) {
-			// Remove the old image from the 
-			var element = document.getElementById("false_image");
-			if (element != null)
-				document.getElementById("display_card_row").removeChild(element);
-		}
+		$("#display_card_row").empty();
 
-		var false_img = document.createElement("img");
+		var source = "";
 		if (card.color == undefined) {
 			// Non people cards can use toString()
-			false_img.src = "/assets/images/Cards/card_" + card.toString() + ".jpg";
+			source = "/assets/images/Cards/card_" + card.toString() + ".jpg";
 		} else {
 			// People cards get a special name
-			false_img.src = "/assets/images/Cards/card_" + card.color + ".jpg";
+			source = "/assets/images/Cards/card_" + card.color + ".jpg";
 		}
-		false_img.alt = card.toString();
-		false_img.title = card.toString();
-		false_img.setAttribute('id', 'false_image');
 
+		var image = $('<img>').attr({	
+			alt: card.toString(), 
+			src: source,
+		});		
 
-		document.getElementById("display_card_row").appendChild(false_img);
+		// Append the image row
+		$('#display_card_row').append(image);
+
+		$('#display_card').modal({
+			backdrop: 'static',
+			keyboard: false
+		});
+
 		$('#display_card').modal('show');
+	},
+
+	// Similar to displayCard(), except this goes on a different modal
+	displayCards: function(cards) {
+		$("#choose_card_form").empty();
+
+		for (var i in cards) {
+			//Create the label element
+			var label = $('<label class="image_radio_button">');
+
+			//Create the input element as a radio button
+			var input = $('<input type="radio" name="radioImages">').attr({
+				value: cards[i].toString(),
+			});
+
+			// Create an image
+			var source = "";
+			if (cards[i].color == undefined) {
+				// Non people cards can use toString()
+				source = "/assets/images/Cards/card_" + cards[i].toString() + ".jpg";
+			} else {
+				// People cards get a special name
+				source = "/assets/images/Cards/card_" + cards[i].color + ".jpg";
+			}
+
+			var image = $('<img>').attr({	
+				alt: cards[i].toString(), 
+				src: source,
+			});
+
+			//Insert the input into the label
+			input.appendTo(label);
+			image.appendTo(label);
+
+			// Append the image radio buttons to the form
+			$('#choose_card_form').append(label);			
+		}
+
+		// User can't click their way out of this one
+		$('#choose_card').modal({
+			backdrop: 'static',
+			keyboard: false
+		});
+
+		$('#choose_card').modal('show');
+	},
+
+	refuteSuggestion: function(card) {
+		// Send the card that the player chose to refute
+		var msg = Message.query(Q_CARDS);
+		msg.card = card;
+		CMTS.sendMessage(msg);
 	},
 };
 //GameBoard.showCards( [1, 2, 3] );

@@ -189,16 +189,16 @@ var NEWPLAYER = new Gameobjects.announcementType("NEWPLAYER", 8);
 var SHOWHAND = new Gameobjects.announcementType("SHOWHAND", 9);
 var NOP = new Gameobjects.announcementType("NOP", 10);
 
-var Q_SUGGEST = new Gameobjects.queryType("SUGGEST");
-var Q_ACCUSE = new Gameobjects.queryType("ACCUSE");
-var Q_CARDS  = new Gameobjects.queryType("CARDS");
-var Q_ACTION = new Gameobjects.queryType("ACTION");
+var Q_SUGGEST = new Gameobjects.queryType("Q_SUGGEST");
+var Q_ACCUSE = new Gameobjects.queryType("Q_ACCUSE");
+var Q_CARDS  = new Gameobjects.queryType("Q_CARDS");
+var Q_ACTION = new Gameobjects.queryType("Q_ACTION");
 
 // STARTTURN = 0 (not used)
-var A_MOVE = new Gameobjects.actionType("MOVE", 1);
-var A_SUGGEST = new Gameobjects.actionType("SUGGEST", 2);
-var A_ACCUSE = new Gameobjects.actionType("ACCUSE", 3);
-var A_ENDTURN = new Gameobjects.actionType("ENDTURN", 4);
+var A_MOVE = new Gameobjects.actionType("A_MOVE", 1);
+var A_SUGGEST = new Gameobjects.actionType("A_SUGGEST", 2);
+var A_ACCUSE = new Gameobjects.actionType("A_ACCUSE", 3);
+var A_ENDTURN = new Gameobjects.actionType("A_ENDTURN", 4);
 
 var UP = new Gameobjects.direction("UP");
 var DOWN = new Gameobjects.direction("DOWN");
