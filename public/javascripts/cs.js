@@ -77,6 +77,12 @@ var ActionMenu = {
 var GameBoard = {
 
 	playTurn: function(msg) {
+		if (msg == null)
+			return;
+		if (msg.type == null) {
+			return;
+		}
+
 		console.log("playTurn: Got: " + msg.type.toString());
 
 		// NOP
@@ -210,7 +216,7 @@ var GameBoard = {
 			});
 
 			// Pull down the modal
-			$("#select_options").modal("toggle");
+			$("#select_options").modal("show");
 		}
 		
 		// Q_ACCUSE
@@ -241,7 +247,7 @@ var GameBoard = {
 			});
 
 			// Pull down the modal
-			$("#select_options").modal("toggle");
+			$("#select_options").modal("show");
 		}
 
 		// Q_ACTION

@@ -194,7 +194,7 @@ var Q_ACCUSE = new Gameobjects.queryType("Q_ACCUSE");
 var Q_CARDS  = new Gameobjects.queryType("Q_CARDS");
 var Q_ACTION = new Gameobjects.queryType("Q_ACTION");
 
-// STARTTURN = 0 (not used)
+var A_STARTTURN = new Gameobjects.actionType("A_STARTTURN", 0);
 var A_MOVE = new Gameobjects.actionType("A_MOVE", 1);
 var A_SUGGEST = new Gameobjects.actionType("A_SUGGEST", 2);
 var A_ACCUSE = new Gameobjects.actionType("A_ACCUSE", 3);
@@ -315,6 +315,7 @@ SPACE_TYPES[CONSERVEBALL.name] = CONSERVEBALL;
 SPACE_TYPES[BALLKITCHEN.name] = BALLKITCHEN;
 
 var ACTION_TYPES = new Array();
+ACTION_TYPES[A_STARTTURN.name] = A_STARTTURN;
 ACTION_TYPES[A_MOVE.name] = A_MOVE;
 ACTION_TYPES[A_SUGGEST.name] = A_SUGGEST;
 ACTION_TYPES[A_ACCUSE.name] = A_ACCUSE;
