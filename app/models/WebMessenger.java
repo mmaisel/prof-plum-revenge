@@ -168,16 +168,13 @@ class WebMessenger implements IMessenger {
 			
                 // wait for query reply from player
                 JSONObject query_reply = this.blpop();
+				String triglyph = query_reply.get("triglyph").toString();
+				JSONObject jsonTriglyph = (JSONObject)JSONValue.parse(triglyph);
 
-                JSONObject tryglyph = (JSONObject) query_reply.get("tryglyph");
                 Triglyph t = new Triglyph();
-				t.suspect = Suspect.PLUM;
-				t.weapon = Weapon.KNIFE;
-				t.room = Room.LIBRARY;
-
-                t.suspect = Suspect.fromString((String) tryglyph.get("suspect"));
-                t.weapon = Weapon.fromString((String) tryglyph.get("weapon"));
-                t.room = Room.fromString((String) tryglyph.get("room"));
+				t.suspect = Suspect.fromString(jsonTriglyph.get("suspect").toString());
+                t.weapon  = Weapon.fromString( jsonTriglyph.get("weapon").toString());
+                t.room    = Room.fromString(   jsonTriglyph.get("room").toString());
 
                 return t;
 
@@ -191,19 +188,15 @@ class WebMessenger implements IMessenger {
 				
                 // wait for query reply from player
                 JSONObject query_reply = this.blpop();
+				String triglyph = query_reply.get("triglyph").toString();
+				JSONObject jsonTriglyph = (JSONObject)JSONValue.parse(triglyph);
 
-                JSONObject tryglyph = (JSONObject) query_reply.get("tryglyph");
                 Triglyph t = new Triglyph();
-				t.suspect = Suspect.PLUM;
-				t.weapon = Weapon.KNIFE;
-				t.room = Room.LIBRARY;
-
-                t.suspect = Suspect.fromString((String) tryglyph.get("suspect"));
-                t.weapon = Weapon.fromString((String) tryglyph.get("weapon"));
-                t.room = Room.fromString((String) tryglyph.get("room"));
+				t.suspect = Suspect.fromString(jsonTriglyph.get("suspect").toString());
+                t.weapon  = Weapon.fromString( jsonTriglyph.get("weapon" ).toString());
+                t.room    = Room.HALL;
 
                 return t;
-
             }
 			default: {
 				return null;
