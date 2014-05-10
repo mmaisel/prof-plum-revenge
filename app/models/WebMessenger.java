@@ -141,7 +141,8 @@ class WebMessenger implements IMessenger {
 				String query_action = query_reply.get("action").toString();
 				JSONObject query_action_name = (JSONObject)JSONValue.parse(query_action);
 				String qan = query_action_name.get("name").toString();
-				Action action = Action.valueOf(qan.substring(2,qan.length()));
+				Action action = Action.ENDTURN;
+				action = Action.valueOf(qan.substring(2,qan.length()));
 				
                 ArrayList<Object> complexReturn = new ArrayList<Object>();
                 complexReturn.add(action);
@@ -172,6 +173,9 @@ class WebMessenger implements IMessenger {
 
                 JSONObject tryglyph = (JSONObject) query_reply.get("tryglyph");
                 Triglyph t = new Triglyph();
+				t.suspect = Suspect.PLUM;
+				t.weapon = Weapon.KNIFE;
+				t.room = Room.LIBRARY;
 
                 t.suspect = Suspect.fromString((String) tryglyph.get("suspect"));
                 t.weapon = Weapon.fromString((String) tryglyph.get("weapon"));
@@ -192,6 +196,9 @@ class WebMessenger implements IMessenger {
 
                 JSONObject tryglyph = (JSONObject) query_reply.get("tryglyph");
                 Triglyph t = new Triglyph();
+				t.suspect = Suspect.PLUM;
+				t.weapon = Weapon.KNIFE;
+				t.room = Room.LIBRARY;
 
                 t.suspect = Suspect.fromString((String) tryglyph.get("suspect"));
                 t.weapon = Weapon.fromString((String) tryglyph.get("weapon"));
