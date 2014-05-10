@@ -168,13 +168,13 @@ class WebMessenger implements IMessenger {
 			
                 // wait for query reply from player
                 JSONObject query_reply = this.blpop();
-                System.out.println(query_reply);
+                //System.out.println(query_reply);
 
                 JSONObject triglyph = (JSONObject) query_reply.get("triglyph");
                 Triglyph t = new Triglyph();
-				t.suspect = Suspect.PLUM;
-				t.weapon = Weapon.KNIFE;
-				t.room = Room.LIBRARY;
+				//t.suspect = Suspect.PLUM;
+				//t.weapon = Weapon.KNIFE;
+				//t.room = Room.LIBRARY;
 
                 t.suspect = Suspect.fromString((String) triglyph.get("suspect"));
                 t.weapon = Weapon.fromString((String) triglyph.get("weapon"));
@@ -183,7 +183,6 @@ class WebMessenger implements IMessenger {
                 return t;
 
             }
-
             case SUGGEST: {
 				// action query type
                 message_type.put("name", "Q_SUGGEST");
@@ -192,23 +191,57 @@ class WebMessenger implements IMessenger {
 
                 // wait for query reply from player
                 JSONObject query_reply = this.blpop();
-                System.out.println(query_reply);
+                //System.out.println(query_reply);
 
                 JSONObject triglyph = (JSONObject) query_reply.get("triglyph");
                 Triglyph t = new Triglyph();
-				t.suspect = Suspect.PLUM;
-				t.weapon = Weapon.KNIFE;
-				t.room = Room.LIBRARY;
+				//t.suspect = Suspect.PLUM;
+				//t.weapon = Weapon.KNIFE;
+				//t.room = Room.LIBRARY;
 
                 t.suspect = Suspect.fromString((String) triglyph.get("suspect"));
                 t.weapon = Weapon.fromString((String) triglyph.get("weapon"));
                 t.room = Room.fromString((String) triglyph.get("room"));
 
-                System.out.println(t);
+                //System.out.println(t);
 
                 return t;
 
             }
+			case CARDS: {
+			
+				//String options = "Select a card: ";
+				// action query type
+                message_type.put("name", "Q_CARDS");
+                query.put("type", message_type);
+			
+				//int objectLocation = 0;
+				JSONArray cardsJSON = new JSONArray();
+				@SuppressWarnings("unchecked")
+				ArrayList<ICard> cards = (ArrayList<ICard>)objects[1];
+				for (ICard c : cards) {
+					//options = options + "[" + objectLocation++ + "] " + c.prettyName() + ", ";
+					cardsJSON.add(c.prettyName());
+				}
+                query.put("cards", cardsJSON);
+
+				//out.format("%s: %s :", (String)objects[0], options);
+				this.rpush(query);
+				
+                // wait for query reply from player
+				//int answer = this.getNumber(cards.size()-1);
+                JSONObject query_reply = this.blpop();
+				
+				JSONObject query_card = (JSONObject) query_reply.get("card");
+
+				ICard             card = Weapon.fromString(  (String) query_card.get("name")); 
+				if (card == null) card = Room.fromString(    (String) query_card.get("name")); 
+				if (card == null) card = Suspect.fromString( (String) query_card.get("name")); 
+				
+				//return cards.get(answer);
+				return card;
+			}
+			
 			default: {
 				return null;
 			}
