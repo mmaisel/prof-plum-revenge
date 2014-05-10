@@ -25,6 +25,17 @@ public enum Weapon implements ICard {
 	public String prettyName() {
 		return this.prettyName;
 	}
+
+    public static Weapon fromString(String name) {
+        if (name != null) {
+            for (Weapon w : Weapon.values()) {
+                if (name.equalsIgnoreCase(w.prettyName)) {
+                    return w;
+                }
+            }
+        }
+        return null;
+    }
 	
 
 }

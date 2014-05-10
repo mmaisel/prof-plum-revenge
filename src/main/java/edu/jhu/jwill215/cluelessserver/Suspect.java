@@ -25,5 +25,17 @@ public enum Suspect implements ICard {
 	public String prettyName() {
 		return this.prettyName;
 	}
-	
+
+    public static Suspect fromString(String name) {
+        if (name != null) {
+            for (Suspect s : Suspect.values()) {
+                if (name.equalsIgnoreCase(s.prettyName)) {
+                    return s;
+                }
+            }
+        }
+        return null;
+    }
+
+
 }

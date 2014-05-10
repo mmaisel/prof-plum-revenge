@@ -133,26 +133,27 @@ class WebMessenger implements IMessenger {
                 }
                 query.put("spaces", spacesJSON);
 
-                // send to player
                 this.rpush(query);
+                // wait for query reply from player
+                JSONObject query_reply = this.blpop();
 
-                // wait for reply from player
-                // JSONObject answer = this.blpop();
-                // int answer = this.getNumber(actions.size());
-                // Action action = actions.get(answer);
-                // ArrayList<Object> complexReturn = new ArrayList<Object>();
-                // complexReturn.add(action);
-                // if (action == Action.MOVE) {
-                //     complexReturn.add(this.query(Query.MOVE, objects[0], objects[2]));
-                // }
-                // return complexReturn;
+                Action action = Action.valueOf((String)query_reply.get("type"));
 
-                break;
+                ArrayList<Object> complexReturn = new ArrayList<Object>();
+                complexReturn.add(action);
+
+                if (action == Action.MOVE) {
+                     complexReturn.add(this.query(Query.MOVE, objects[0], objects[2]));
+                }
+
+                return complexReturn;
             }
             case SUGGEST: {
                 // suggest query type
+                Triglyph suggestion = new Triglyph();
                 message_type.put("name", "Q_SUGGEST");
                 query.put("type", message_type);
+                // JSONObject suggestionJSON = this.blpop();
                 this.rpush(query);
                 break;
             }
