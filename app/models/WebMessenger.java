@@ -295,7 +295,7 @@ class WebMessenger implements IMessenger {
             }
             case NEXTPLAYER: {
                 @SuppressWarnings("unchecked")
-                String nextplayer_name = (String)objects[1];
+                String nextplayer_name = (String)objects[0];
 
                 announcement = "{\"type\": \"NEXTPLAYER\","
                         + "\"playerCharacter\":" + nextplayer_name
