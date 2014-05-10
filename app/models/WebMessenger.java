@@ -109,23 +109,25 @@ class WebMessenger implements IMessenger {
             case ACTION: {
 
                 // action query type
-                message_type.put("name", "Q_ACTION");
+                message_type.put("name", "ACTION");
                 query.put("type", message_type);
 
                 // available actions
                 @SuppressWarnings("unchecked")
-                ArrayList<Action> actions = (ArrayList<Action>)objects[1];
+                ArrayList<Action> actions = (ArrayList<Action>) objects[1];
                 // convert to JSON array
                 JSONArray actionsJSON = new JSONArray();
                 for (Action action : actions) {
-                    actionsJSON.add("A_" + action.toString());
+                    actionsJSON.add(action.toString());
                 }
                 query.put("actions", actionsJSON);
 
                 // available spaces
                 @SuppressWarnings("unchecked")
                 ArrayList<ISpace> spaces = new ArrayList();
-                if (objects.length>2) { spaces = (ArrayList<ISpace>)objects[2]; }
+                if (objects.length > 2) {
+                    spaces = (ArrayList<ISpace>) objects[2];
+                }
                 // convert to JSON array
                 JSONArray spacesJSON = new JSONArray();
                 for (ISpace space : spaces) {
@@ -137,53 +139,49 @@ class WebMessenger implements IMessenger {
                 // wait for query reply from player
                 JSONObject query_reply = this.blpop();
 
-                Action action = Action.valueOf((String)query_reply.get("type"));
+                Action action = Action.valueOf((String) query_reply.get("type"));
 
                 ArrayList<Object> complexReturn = new ArrayList<Object>();
                 complexReturn.add(action);
 
                 if (action == Action.MOVE) {
-                     complexReturn.add(this.query(Query.MOVE, objects[0], objects[2]));
+                    complexReturn.add(this.query(Query.MOVE, objects[0], objects[2]));
                 }
 
                 return complexReturn;
-            }
-            case SUGGEST: {
-                // suggest query type
-                Triglyph suggestion = new Triglyph();
-                message_type.put("name", "Q_SUGGEST");
-                query.put("type", message_type);
-                // JSONObject suggestionJSON = this.blpop();
-                this.rpush(query);
-                break;
+
             }
             case ACCUSE: {
-                // accuse query type
-                message_type.put("name", "Q_ACCUSE");
-                query.put("type", message_type);
-                this.rpush(query);
-                break;
-            }
-            case CARDS: {
-                message_type.put("name", "Q_CARDS");
-                query.put("type", message_type);
-                // cards
-				@SuppressWarnings("unchecked")
-				ArrayList<ICard> cards = (ArrayList<ICard>)objects[1];
-                // convert to JSON array
-                JSONArray cardsJSON = new JSONArray();
-                for (ICard card : cards) {
-                    cardsJSON.add(card.prettyName());
-                }
-                query.put("cards", cardsJSON);
+                // wait for query reply from player
+                JSONObject query_reply = this.blpop();
 
-                this.rpush(query);
-                break;
+                JSONObject tryglyph = (JSONObject) query_reply.get("tryglyph");
+                Triglyph t = new Triglyph();
+
+                t.suspect = Suspect.fromString((String) tryglyph.get("suspect"));
+                t.weapon = Weapon.fromString((String) tryglyph.get("weapon"));
+                t.room = Room.fromString((String) tryglyph.get("room"));
+
+                return t;
+
             }
-            default: {
-                break;
+
+            case SUGGEST: {
+
+                // wait for query reply from player
+                JSONObject query_reply = this.blpop();
+
+                JSONObject tryglyph = (JSONObject) query_reply.get("tryglyph");
+                Triglyph t = new Triglyph();
+
+                t.suspect = Suspect.fromString((String) tryglyph.get("suspect"));
+                t.weapon = Weapon.fromString((String) tryglyph.get("weapon"));
+                t.room = Room.fromString((String) tryglyph.get("room"));
+
+                return t;
+
             }
-		}
+        }
 
 		//TODO: replace this with board query response
 		return tempMsgr.query(type, objects);

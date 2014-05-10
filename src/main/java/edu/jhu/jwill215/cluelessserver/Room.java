@@ -33,6 +33,17 @@ public enum Room implements ICard, ISpace {
 		return this.prettyName;
 	}
 
+    public static Room fromString(String name) {
+        if (name != null) {
+            for (Room r : Room.values()) {
+                if (name.equalsIgnoreCase(r.prettyName)) {
+                    return r;
+                }
+            }
+        }
+        return null;
+    }
+
 	@Override
 	public void addConnection(ISpace connection) {
 		adjacentSpaces.add(connection);
