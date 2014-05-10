@@ -54,3 +54,15 @@ input[type=radio] + img{
 }
 input[type=radio]:checked + img{
   border:3px solid #f00;
+}
+
+.start_button_style {
+	background:none;
+    border:none;
+    margin:0;
+    line-height: 2.3em;
+    display: block;
+    position: relative;
+    padding: 10px 15px;
+	color: #777;
+}

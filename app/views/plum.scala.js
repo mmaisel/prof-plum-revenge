@@ -171,7 +171,7 @@ $(document).ready(function() {
 		.attr({
 			type: "button",
 			id: "start_game_button",
-			//class: "start_button_style"
+			class: "start_button_style"
 		});	
 	$("#link_to_start").append(link);
 

@@ -139,6 +139,10 @@ var GameBoard = {
 
 		// NEWPLAYER
 		else if (msg.type === NEWPLAYER) {
+			// We get this message only a couple times, and it is one of the
+			// first ones we get, so disable the start button ASAP
+			$("#start_game_button").attr("disabled", "disabled");
+
 			MessageBox.addInfoMessage(msg.playerName + " joined the game as " +
 				msg.playerCharacter.toString());
 
@@ -173,11 +177,7 @@ var GameBoard = {
 		}
 
 		// SHOWHAND
-		else if (msg.type === SHOWHAND) {
-			// We get this message once in the beginning so it makes sense to
-			// disable this button here: 
-			$("#start_game_button").attr("disabled", "disabled");
-			
+		else if (msg.type === SHOWHAND) {			
 			GameBoard.showCards(msg.cards);
 		}	
 
