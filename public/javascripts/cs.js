@@ -184,7 +184,7 @@ var GameBoard = {
 
 		// Q_SUGGEST
 		else if (msg.type === Q_SUGGEST) {
-			
+
 		}
 		
 		// Q_ACCUSE
@@ -439,7 +439,7 @@ var MessageBox = {
 	// after sending a message. It happened after I added the 
 	// event.preventDefaults() function call in plum.scala.js.
 	onSubmit: function(text) {
-		var msg = new Message.query(A_CHAT);
+		var msg = new Message.query(CHAT);
 		msg.text = text;
 		CMTS.sendMessage(msg);
 
