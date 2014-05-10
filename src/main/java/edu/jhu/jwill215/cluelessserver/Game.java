@@ -144,7 +144,7 @@ public class Game {
 					validActions.add(Action.ACCUSE);
 					validActions.add(Action.ENDTURN);
 				}
-                this.announce(Announcement.NEXTPLAYER, currentPlayer.name);
+                this.announce(Announcement.NEXTPLAYER, currentPlayer.character.prettyName());
 				@SuppressWarnings("unchecked")
 				ArrayList<Object> response = (ArrayList<Object>)currentPlayer.query(Query.ACTION, validActions, validMoves);
 				nextAction = (Action)response.get(0);
