@@ -172,46 +172,6 @@ var GameBoard = {
 			GameBoard.showCards(msg.cards);
 		}	
 
-		// YOURTURN
-		else if (msg.type === YOURTURN) {
-			// Get the player location... Since this message should only go to
-			// us we can use our internal representation to find out where
-			// we are at on the game board.
-			var loc = GAMEBOARDMOVES[player_location];
-			console.log(loc);
-
-			// Here we figure out what moves are available and enable those 
-			// buttons. Finding out where we're at on the gameboard and then
-			// finding the available spaces to move to.
-			if (loc.up != null) {
-				if (GameBoard.isOccupied(loc.up) == false) {
-					$("#up_button").removeAttr("disabled");
-				}
-			}
-
-			if (loc.down != null) {
-				if (GameBoard.isOccupied(loc.down) == false) {
-					$("#down_button").removeAttr("disabled");
-				}
-			}
-
-			if (loc.left != null) {
-				if (GameBoard.isOccupied(loc.left) == false) {
-					$("#left_button").removeAttr("disabled");
-				}
-			}
-
-			if (loc.right != null) {
-				if (GameBoard.isOccupied(loc.right) == false) {
-					$("#right_button").removeAttr("disabled");
-				}
-			}
-
-			if (loc.secret != null) {
-				$("#secret_room_button").removeAttr("disabled");
-			}
-		}
-
 		// CHAT
 		else if (msg.type === CHAT) {
 			MessageBox.addChatMessage(msg.playerName, msg.text);
@@ -220,6 +180,95 @@ var GameBoard = {
 		// Q_CARDS
 		else if (msg.type === Q_CARDS) {
 			// Coming soon to a theater near you....
+		}
+
+		// Q_SUGGEST
+		else if (msg.type === Q_SUGGEST) {
+
+		}
+		
+		// Q_ACCUSE
+		else if (msg.type === Q_ACCUSE) {
+
+		}
+
+		// Q_ACTION
+		else if (msg.type === Q_ACTION) {
+
+			for (var action in msg.actions) {
+				if (msg.actions[action] === A_MOVE) {
+					/**
+					 * Get the player location. Since this message should only 
+					 * go to us we can use our internal representation to find 
+					 * out where we are at on the game board.
+					 */
+					var loc = GAMEBOARDMOVES[player_location];
+					console.log(loc);
+
+					/**
+					 * Here we figure out what moves are available to enable
+					 * the appropriate buttons.
+					 */
+					if (loc.up != null) {
+						if (GameBoard.isOccupied(loc.up) == false &&
+							GameBoard.fromServer(loc.up, msg.spaces) == true) {
+							$("#up_button").removeAttr("disabled");
+						}
+					}
+
+					if (loc.down != null) {
+						if (GameBoard.isOccupied(loc.down) == false &&
+							GameBoard.fromServer(loc.down, msg.spaces) == true) {
+							$("#down_button").removeAttr("disabled");
+						}
+					}
+
+					if (loc.left != null) {
+						if (GameBoard.isOccupied(loc.left) == false &&
+							GameBoard.fromServer(loc.left, msg.spaces) == true) {
+							$("#left_button").removeAttr("disabled");
+						}
+					}
+
+					if (loc.right != null) {
+						if (GameBoard.isOccupied(loc.right) == false &&
+							GameBoard.fromServer(loc.right, msg.spaces) == true) {
+							$("#right_button").removeAttr("disabled");
+						}
+					}
+
+					if (loc.secret != null) {
+						if (GameBoard.fromServer(loc.secret, msg.spaces) == true) {
+							$("#secret_room_button").removeAttr("disabled");
+						}
+					}
+
+					//console.log("enabled some rooms!");
+				}
+
+				else if (msg.actions[action] === A_SUGGEST) {
+					$("#suggest_button").removeAttr("disabled");
+					//console.log("enabled some suggestion button");
+				}
+
+				else if (msg.actions[action] === A_ACCUSE) {
+					$("#accuse_button").removeAttr("disabled");
+					//console.log("enabled some accuse button");
+				}
+
+				else if (msg.actions[action] === A_ENDTURN) {
+					$("#end_turn_button").removeAttr("disabled");
+					//console.log("enabled some end turn button");
+				}
+
+				else if (msg.actions[action] === A_CHAT) {
+					//$("#secret_room_button").removeAttr("disabled");
+				}
+
+				else {
+					console.log("ERROR: Bad ACTION type received - " + msg.actions[action].toString());
+				}
+			}
 		}
 
 		// Unsupported message type
@@ -247,6 +296,18 @@ var GameBoard = {
 		} else {
 			return false; // Not a hallway
 		}
+	},
+
+	// Tells us if the room next to our character is in the list of available
+	// rooms provided by the server in the A_MOVE command
+	fromServer: function(destination, spaces) {
+		for (var space in spaces) {
+			if (destination == spaces[space]) {
+				return true;
+			}
+		}
+
+		return false;
 	},
 
 	addToHand : function (card) {

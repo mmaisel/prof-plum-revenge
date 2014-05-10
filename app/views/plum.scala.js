@@ -23,8 +23,6 @@ var player_hand = new Array();
 // Switch to determine if player clicked accusation or suggestion
 var accusation = false;
 
-// Temporary debug switch for END TURN
-var debug_switch = false;
 
 /**
  * JQuery handlers for everything in the game
@@ -129,8 +127,6 @@ $(document).ready(function() {
 
 
 	$("#end_turn_button").click(function() {
-		//if (debug_switch == false) {
-		//debug_switch = true;
 		// Disable all action menu buttons
 		$("#up_button").attr("disabled", "disabled");
 		$("#left_button").attr("disabled", "disabled");
@@ -139,16 +135,8 @@ $(document).ready(function() {
 		$("#secret_room_button").attr("disabled", "disabled");
 		$("#accuse_button").attr("disabled", "disabled");
 		$("#suggest_button").attr("disabled", "disabled");
-		//$("#end_turn_button").attr("disabled", "disabled");
+		$("#end_turn_button").attr("disabled", "disabled");
 		ActionMenu.endTurn();
-		/*} else {
-			// Do things here to trigger stuff (at least until server works)
-			debug_switch = false;
-			$("#" + DININGKITCHEN).data("occupied", true);
-			var a = new Gameobjects.announcement();
-			a.type = YOURTURN;
-			GameBoard.playTurn(a);
-		}*/
 	});
 
 	// Directions
