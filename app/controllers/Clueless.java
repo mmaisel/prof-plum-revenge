@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.*;
 import play.libs.Json;
+import org.json.simple.*;
 
 import com.typesafe.plugin.RedisPlugin;
 import redis.clients.jedis.*;
@@ -47,30 +48,30 @@ public class Clueless extends Controller {
 
         JsonNode jsonMessage = request().body().asJson();
         String stringMessage = Json.stringify(jsonMessage);
+        Logger.info(stringMessage);
         List<String> result;
         ObjectNode reply = Json.newObject();
         JsonNode jsonReply = Json.parse("{\"type\" : {\"name\": \"NOP\"}}");
 
         Jedis j = play.Play.application().plugin(RedisPlugin.class).jedisPool().getResource();
         try {
-            // put message on the player's in queue
-            j.rpush("club:" + club_uuid + ":player:" + player_uuid + ":in", stringMessage);
-            // wait for reply from game server, this is a blocking call
-            //result = j.blpop(0, "club:" + club_uuid + ":player:" + player_uuid + ":out");
+            JSONObject message = (JSONObject)JSONValue.parse(stringMessage);
+            String type = message.get("type").toString();
+            Logger.info(type);
+            if (type.equals("CHAT")) {
+                Logger.info("CHAT MESSAGE");
+                for(int i=0; i<6; i++){
+                    j.rpush("club:" + club_uuid + ":player:" + i + ":out", stringMessage);
+                }
+            } else {
+                Logger.info("NOT A CHAT MESSAGE");
+                // put message on the player's in queue
+                j.rpush("club:" + club_uuid + ":player:" + player_uuid + ":in", stringMessage);
+            }
         } finally {
             play.Play.application().plugin(RedisPlugin.class).jedisPool().returnResource(j);
         }
 
-        // 0 index of result list determines if there is a popped result within timeout, since we block forever, it shouldn't happen
-        // if (result.get(0) != null) {
-            // // get message from
-            // String stringReply = result.get(1);
-            // jsonReply = Json.parse(stringReply);
-        // }
-
-        // reply.put("message", jsonReply);
-
-        //return ok(reply);
 		return ok();
     }
 
