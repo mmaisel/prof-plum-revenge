@@ -22,6 +22,7 @@ var player_hand = new Array();
 // Switch to determine if player clicked accusation or suggestion
 var accusation = false;
 
+GameBoard.disableActionButtons();
 
 /**
  * JQuery handlers for everything in the game
@@ -36,7 +37,8 @@ $(document).ready(function() {
 	$("#accuse_button").click(function() {
 		// First we send a message to the server and wait for a reply. After 
 		// the reply then we can push out the modal
-		var msg = Message.query(Q_ACCUSE);
+		var msg = Message.query(Q_ACTION);
+		msg.action = A_ACCUSE;
 		CMTS.sendMessage(msg);
 
 		// We don't need them to send extra messages :)
@@ -48,7 +50,8 @@ $(document).ready(function() {
 	$("#suggest_button").click(function() {
 		// First we send a message to the server and wait for a reply. After 
 		// the reply then we can push out the modal
-		var msg = Message.query(Q_SUGGEST);
+		var msg = Message.query(Q_ACTION);
+		msg.action = A_SUGGEST;
 		CMTS.sendMessage(msg);
 
 		// We don't need them to send extra messages :)

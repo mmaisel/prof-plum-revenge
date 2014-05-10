@@ -36,7 +36,7 @@ public enum Room implements ICard, ISpace {
     public static Room fromString(String name) {
         if (name != null) {
             for (Room r : Room.values()) {
-                if (name.equalsIgnoreCase(r.prettyName)) {
+                if (name.equalsIgnoreCase(r.prettyName())) {
                     return r;
                 }
             }

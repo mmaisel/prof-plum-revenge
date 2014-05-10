@@ -56,21 +56,22 @@ public class Clueless extends Controller {
             // put message on the player's in queue
             j.rpush("club:" + club_uuid + ":player:" + player_uuid + ":in", stringMessage);
             // wait for reply from game server, this is a blocking call
-            result = j.brpop(0, "club:" + club_uuid + ":player:" + player_uuid + ":out");
+            //result = j.blpop(0, "club:" + club_uuid + ":player:" + player_uuid + ":out");
         } finally {
             play.Play.application().plugin(RedisPlugin.class).jedisPool().returnResource(j);
         }
 
         // 0 index of result list determines if there is a popped result within timeout, since we block forever, it shouldn't happen
-        if (result.get(0) != null) {
-            // get message from
-            String stringReply = result.get(1);
-            jsonReply = Json.parse(stringReply);
-        }
+        // if (result.get(0) != null) {
+            // // get message from
+            // String stringReply = result.get(1);
+            // jsonReply = Json.parse(stringReply);
+        // }
 
-        reply.put("message", jsonReply);
+        // reply.put("message", jsonReply);
 
-        return ok(reply);
+        //return ok(reply);
+		return ok();
     }
 
     private void doAction() {

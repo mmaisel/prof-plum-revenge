@@ -107,9 +107,8 @@ class WebMessenger implements IMessenger {
         LinkedHashMap message_type = new LinkedHashMap();
 		switch(type) {
             case ACTION: {
-
                 // action query type
-                message_type.put("name", "ACTION");
+                message_type.put("name", "Q_ACTION");
                 query.put("type", message_type);
 
                 // available actions
@@ -118,7 +117,7 @@ class WebMessenger implements IMessenger {
                 // convert to JSON array
                 JSONArray actionsJSON = new JSONArray();
                 for (Action action : actions) {
-                    actionsJSON.add(action.toString());
+                    actionsJSON.add("A_" + action.toString());
                 }
                 query.put("actions", actionsJSON);
 
@@ -138,20 +137,36 @@ class WebMessenger implements IMessenger {
                 this.rpush(query);
                 // wait for query reply from player
                 JSONObject query_reply = this.blpop();
-
-                Action action = Action.valueOf((String) query_reply.get("type"));
-
+				
+				String query_action = query_reply.get("action").toString();
+				JSONObject query_action_name = (JSONObject)JSONValue.parse(query_action);
+				String qan = query_action_name.get("name").toString();
+				Action action = Action.valueOf(qan.substring(2,qan.length()));
+				
                 ArrayList<Object> complexReturn = new ArrayList<Object>();
                 complexReturn.add(action);
 
                 if (action == Action.MOVE) {
-                    complexReturn.add(this.query(Query.MOVE, objects[0], objects[2]));
+                    //complexReturn.add(this.query(Query.MOVE, objects[0], objects[2]));
+					String query_space = query_reply.get("space").toString();
+					JSONObject query_space_name = (JSONObject)JSONValue.parse(query_space);
+					ISpace space = Room.HALL;
+					try {space = Hall.valueOf(query_space_name.get("name").toString()); } 
+						catch(IllegalArgumentException iaex) {}
+					try {space = Room.valueOf(query_space_name.get("name").toString()); } 
+						catch(IllegalArgumentException iaex) {}
+					complexReturn.add(space);
                 }
 
                 return complexReturn;
 
             }
             case ACCUSE: {
+				// action query type
+                message_type.put("name", "Q_ACCUSE");
+                query.put("type", message_type);
+				this.rpush(query);
+			
                 // wait for query reply from player
                 JSONObject query_reply = this.blpop();
 
@@ -167,7 +182,11 @@ class WebMessenger implements IMessenger {
             }
 
             case SUGGEST: {
-
+				// action query type
+                message_type.put("name", "Q_SUGGEST");
+                query.put("type", message_type);
+				this.rpush(query);
+				
                 // wait for query reply from player
                 JSONObject query_reply = this.blpop();
 
@@ -181,10 +200,13 @@ class WebMessenger implements IMessenger {
                 return t;
 
             }
+			default: {
+				return null;
+			}
         }
 
 		//TODO: replace this with board query response
-		return tempMsgr.query(type, objects);
+		//return tempMsgr.query(type, objects);
 	}
 
 	@Override

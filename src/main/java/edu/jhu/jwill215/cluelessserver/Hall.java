@@ -48,5 +48,14 @@ public enum Hall implements ISpace {
 		return String.format("%s-%s", this.adjacentSpaces.get(0).prettyName(), this.adjacentSpaces.get(1).prettyName());
 	}
 
-	
+    public static Hall fromString(String name) {
+        if (name != null) {
+            for (Hall r : Hall.values()) {
+                if (name.equalsIgnoreCase(r.prettyName())) {
+                    return r;
+                }
+            }
+        }
+        return null;
+    }
 }

@@ -75,7 +75,7 @@ var ActionMenu = {
 
 
 var GameBoard = {
-	
+
 	playTurn: function(msg) {
 		console.log("playTurn: Got: " + msg.type.toString());
 
@@ -247,6 +247,8 @@ var GameBoard = {
 		// Q_ACTION
 		else if (msg.type === Q_ACTION) {
 
+			GameBoard.disableActionButtons();		
+		
 			for (var action in msg.actions) {
 				if (msg.actions[action] === A_MOVE) {
 					/**
@@ -529,6 +531,17 @@ var GameBoard = {
 		var msg = Message.query(Q_CARDS);
 		msg.card = card;
 		CMTS.sendMessage(msg);
+	},
+	
+	disableActionButtons: function() {
+		$("#up_button").attr("disabled", "disabled");
+		$("#down_button").attr("disabled", "disabled");
+		$("#left_button").attr("disabled", "disabled");
+		$("#right_button").attr("disabled", "disabled");
+		$("#secret_room_button").attr("disabled", "disabled");
+		$("#suggest_button").attr("disabled", "disabled");
+		$("#accuse_button").attr("disabled", "disabled");
+		$("#end_turn_button").attr("disabled", "disabled");
 	},
 };
 //GameBoard.showCards( [1, 2, 3] );
