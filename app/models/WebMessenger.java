@@ -298,7 +298,7 @@ class WebMessenger implements IMessenger {
                 String nextplayer_name = (String)objects[0];
 
                 announcement = "{\"type\": \"NEXTPLAYER\","
-                        + "\"playerCharacter\":" + nextplayer_name
+                        + "\"playerCharacter\":\"" + nextplayer_name + "\""
                         + "}";
                 break;
             }
