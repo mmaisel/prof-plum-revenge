@@ -4,13 +4,15 @@ var Gameobjects = {
 	},
 
 
-	room: function(name) {
+	room: function(name, value) {
 		this.name = name;
+		this.value = value;
 	},
 	
 
-	hall: function(name) {
+	hall: function(name, value) {
 		this.name = name;
+		this.value = value;
 	},
 
 
@@ -40,8 +42,9 @@ var Gameobjects = {
 	},
 
 
-	announcementType: function(name) {
+	announcementType: function(name, value) {
 		this.name = name;
+		this.value = value;
 	},
 
 	
@@ -60,8 +63,9 @@ var Gameobjects = {
 	},
 
 
-	actionType: function(name) {
+	actionType: function(name, value) {
 		this.name = name;
+		this.value = value;
 	},
 
 
@@ -173,29 +177,28 @@ var GREEN	= new Gameobjects.suspect("Mr. Green", 3, "green");
 var PEACOCK = new Gameobjects.suspect("Mrs. Peacock", 4, "peacock");
 var PLUM	= new Gameobjects.suspect("Prof. Plum", 5, "plum");
 
-var SKIP = new Gameobjects.announcementType("SKIP");
-var MOVE = new Gameobjects.announcementType("MOVE");
-var SUGGEST = new Gameobjects.announcementType("SUGGEST");
-var FALSE = new Gameobjects.announcementType("FALSE");
-var ACCUSE = new Gameobjects.announcementType("ACCUSE");
-var WINNER = new Gameobjects.announcementType("WINNER");
-var LOSER = new Gameobjects.announcementType("LOSER");
-var NEWPLAYER = new Gameobjects.announcementType("NEWPLAYER");
-var SHOWHAND = new Gameobjects.announcementType("SHOWHAND");
-var YOURTURN = new Gameobjects.announcementType("YOURTURN");
-var CHAT = new Gameobjects.announcementType("CHAT");
-var NOP = new Gameobjects.announcementType("NOP");
+var CHAT = new Gameobjects.announcementType("CHAT", 0);
+var SKIP = new Gameobjects.announcementType("SKIP", 1);
+var MOVE = new Gameobjects.announcementType("MOVE", 2);
+var SUGGEST = new Gameobjects.announcementType("SUGGEST", 3);
+var FALSE = new Gameobjects.announcementType("FALSE", 4);
+var ACCUSE = new Gameobjects.announcementType("ACCUSE", 5);
+var WINNER = new Gameobjects.announcementType("WINNER", 6);
+var LOSER = new Gameobjects.announcementType("LOSER", 7);
+var NEWPLAYER = new Gameobjects.announcementType("NEWPLAYER", 8);
+var SHOWHAND = new Gameobjects.announcementType("SHOWHAND", 9);
+var NOP = new Gameobjects.announcementType("NOP", 10);
 
 var Q_SUGGEST = new Gameobjects.queryType("Q_SUGGEST");
 var Q_ACCUSE = new Gameobjects.queryType("Q_ACCUSE");
 var Q_CARDS  = new Gameobjects.queryType("Q_CARDS");
 var Q_ACTION = new Gameobjects.queryType("Q_ACTION");
 
-var A_MOVE = new Gameobjects.actionType("A_MOVE");
-var A_SUGGEST = new Gameobjects.actionType("A_SUGGEST");
-var A_ACCUSE = new Gameobjects.actionType("A_ACCUSE");
-var A_ENDTURN = new Gameobjects.actionType("A_ENDTURN");
-var A_CHAT = new Gameobjects.actionType("A_CHAT");
+// STARTTURN = 0 (not used)
+var A_MOVE = new Gameobjects.actionType("A_MOVE", 1);
+var A_SUGGEST = new Gameobjects.actionType("A_SUGGEST", 2);
+var A_ACCUSE = new Gameobjects.actionType("A_ACCUSE", 3);
+var A_ENDTURN = new Gameobjects.actionType("A_ENDTURN", 4);
 
 var UP = new Gameobjects.direction("UP");
 var DOWN = new Gameobjects.direction("DOWN");
@@ -216,33 +219,33 @@ var NOCARD 		= new Gameobjects.weapon("no card");
  * The rooms and halls are used as IDs in the HTML gameboard, so if you change
  * something here, you should update it there as well.
  */
-var STUDY 		 = new Gameobjects.room("Study");
-var HALL 		 = new Gameobjects.room("Hall");
-var LOUNGE 		 = new Gameobjects.room("Lounge");
-var LIBRARY		 = new Gameobjects.room("Library");
-var BILLIARD 	 = new Gameobjects.room("Billiard");
-var DINING 		 = new Gameobjects.room("Dining");
-var CONSERVATORY = new Gameobjects.room("Conservatory");
-var BALLROOM 	 = new Gameobjects.room("Ballroom");
-var KITCHEN 	 = new Gameobjects.room("Kitchen");
+var STUDY 		 = new Gameobjects.room("Study", 0);
+var HALL 		 = new Gameobjects.room("Hall", 1);
+var LOUNGE 		 = new Gameobjects.room("Lounge", 2);
+var LIBRARY		 = new Gameobjects.room("Library", 3);
+var BILLIARD 	 = new Gameobjects.room("Billiard", 4);
+var DINING 		 = new Gameobjects.room("Dining", 5);
+var CONSERVATORY = new Gameobjects.room("Conservatory", 6);
+var BALLROOM 	 = new Gameobjects.room("Ballroom", 7);
+var KITCHEN 	 = new Gameobjects.room("Kitchen", 8);
 
 /**
  * Keep the '-' character in these names. The YOURTURN logic relies on it to 
  * determine if the location is a room or a location.
  */
 
-var STUDYHALL 		= new Gameobjects.hall("Study-Hall");
-var HALLLOUNGE 		= new Gameobjects.hall("Hall-Lounge");
-var STUDYLIBRARY 	= new Gameobjects.hall("Study-Library");
-var HALLBILLIARD 	= new Gameobjects.hall("Hall-Billiard");
-var LOUNGEDINING 	= new Gameobjects.hall("Lounge-Dining");
-var LIBRARYBILLIARD = new Gameobjects.hall("Library-Billiard");
-var BILLIARDDINING 	= new Gameobjects.hall("Billiard-Dining");
-var LIBRARYCONSERVE = new Gameobjects.hall("Library-Conservatory");
-var BILLIARDBALL 	= new Gameobjects.hall("Billiard-Ballroom");
-var DININGKITCHEN 	= new Gameobjects.hall("Dining-Kitchen");
-var CONSERVEBALL 	= new Gameobjects.hall("Conservatory-Ballroom");
-var BALLKITCHEN 	= new Gameobjects.hall("Ballroom-Kitchen");
+var STUDYHALL 		= new Gameobjects.hall("Study-Hall", 0);
+var HALLLOUNGE 		= new Gameobjects.hall("Hall-Lounge", 1);
+var LIBRARYBILLIARD = new Gameobjects.hall("Library-Billiard", 2);
+var BILLIARDDINING 	= new Gameobjects.hall("Billiard-Dining", 3);
+var CONSERVEBALL 	= new Gameobjects.hall("Conservatory-Ballroom", 4);
+var BALLKITCHEN 	= new Gameobjects.hall("Ballroom-Kitchen", 5);
+var STUDYLIBRARY 	= new Gameobjects.hall("Study-Library", 6);
+var LIBRARYCONSERVE = new Gameobjects.hall("Library-Conservatory", 7);
+var HALLBILLIARD 	= new Gameobjects.hall("Hall-Billiard", 8);
+var BILLIARDBALL 	= new Gameobjects.hall("Billiard-Ballroom", 9);
+var LOUNGEDINING 	= new Gameobjects.hall("Lounge-Dining", 10);
+var DININGKITCHEN 	= new Gameobjects.hall("Dining-Kitchen", 11);
 
 
 var MESSAGE_TYPES = new Array();
@@ -255,7 +258,6 @@ MESSAGE_TYPES[WINNER.name] = WINNER;
 MESSAGE_TYPES[LOSER.name] = LOSER;
 MESSAGE_TYPES[NEWPLAYER.name] = NEWPLAYER;
 MESSAGE_TYPES[SHOWHAND.name] = SHOWHAND;
-MESSAGE_TYPES[YOURTURN.name] = YOURTURN;
 MESSAGE_TYPES[CHAT.name] = CHAT;
 MESSAGE_TYPES[NOP.name] = NOP;
 MESSAGE_TYPES[Q_SUGGEST.name] = Q_SUGGEST;
@@ -317,7 +319,6 @@ ACTION_TYPES[A_MOVE.name] = A_MOVE;
 ACTION_TYPES[A_SUGGEST.name] = A_SUGGEST;
 ACTION_TYPES[A_ACCUSE.name] = A_ACCUSE;
 ACTION_TYPES[A_ENDTURN.name] = A_ENDTURN;
-ACTION_TYPES[A_CHAT.name] = A_CHAT;
 
 var CHARACTER_TYPES = new Array();
 CHARACTER_TYPES[SCARLET.name] = SCARLET;

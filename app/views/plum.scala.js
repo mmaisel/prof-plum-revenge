@@ -28,7 +28,6 @@ var accusation = false;
  */
 $(document).ready(function() {
 
-
 	/**
 	 * Action Menu
 	 */
