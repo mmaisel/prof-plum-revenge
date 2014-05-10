@@ -615,30 +615,23 @@ var MessageBox = {
 	// after sending a message. It happened after I added the 
 	// event.preventDefaults() function call in plum.scala.js.
 	onSubmit: function(text) {
-		var msg = new Message.query(CHAT);
+		var msg = new Message.announcement(CHAT);
 		msg.text = text;
+		msg.playerName = player_name;
 		CMTS.sendMessage(msg);
-
-		// DEBUG
-		/*var a = new Gameobjects.announcement();
-		a.type = CHAT;
-		a.playerName = player_name;
-		a.text = text;
-		GameBoard.playTurn(a);*/
-
-		$("#message_input").val("");
 	},
 
 	addInfoMessage: function(text) {
-		$("#chat_box").append("[INFO]: " + text + "\n");
-	},
-
-	addPrivateMessage: function(text) {
-		$("#chat_box").append("[PRIVATE]: " + text + "\n");
+		MessageBox.addMessage("[INFO]: " + text + "\n");
 	},
 
 	addChatMessage: function(player, text) {
-		$("#chat_box").append("[" + player.toString() + "]: " + text + "\n");
+		MessageBox.addMessage("[" + player.toString() + "]: " + text + "\n");
+	},
+
+	addMessage: function(text) {
+		$("#chat_box").append(text);
+		$('#chat_box').scrollTop($('#chat_box')[0].scrollHeight);
 	},
 
 	// Make sure that the submit button isn't enabled until the user has typed

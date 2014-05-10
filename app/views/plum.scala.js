@@ -149,6 +149,7 @@ $(document).ready(function() {
 	// Send Message
 	$("#message_form").submit(function(event) {
 		MessageBox.onSubmit($("#message_input").val());
+		$("#message_input").val("");
 		event.preventDefault(); // Needed to prevent random refreshes
 
 	});
