@@ -144,6 +144,7 @@ public class Game {
 					validActions.add(Action.ACCUSE);
 					validActions.add(Action.ENDTURN);
 				}
+                this.announce(Announcement.NEXTPLAYER, currentPlayer.name);
 				@SuppressWarnings("unchecked")
 				ArrayList<Object> response = (ArrayList<Object>)currentPlayer.query(Query.ACTION, validActions, validMoves);
 				nextAction = (Action)response.get(0);
@@ -235,7 +236,7 @@ public class Game {
 		this.announce(Announcement.MOVE, suspect, space);
 	}
 	
-	public enum Announcement {CHAT, SKIP, MOVE, SUGGEST, FALSE, ACCUSE, WINNER, LOSER, NEWPLAYER, SHOWHAND}
+	public enum Announcement {CHAT, SKIP, MOVE, SUGGEST, FALSE, ACCUSE, WINNER, LOSER, NEWPLAYER, SHOWHAND, NEXTPLAYER}
 	
 	private void announce(Announcement type, Object...objects) {
 

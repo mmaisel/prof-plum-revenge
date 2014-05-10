@@ -168,13 +168,17 @@ class WebMessenger implements IMessenger {
 			
                 // wait for query reply from player
                 JSONObject query_reply = this.blpop();
-				String triglyph = query_reply.get("triglyph").toString();
-				JSONObject jsonTriglyph = (JSONObject)JSONValue.parse(triglyph);
+                System.out.println(query_reply);
 
+                JSONObject triglyph = (JSONObject) query_reply.get("triglyph");
                 Triglyph t = new Triglyph();
-				t.suspect = Suspect.fromString(jsonTriglyph.get("suspect").toString());
-                t.weapon  = Weapon.fromString( jsonTriglyph.get("weapon").toString());
-                t.room    = Room.fromString(   jsonTriglyph.get("room").toString());
+				t.suspect = Suspect.PLUM;
+				t.weapon = Weapon.KNIFE;
+				t.room = Room.LIBRARY;
+
+                t.suspect = Suspect.fromString((String) triglyph.get("suspect"));
+                t.weapon = Weapon.fromString((String) triglyph.get("weapon"));
+                t.room = Room.fromString((String) triglyph.get("room"));
 
                 return t;
 
@@ -185,18 +189,25 @@ class WebMessenger implements IMessenger {
                 message_type.put("name", "Q_SUGGEST");
                 query.put("type", message_type);
 				this.rpush(query);
-				
+
                 // wait for query reply from player
                 JSONObject query_reply = this.blpop();
-				String triglyph = query_reply.get("triglyph").toString();
-				JSONObject jsonTriglyph = (JSONObject)JSONValue.parse(triglyph);
+                System.out.println(query_reply);
 
+                JSONObject triglyph = (JSONObject) query_reply.get("triglyph");
                 Triglyph t = new Triglyph();
-				t.suspect = Suspect.fromString(jsonTriglyph.get("suspect").toString());
-                t.weapon  = Weapon.fromString( jsonTriglyph.get("weapon" ).toString());
-                t.room    = Room.HALL;
+				t.suspect = Suspect.PLUM;
+				t.weapon = Weapon.KNIFE;
+				t.room = Room.LIBRARY;
+
+                t.suspect = Suspect.fromString((String) triglyph.get("suspect"));
+                t.weapon = Weapon.fromString((String) triglyph.get("weapon"));
+                t.room = Room.fromString((String) triglyph.get("room"));
+
+                System.out.println(t);
 
                 return t;
+
             }
 			default: {
 				return null;
@@ -280,6 +291,15 @@ class WebMessenger implements IMessenger {
 				announcement = "{\"type\":{\"name\":\"SHOWHAND\"},"
 					+ "\"cards\":" + JsonBuilder.printC(cards)
 					+ "}";
+                break;
+            }
+            case NEXTPLAYER: {
+                @SuppressWarnings("unchecked")
+                String nextplayer_name = (String)objects[1];
+
+                announcement = "{\"type\": \"NEXTPLAYER\","
+                        + "\"playerCharacter\":" + nextplayer_name
+                        + "}";
                 break;
             }
             default: {
